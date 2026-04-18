@@ -1,0 +1,19 @@
+{
+  "profile_id": "spatial_default_example",
+  "isolation_mode": "sandbox-container",
+  "base_stack": [
+    "python-3.11",
+    "scanpy",
+    "squidpy"
+  ],
+  "resource_class": "cpu",
+  "storage_policy": {
+    "artifacts": "persist",
+    "cache": "ephemeral"
+  },
+  "secrets_policy": "disallow_by_default",
+  "provider": "provider-neutral blueprint",
+  "example_status": "illustrative_example",
+  "authority_note": "Illustrative only; does not define the canonical runtime burden for any current Layer 2 method.",
+  "approval_required": false
+}

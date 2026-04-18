@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ValidationReport",
+  "type": "object",
+  "required": [
+    "report_id",
+    "run_id",
+    "preflight",
+    "post_run",
+    "final_status",
+    "manual_review_required"
+  ],
+  "properties": {
+    "report_id": {
+      "type": "string"
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "preflight": {
+      "type": "object"
+    },
+    "post_run": {
+      "type": "object"
+    },
+    "final_status": {
+      "type": "string"
+    },
+    "manual_review_required": {
+      "type": "boolean"
+    },
+    "example_status": {
+      "type": "string"
+    },
+    "authority_note": {
+      "type": "string"
+    },
+    "blocking_reasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

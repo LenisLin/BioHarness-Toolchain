@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RunRecord",
+  "type": "object",
+  "required": [
+    "run_id",
+    "skill_id",
+    "surface_id",
+    "status",
+    "state_summary"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string"
+    },
+    "skill_id": {
+      "type": "string"
+    },
+    "surface_id": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "state_summary": {
+      "type": "object"
+    },
+    "example_status": {
+      "type": "string"
+    },
+    "authority_note": {
+      "type": "string"
+    },
+    "last_validation_report": {
+      "type": "string"
+    }
+  }
+}

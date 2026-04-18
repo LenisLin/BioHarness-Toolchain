@@ -1,0 +1,7 @@
+{
+  "scenario_id": "golden-run-record-resume",
+  "resume_from": "run-spatial-domain-001",
+  "state_source": "RunRecord.state_summary",
+  "illustrative_only": true,
+  "compaction_expectation": "resume from structured state instead of transcript replay"
+}

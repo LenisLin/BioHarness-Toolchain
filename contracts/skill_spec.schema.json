@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SkillSpec",
+  "type": "object",
+  "required": [
+    "skill_id",
+    "analysis_problem",
+    "selection_signals",
+    "default_surface"
+  ],
+  "properties": {
+    "skill_id": {
+      "type": "string"
+    },
+    "analysis_problem": {
+      "type": "string"
+    },
+    "selection_signals": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "default_surface": {
+      "type": "string"
+    },
+    "example_status": {
+      "type": "string"
+    },
+    "authority_note": {
+      "type": "string"
+    },
+    "approval_level": {
+      "type": "string"
+    },
+    "prerequisites": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

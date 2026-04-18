@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ExecutionSurfaceSpec",
+  "type": "object",
+  "required": [
+    "surface_id",
+    "analysis_problem",
+    "input_contract",
+    "parameter_template",
+    "environment_profile",
+    "output_artifacts",
+    "validation_hooks"
+  ],
+  "properties": {
+    "surface_id": {
+      "type": "string"
+    },
+    "analysis_problem": {
+      "type": "string"
+    },
+    "input_contract": {
+      "type": "object"
+    },
+    "parameter_template": {
+      "type": "object"
+    },
+    "environment_profile": {
+      "type": "string"
+    },
+    "output_artifacts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "validation_hooks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "example_status": {
+      "type": "string"
+    },
+    "authority_note": {
+      "type": "string"
+    },
+    "failure_semantics": {
+      "type": "object"
+    }
+  }
+}

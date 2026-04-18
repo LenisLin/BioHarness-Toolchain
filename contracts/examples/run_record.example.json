@@ -1,0 +1,20 @@
+{
+  "run_id": "run-spatial-domain-001",
+  "skill_id": "example_spatial_domain_identification",
+  "surface_id": "example.spatial_domain_identification.spagcn",
+  "status": "awaiting_manual_review",
+  "state_summary": {
+    "completed_steps": [
+      "selection_complete",
+      "preflight_complete",
+      "surface_complete"
+    ],
+    "pending_steps": [
+      "manual_review"
+    ],
+    "resume_strategy": "structured state rehydration"
+  },
+  "example_status": "illustrative_example",
+  "authority_note": "Illustrative only; shows the intended shape of structured resume state without freezing a production runtime contract.",
+  "last_validation_report": "validation-spatial-domain-001"
+}

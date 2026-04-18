@@ -1,0 +1,17 @@
+{
+  "skill_id": "example_spatial_domain_identification",
+  "analysis_problem": "Domain / Clustering",
+  "selection_signals": [
+    "histology available",
+    "single-slice domain identification",
+    "need an established histology-aware baseline"
+  ],
+  "default_surface": "example.spatial_domain_identification.spagcn",
+  "example_status": "illustrative_example",
+  "authority_note": "Illustrative only; does not freeze a current Layer 3 default or override the current Layer 2 pilot authority.",
+  "approval_level": "standard",
+  "prerequisites": [
+    "adata-like expression matrix",
+    "spatial coordinates"
+  ]
+}

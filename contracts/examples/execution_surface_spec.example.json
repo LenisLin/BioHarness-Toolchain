@@ -1,0 +1,33 @@
+{
+  "surface_id": "example.spatial_domain_identification.spagcn",
+  "analysis_problem": "Domain / Clustering",
+  "input_contract": {
+    "primary_object": "anndata",
+    "required_modalities": [
+      "expression",
+      "coordinates"
+    ],
+    "optional_modalities": [
+      "histology_image"
+    ]
+  },
+  "parameter_template": {
+    "mode": "histology_aware_default",
+    "batch_handling": "not addressed"
+  },
+  "environment_profile": "spatial_default_example",
+  "output_artifacts": [
+    "domain_labels",
+    "run_log"
+  ],
+  "validation_hooks": [
+    "preflight.schema",
+    "post_run.domain_labels"
+  ],
+  "example_status": "illustrative_example",
+  "authority_note": "Illustrative only; does not freeze SpaGCN as the current default surface or override the Layer 2 pilot freeze.",
+  "failure_semantics": {
+    "missing_histology": "fallback_or_reselect",
+    "empty_labels": "validation_failure"
+  }
+}

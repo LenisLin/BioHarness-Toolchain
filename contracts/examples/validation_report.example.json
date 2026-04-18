@@ -1,0 +1,19 @@
+{
+  "report_id": "validation-spatial-domain-001",
+  "run_id": "run-spatial-domain-001",
+  "preflight": {
+    "schema": "pass",
+    "environment_profile": "resolved"
+  },
+  "post_run": {
+    "domain_labels": "pass",
+    "artifact_bundle": "pass"
+  },
+  "final_status": "blocked_pending_manual_review",
+  "manual_review_required": true,
+  "example_status": "illustrative_example",
+  "authority_note": "Illustrative only; shows a manual-review branch without establishing a current authoritative writeback workflow.",
+  "blocking_reasons": [
+    "authoritative artifact writeback"
+  ]
+}

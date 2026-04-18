@@ -1,0 +1,7 @@
+{
+  "scenario_id": "golden-gpu-approval",
+  "environment_profile": "example.high_cost_gpu_surface",
+  "approval_gate": "required",
+  "illustrative_only": true,
+  "reason": "high-cost GPU execution requires explicit approval before dispatch"
+}

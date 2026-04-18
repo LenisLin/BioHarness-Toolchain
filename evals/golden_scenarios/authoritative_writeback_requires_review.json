@@ -1,0 +1,7 @@
+{
+  "scenario_id": "golden-authoritative-writeback-review",
+  "artifact_type": "authoritative CSV",
+  "manual_review_required": true,
+  "illustrative_only": true,
+  "reason": "authoritative artifacts must not be written without human review"
+}

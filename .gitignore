@@ -33,3 +33,5 @@ ENV/
 .codex/skills/.system/**
 !.codex/prompts/
 !.codex/prompts/**
+.learnings/
+tmp/

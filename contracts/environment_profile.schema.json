@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EnvironmentProfile",
+  "type": "object",
+  "required": [
+    "profile_id",
+    "isolation_mode",
+    "base_stack",
+    "resource_class",
+    "storage_policy",
+    "secrets_policy",
+    "provider"
+  ],
+  "properties": {
+    "profile_id": {
+      "type": "string"
+    },
+    "isolation_mode": {
+      "type": "string"
+    },
+    "base_stack": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "resource_class": {
+      "type": "string"
+    },
+    "storage_policy": {
+      "type": "object"
+    },
+    "secrets_policy": {
+      "type": "string"
+    },
+    "provider": {
+      "type": "string"
+    },
+    "example_status": {
+      "type": "string"
+    },
+    "authority_note": {
+      "type": "string"
+    },
+    "approval_required": {
+      "type": "boolean"
+    }
+  }
+}

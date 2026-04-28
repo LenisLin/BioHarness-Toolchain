@@ -1,7 +1,7 @@
 # BioHarness Toolchain Repo Instructions
 
 This file sets stable repo-wide instructions for Codex sessions in this repository.
-Keep it short. Put detailed topic logic and evolving Round 2 design in the relevant project docs or topic artifacts, not here.
+Keep it short. Put detailed topic logic and evolving substrate design in the relevant project docs or topic artifacts, not here.
 
 - Nested `AGENTS.md` or `AGENTS.override.md` files may add narrower rules for subtrees.
 - When opening a new Codex window for focused work, start from the narrowest relevant directory.
@@ -15,9 +15,9 @@ Keep it short. Put detailed topic logic and evolving Round 2 design in the relev
 ## Current Direction
 
 - The first vertical remains spatial transcriptomics downstream analysis.
-- Round 1 provides the baseline evidence for what methods exist.
-- Round 2 is a bioagent-oriented tool substrate effort. It is not a continuation of broad Round 1 table expansion.
-- Round 1 inclusion does not by itself imply Round 2 core candidacy, a stable execution surface, or rewrite priority.
+- The Layer 1 method registry provides the baseline evidence for what methods exist.
+- The current substrate phase is a bioagent-oriented tool substrate effort. It is not a continuation of broad Layer 1 table expansion.
+- Layer 1 registry inclusion does not by itself imply core candidacy, a stable execution surface, or rewrite priority.
 - Do not describe working buffers, pilots, or blueprint examples as frozen architecture unless a project document explicitly locks the decision.
 
 ## Durable Sources Of Truth
@@ -25,11 +25,11 @@ Keep it short. Put detailed topic logic and evolving Round 2 design in the relev
 - Start with:
   - `README.md`
   - `docs/10_scope.md`
-  - `docs/12_round2_working_buffer.md`
-  - `docs/15_round1_baseline_and_round2_prep.md`
-- Use `docs/15_round1_baseline_and_round2_prep.md` as the current anchor for Round 1 baseline state and the minimum agreed Round 2 transition note.
-- Use `docs/12_round2_working_buffer.md` for unresolved Round 2 questions and working hypotheses. It does not freeze architecture.
-- For tasks that touch Round 2 substrate design, load only the relevant sections of:
+  - `docs/12_substrate_working_buffer.md`
+  - `docs/15_layer1_method_registry_and_substrate_transition.md`
+- Use `docs/15_layer1_method_registry_and_substrate_transition.md` as the current anchor for Layer 1 method-registry state and the minimum agreed substrate transition note.
+- Use `docs/12_substrate_working_buffer.md` for unresolved substrate questions and working hypotheses. It does not freeze architecture.
+- For tasks that touch substrate design, load only the relevant sections of:
   - `docs/30_env_strategy.md`
   - `docs/35_agent_runtime_reference.md`
   - `docs/40_interface_contract.md`
@@ -40,11 +40,17 @@ Keep it short. Put detailed topic logic and evolving Round 2 design in the relev
 
 ## Layer Discipline
 
-- Layer 1: agent-facing tool directory.
-- Layer 2: tool family, algorithm options, and distinguishing characteristics.
-- Layer 3: rewritten or unified invocation layer.
-- Layer 1 and Layer 2 are knowledge layers. Layer 3 is the first engineering-facing layer.
-- Do not collapse Layer 2 comparison material into a claimed Layer 3 default unless that default has been explicitly frozen.
+- Layer 1: agent-facing toolbox catalog.
+- Layer 2: task-family method knowledge pack and decision tree.
+- Layer 3: execution surface registry and callable contract.
+- Layer 4: backend adapter, wrapper, or rewrite implementation.
+- Layer 1 and Layer 2 are knowledge layers.
+- Layer 3 is the first machine-readable execution-planning layer.
+- Layer 4 is the concrete implementation layer.
+- The brain should normally receive Layer 1, then selected Layer 2, then selected Layer 3.
+- Layer 4 should be exposed only for implementation, debugging, or audit.
+- Do not collapse Layer 2 method-comparison material into Layer 3 execution surfaces.
+- Do not collapse Layer 3 surface contracts into Layer 4 adapter code.
 - Topic-specific Layer 2 freezes belong in the relevant topic artifact, not in this top-level file.
 - The following remain post-research decisions unless frozen elsewhere:
   - execution-surface counts
@@ -55,7 +61,7 @@ Keep it short. Put detailed topic logic and evolving Round 2 design in the relev
 
 ## Discussion And Mutation Guardrails
 
-- During design discussion, do not harden open Round 2 questions into repo-level engineering commitments.
+- During design discussion, do not harden open substrate questions into repo-level engineering commitments.
 - Do not modify NAS topic-pilot files or other authoritative external artifacts unless the task explicitly calls for that mutation.
 - When work is topic-specific, update the relevant topic artifact before promoting anything into repo-wide instructions.
 - Do not backfill topic-specific Layer 2 detail into this file unless it changes repo-wide policy.

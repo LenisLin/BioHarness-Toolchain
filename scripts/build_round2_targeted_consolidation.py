@@ -17,12 +17,12 @@ RUN_DATE = "2026-04-13"
 MAIN_WINDOW = ("2015-01-01", "2026-04-11")
 AUTHORITATIVE_CSV = registry.AUTHORITATIVE_CSV
 CONSOLIDATION_REPORT = (
-    "/mnt/NAS_21T/ProjectData/BioHarness/round1_reports/"
-    "2026-04-13_round2_consolidation_report.md"
+    "/tmp/bioharness_layer1_generated/reports/"
+    "2026-04-13_layer1_targeted_consolidation_report.md"
 )
 ROUND2_REPORT = (
-    "/mnt/NAS_21T/ProjectData/BioHarness/round1_reports/"
-    "2026-04-13_round2_targeted_completion_audit.md"
+    "/tmp/bioharness_layer1_generated/reports/"
+    "2026-04-13_layer1_targeted_completion_audit.md"
 )
 
 
@@ -1133,13 +1133,13 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--out-root",
-        default="/mnt/NAS_21T/ProjectData/BioHarness",
-        help="Base output directory for round1_expanded_scratch, round1_runs, and round1_reports.",
+        default="/tmp/bioharness_layer1_generated",
+        help="Base output directory for generated_scratch, run_notes, and reports.",
     )
     parser.add_argument(
         "--reconcile-authoritative",
         action="store_true",
-        help="Overlay the approved round-2 supplement changes onto the authoritative master registry.",
+        help="Overlay the approved substrate-transition supplement changes onto the authoritative master registry.",
     )
     parser.add_argument(
         "--authoritative-csv",
@@ -1149,19 +1149,19 @@ def main() -> None:
     parser.add_argument(
         "--consolidation-report",
         default=CONSOLIDATION_REPORT,
-        help="Markdown report path for the round-2 reconciliation summary.",
+        help="Markdown report path for the substrate-transition reconciliation summary.",
     )
     parser.add_argument(
         "--round2-report",
         default=ROUND2_REPORT,
-        help="Markdown report path for the NAS copy of the round-2 audit summary.",
+        help="Markdown report path for the substrate-transition audit summary.",
     )
     args = parser.parse_args()
 
     out_root = Path(args.out_root)
-    scratch_root = out_root / "round1_expanded_scratch"
-    runs_root = out_root / "round1_runs"
-    reports_root = out_root / "round1_reports"
+    scratch_root = out_root / "generated_scratch"
+    runs_root = out_root / "run_notes"
+    reports_root = out_root / "reports"
 
     all_rows = build_all_rows()
     for topic in SUPPLEMENT_TOPICS:

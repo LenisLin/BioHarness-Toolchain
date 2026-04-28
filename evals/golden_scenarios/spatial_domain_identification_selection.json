@@ -1,7 +1,7 @@
 {
   "scenario_id": "golden-spatial-domain-selection",
   "skill_id": "example_spatial_domain_identification",
-  "layer2_reference": "/mnt/NAS_21T/ProjectData/BioHarness/2026-04-16_domain_identification_layer2_pilot.md",
+  "layer2_reference": "/mnt/NAS_21T/ProjectData/BioHarness/results/layer2/spatial_domain_identification/2026-04-16_domain_identification_layer2_pilot.md",
   "selection_signal": "histology available",
   "expected_surface": "example.spatial_domain_identification.spagcn",
   "decision_status": "not_frozen",

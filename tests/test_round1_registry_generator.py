@@ -175,14 +175,14 @@ def test_authoritative_rows_match_final_merge_decisions(tmp_path):
     assert skipped == {}
 
 
-def test_baseline_authority_doc_reflects_current_round1_state():
-    baseline = Path("docs/15_round1_baseline_and_round2_prep.md").read_text()
+def test_baseline_authority_doc_reflects_current_layer1_state():
+    baseline = Path("docs/15_layer1_method_registry_and_substrate_transition.md").read_text()
 
     assert "15 analysis problems" in baseline
     assert "first-layer overview registry" in baseline
-    assert "Round 1 inclusion does not imply round2 core candidacy" in baseline
+    assert "Layer 1 registry inclusion does not imply later core candidacy" in baseline
     assert "tool substrate" in baseline
-    assert "8-topic" in baseline
+    assert "smaller first pass" in baseline
     assert "stable-core-only" in baseline
     assert "STT" in baseline
     assert "segger" in baseline

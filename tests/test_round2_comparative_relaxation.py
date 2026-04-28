@@ -257,8 +257,8 @@ def test_comparative_relaxation_main_writes_outputs(tmp_path):
         check=True,
     )
 
-    scratch_csv = out_root / "round1_expanded_scratch" / "2026-04-15_comparative_analysis.csv"
-    supplement_note = out_root / "round1_runs" / "2026-04-15_comparative_analysis_supplement.md"
+    scratch_csv = out_root / "generated_scratch" / "2026-04-15_comparative_analysis.csv"
+    supplement_note = out_root / "run_notes" / "2026-04-15_comparative_analysis_supplement.md"
 
     assert scratch_csv.exists()
     assert supplement_note.exists()

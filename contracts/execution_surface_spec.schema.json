@@ -18,6 +18,15 @@
     "analysis_problem": {
       "type": "string"
     },
+    "task_family": {
+      "type": "string"
+    },
+    "method": {
+      "type": "string"
+    },
+    "visibility": {
+      "type": "string"
+    },
     "input_contract": {
       "type": "object"
     },
@@ -38,6 +47,51 @@
       "items": {
         "type": "string"
       }
+    },
+    "semantic_inputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "semantic_parameters": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "semantic_outputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "preflight_checks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "postrun_checks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "failure_modes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "provenance_expectations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "backend_adapter": {
+      "type": "string"
     },
     "example_status": {
       "type": "string"

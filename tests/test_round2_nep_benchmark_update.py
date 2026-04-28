@@ -316,8 +316,8 @@ def test_nep_benchmark_main_writes_outputs(tmp_path):
         check=True,
     )
 
-    scratch_csv = out_root / "round1_expanded_scratch" / "2026-04-16_cell_cell_communication.csv"
-    supplement_note = out_root / "round1_runs" / "2026-04-16_cell_cell_communication_supplement.md"
+    scratch_csv = out_root / "generated_scratch" / "2026-04-16_cell_cell_communication.csv"
+    supplement_note = out_root / "run_notes" / "2026-04-16_cell_cell_communication_supplement.md"
 
     assert scratch_csv.exists()
     assert supplement_note.exists()

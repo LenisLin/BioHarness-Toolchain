@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MethodEngineeringAudit",
+  "description": "Blueprint-level engineering audit artifact used to derive separate Layer 3 ExecutionSurfaceSpec and Layer 4 BackendAdapterSpec drafts. It is not a runtime API.",
+  "type": "object",
+  "required": [
+    "method_id",
+    "task_family",
+    "engineering_audit",
+    "layer3_surface_draft",
+    "layer4_binding_draft",
+    "environment",
+    "rewrite_decision",
+    "promotion_status"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "method_id": {
+      "type": "string"
+    },
+    "task_family": {
+      "type": "string"
+    },
+    "layer2_role": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "repository": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "engineering_audit": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "layer3_surface_draft": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "layer4_binding_draft": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "rewrite_decision": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "promotion_status": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "enter_layer3_surface",
+          "enter_layer4_adapter_design",
+          "hold"
+        ]
+      }
+    },
+    "notes": {
+      "type": "string"
+    },
+    "example_status": {
+      "type": "string"
+    },
+    "authority_note": {
+      "type": "string"
+    }
+  }
+}

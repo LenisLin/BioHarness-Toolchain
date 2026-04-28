@@ -1,6 +1,6 @@
 # Evals Blueprint
 
-This directory stores golden scenarios for the Round 2 runtime blueprint.
+This directory stores golden scenarios for the substrate runtime blueprint.
 
 The goal is to keep a small set of regression anchors for:
 

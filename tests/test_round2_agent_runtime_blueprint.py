@@ -25,19 +25,30 @@ def test_agent_runtime_reference_is_explicitly_non_authoritative():
     assert "working blueprint" in reference
     assert "not a current authority document" in reference
     assert "does not override" in reference
-    assert "docs/15_round1_baseline_and_round2_prep.md" in reference
-    assert "/mnt/NAS_21T/ProjectData/BioHarness/2026-04-16_domain_identification_layer2_pilot.md" in reference
+    assert "docs/15_layer1_method_registry_and_substrate_transition.md" in reference
+    assert "/mnt/NAS_21T/ProjectData/BioHarness/results/layer2/spatial_domain_identification/2026-04-16_domain_identification_layer2_pilot.md" in reference
     assert "candidate mapping" in reference
+    assert "Layer 1 = agent-facing toolbox catalog" in reference
+    assert "Layer 2 = task-family method knowledge pack and decision tree" in reference
+    assert "Layer 3 = execution surface registry and callable contract" in reference
+    assert "Layer 4 = backend adapter, wrapper, or rewrite implementation" in reference
+    assert "Layer 4 should not be loaded into default reasoning context" in reference
     assert "https://openai.com/index/the-next-evolution-of-the-agents-sdk/" in reference
     assert "https://developers.openai.com/api/docs/guides/agents/sandboxes" in reference
     assert "https://developers.openai.com/api/docs/guides/tools-skills" in reference
     assert "https://developers.openai.com/api/docs/guides/agents/orchestration" in reference
     assert "https://modal.com/blog/building-with-modal-and-the-openai-agent-sdk" in reference
     assert "Frozen Mapping" not in reference
+    for old_phrase in [
+        "Layer 3 " + "below the information surface",
+        "rewritten or unified " + "invocation layer",
+        "first engineering-facing " + "layer",
+    ]:
+        assert old_phrase not in reference
 
 
 def test_working_buffer_keeps_existing_authority_order_intact():
-    buffer_text = read_text(DOCS / "12_round2_working_buffer.md")
+    buffer_text = read_text(DOCS / "12_substrate_working_buffer.md")
 
     assert "candidate blueprint material" in buffer_text
     assert "do not replace the existing authority order" in buffer_text
@@ -79,12 +90,15 @@ def test_interface_contract_doc_is_explicitly_provisional():
         "SkillSpec",
         "ExecutionSurfaceSpec",
         "EnvironmentProfile",
+        "BackendAdapterSpec",
         "RunRecord",
         "ValidationReport",
     ]:
         assert contract_name in contract_doc
 
     assert "smallest stable callable unit" in contract_doc
+    assert "Layer 3 contract" in contract_doc
+    assert "Layer 4 backend adapter" in contract_doc
     assert "structured state" in contract_doc
     assert "manual review" in contract_doc
     assert "Current Decision" not in contract_doc
@@ -141,6 +155,15 @@ def test_schema_bundle_and_examples_exist_for_all_public_contracts():
             "storage_policy",
             "secrets_policy",
             "provider",
+        ],
+        "backend_adapter_spec": [
+            "adapter_id",
+            "surface_id",
+            "runtime_language",
+            "environment_profile",
+            "entrypoint",
+            "rewrite_level",
+            "visibility",
         ],
         "run_record": ["run_id", "skill_id", "surface_id", "status", "state_summary"],
         "validation_report": [

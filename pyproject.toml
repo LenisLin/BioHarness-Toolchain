@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "bioharness-toolchain"
 version = "0.0.0"
-description = "Tools and infrastructure for BioHarness downstream workflows."
+description = "Blueprints for a spatial transcriptomics execution harness."
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = []
@@ -15,4 +15,3 @@ package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
-

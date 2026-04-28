@@ -8,8 +8,8 @@ from pathlib import Path
 
 RUN_DATE = "2026-04-11"
 WINDOW = ("2015-01-01", "2026-04-11")
-AUTHORITATIVE_CSV = "/mnt/NAS_21T/ProjectData/BioHarness/2026-04-10_spatial_method_survey_v1.csv"
-AUTHORITATIVE_REPORT = "/mnt/NAS_21T/ProjectData/BioHarness/round1_reports/2026-04-11_authoritative_reconcile_report.md"
+AUTHORITATIVE_CSV = "/mnt/NAS_21T/ProjectData/BioHarness/results/layer1_method_registry/registry/layer1_spatial_method_registry.csv"
+AUTHORITATIVE_REPORT = "/tmp/bioharness_layer1_generated/reports/layer1_registry_reconcile_report.md"
 
 SCRATCH_FIELDS = [
     "Analysis Problem",
@@ -3626,8 +3626,8 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--out-root",
-        default="/mnt/NAS_21T/ProjectData/BioHarness",
-        help="Base output directory for round1_expanded_scratch, round1_runs, and round1_reports.",
+        default="/tmp/bioharness_layer1_generated",
+        help="Base output directory for generated_scratch, run_notes, and reports.",
     )
     parser.add_argument(
         "--reconcile-authoritative",
@@ -3652,9 +3652,9 @@ def main() -> None:
     args = parser.parse_args()
 
     out_root = Path(args.out_root)
-    scratch_root = out_root / "round1_expanded_scratch"
-    runs_root = out_root / "round1_runs"
-    reports_root = out_root / "round1_reports"
+    scratch_root = out_root / "generated_scratch"
+    runs_root = out_root / "run_notes"
+    reports_root = out_root / "reports"
 
     if args.reconcile_from_existing_scratch:
         all_rows = load_existing_scratch_rows(scratch_root)
@@ -3672,11 +3672,11 @@ def main() -> None:
 
         summary = summary_markdown(all_rows)
         write_markdown(
-            reports_root / f"{RUN_DATE}_round1_expanded_summary.md",
+            reports_root / f"{RUN_DATE}_layer1_registry_expanded_summary.md",
             summary,
         )
         write_markdown(
-            reports_root / f"{RUN_DATE}_round1_expanded_summary_v2.md",
+            reports_root / f"{RUN_DATE}_layer1_registry_expanded_summary_v2.md",
             summary,
         )
 

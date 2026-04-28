@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BackendAdapterSpec",
+  "description": "Layer 4 implementation-facing contract for binding a Layer 3 ExecutionSurfaceSpec to backend adapter, wrapper, or rewrite details.",
+  "type": "object",
+  "required": [
+    "adapter_id",
+    "surface_id",
+    "runtime_language",
+    "environment_profile",
+    "entrypoint",
+    "rewrite_level",
+    "visibility"
+  ],
+  "properties": {
+    "adapter_id": {
+      "type": "string"
+    },
+    "surface_id": {
+      "type": "string"
+    },
+    "backend_method": {
+      "type": "string"
+    },
+    "runtime_language": {
+      "type": "string"
+    },
+    "environment_profile": {
+      "type": "string"
+    },
+    "entrypoint": {
+      "type": "string"
+    },
+    "call_graph": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "parameter_mapping": {
+      "type": "object"
+    },
+    "input_conversion": {
+      "type": "object"
+    },
+    "output_mapping": {
+      "type": "object"
+    },
+    "artifact_mapping": {
+      "type": "object"
+    },
+    "failure_translation": {
+      "type": "object"
+    },
+    "smoke_test": {
+      "type": "object"
+    },
+    "fidelity_test": {
+      "type": "object"
+    },
+    "rewrite_level": {
+      "type": "string",
+      "enum": [
+        "core_anchor",
+        "thin_adapter",
+        "strong_wrapper",
+        "compatibility_rewrite",
+        "algorithmic_rewrite",
+        "legacy_capsule",
+        "hold"
+      ]
+    },
+    "visibility": {
+      "type": "string",
+      "enum": [
+        "implementation_debug_audit_only",
+        "agent_debug_view"
+      ]
+    },
+    "example_status": {
+      "type": "string"
+    },
+    "authority_note": {
+      "type": "string"
+    }
+  }
+}

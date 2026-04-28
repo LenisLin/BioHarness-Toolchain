@@ -16,12 +16,12 @@ RUN_DATE = "2026-04-15"
 MAIN_WINDOW = ("2015-01-01", "2026-04-11")
 AUTHORITATIVE_CSV = registry.AUTHORITATIVE_CSV
 ROUND2_REPORT = (
-    "/mnt/NAS_21T/ProjectData/BioHarness/round1_reports/"
-    "2026-04-15_round2_comparative_relaxation_report.md"
+    "/tmp/bioharness_layer1_generated/reports/"
+    "2026-04-15_layer1_comparative_relaxation_report.md"
 )
 CONSOLIDATION_REPORT = (
-    "/mnt/NAS_21T/ProjectData/BioHarness/round1_reports/"
-    "2026-04-15_round2_comparative_relaxation_consolidation_report.md"
+    "/tmp/bioharness_layer1_generated/reports/"
+    "2026-04-15_layer1_comparative_relaxation_consolidation_report.md"
 )
 
 
@@ -502,8 +502,8 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--out-root",
-        default="/mnt/NAS_21T/ProjectData/BioHarness",
-        help="Base output directory for round1_expanded_scratch, round1_runs, and round1_reports.",
+        default="/tmp/bioharness_layer1_generated",
+        help="Base output directory for generated_scratch, run_notes, and reports.",
     )
     parser.add_argument(
         "--reconcile-authoritative",
@@ -528,8 +528,8 @@ def main() -> None:
     args = parser.parse_args()
 
     out_root = Path(args.out_root)
-    scratch_root = out_root / "round1_expanded_scratch"
-    runs_root = out_root / "round1_runs"
+    scratch_root = out_root / "generated_scratch"
+    runs_root = out_root / "run_notes"
 
     all_rows = build_all_rows()
     for topic in SUPPLEMENT_TOPICS:

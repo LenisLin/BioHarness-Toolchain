@@ -1,0 +1,47 @@
+{
+  "adapter_id": "example.backend.spatial_domain_identification.spagcn",
+  "surface_id": "example.spatial_domain_identification.spagcn",
+  "backend_method": "SpaGCN",
+  "runtime_language": "python",
+  "environment_profile": "deep-spatial",
+  "entrypoint": "bioharness_adapters.spatial_domain.spagcn.run",
+  "call_graph": [
+    "validate_input_contract",
+    "convert_anndata_to_backend_input",
+    "run_backend_training_or_inference",
+    "extract_domain_labels",
+    "write_domain_labels_to_adata_obs",
+    "generate_standard_plots",
+    "emit_validation_report"
+  ],
+  "parameter_mapping": {
+    "n_domains": "backend.cluster_count",
+    "spatial_key": "backend.coordinate_key",
+    "random_seed": "backend.seed"
+  },
+  "input_conversion": {
+    "spatial_anndata": "backend_expression_and_coordinates"
+  },
+  "output_mapping": {
+    "domain_labels": "adata.obs[\"bioharness_domain\"]",
+    "summary": "outputs/summary.json",
+    "plot": "outputs/figures/domain_plot.png"
+  },
+  "artifact_mapping": {
+    "run_log": "outputs/logs/spagcn.log"
+  },
+  "failure_translation": {
+    "missing_spatial_key": "SpatialCoordinateMissing",
+    "cuda_not_available": "GPUUnavailable"
+  },
+  "smoke_test": {
+    "status": "planned"
+  },
+  "fidelity_test": {
+    "status": "planned"
+  },
+  "rewrite_level": "strong_wrapper",
+  "visibility": "implementation_debug_audit_only",
+  "example_status": "illustrative_example",
+  "authority_note": "Illustrative only; does not indicate that this backend adapter or entrypoint exists."
+}

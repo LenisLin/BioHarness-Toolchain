@@ -1,6 +1,6 @@
 # Skills Blueprint
 
-This directory is the future home for task-level instructions and selection rules that sit at the Layer 1 boundary of the Round 2 architecture.
+This directory is the future home for task-level instructions and selection rules that sit at the Layer 1 boundary of the substrate architecture.
 
 At this stage it is a blueprint directory, not a runnable skill system. Each future skill entry should link:
 

@@ -3,13 +3,13 @@ import json
 
 
 PILOT_PATH = Path(
-    "/mnt/NAS_21T/ProjectData/BioHarness/2026-04-16_domain_identification_layer2_pilot.md"
+    "/mnt/NAS_21T/ProjectData/BioHarness/results/layer2/spatial_domain_identification/2026-04-16_domain_identification_layer2_pilot.md"
 )
 SUBTABLE_MD_PATH = Path(
-    "/mnt/NAS_21T/ProjectData/BioHarness/2026-04-16_domain_identification_layer2_subtable.md"
+    "/mnt/NAS_21T/ProjectData/BioHarness/results/layer2/spatial_domain_identification/2026-04-16_domain_identification_layer2_subtable.md"
 )
 SUBTABLE_JSON_PATH = Path(
-    "/mnt/NAS_21T/ProjectData/BioHarness/2026-04-16_domain_identification_layer2_subtable.json"
+    "/mnt/NAS_21T/ProjectData/BioHarness/results/layer2/spatial_domain_identification/2026-04-16_domain_identification_layer2_subtable.json"
 )
 
 

@@ -18,9 +18,11 @@ Layer 3 is not raw backend function documentation and is not a full implementati
 
 A method-specific Layer 3 surface is a realization of a canonical task-family surface. It should carry `inherits_from`, such as `spatial_domain_identification.canonical.v1`, and only add method-specific semantic constraints, parameters, outputs, artifacts, and validation hooks.
 
-Layer 3 uses the unified execution stage vocabulary from [Layer 3/4 Method Execution Planning Protocol v0.6](83_layer3_4_method_execution_planning_protocol.md): `input_check`, `method_preprocessing`, `core_structure_building`, `model_fit_or_inference`, `output_assignment`, `artifact_export`, `final_validation`, and `visualization`. `method_preprocessing` means method-local preprocessing, not global Scanpy/ST preprocessing.
+Layer 3 uses the unified execution stage vocabulary from [Layer 3/4 Method Execution Planning Protocol v0.7.1](83_layer3_4_method_execution_planning_protocol.md): `input_check`, `method_preprocessing`, `core_structure_building`, `model_fit_or_inference`, `output_assignment`, `artifact_export`, `final_validation`, and `visualization`. `method_preprocessing` means method-local preprocessing, not global Scanpy/ST preprocessing.
 
 Layer 3 is agent-visible by default. It should not expose backend function names, backend file paths, internal call graphs, or package-private parameters.
+
+Layer 3 parameter policy should expose only semantic, constrained controls. Low-level output namespaces, directory layouts, temporary paths, backend output prefixes, unsafe memory flags, internal object keys, and backend optimization knobs should remain adapter-controlled or forbidden for agent use.
 
 Illustrative `ExecutionSurfaceSpec`:
 
@@ -76,6 +78,8 @@ Layer 4 is the concrete backend binding. It captures parameter mapping, input co
 
 Layer 4 must record `integration_mode` and `filesystem_policy` so the planning record can distinguish thin API adapters, wrappers, legacy capsules, CLI/script boundaries, and rewrite candidates. It also carries evidence traceability for backend files, functions, entrypoints, parameters, I/O behavior, and failure translation.
 
+Every Layer 3 functional stage must have a Layer 4 `function_surface_bindings` entry with `binding_status: backend_bound | wrapper_added | not_applicable | requires_followup`. Draft-only unresolved backend symbols must be marked with `implementation_blocker: true` and resolved before MVP adapter implementation.
+
 Illustrative `BackendAdapterSpec`:
 
 ```yaml
@@ -101,6 +105,13 @@ call_graph:
   - write_domain_labels_to_adata_obs
   - generate_standard_plots
   - emit_validation_report
+function_surface_bindings:
+  - layer3_stage: model_fit_or_inference
+    binding_status: requires_followup
+    backend_files_or_functions:
+      - source_symbol_not_resolved_in_current_inventory
+    adapter_responsibility: "Resolve exact backend entrypoint before implementation."
+    implementation_blocker: true
 parameter_mapping:
   n_domains: backend.cluster_count
   spatial_key: backend.coordinate_key
@@ -123,6 +134,8 @@ This example is illustrative and does not indicate that the adapter entrypoint e
 Layer 2 scientific suitability does not automatically imply Layer 3 promotion. Layer 3 entry requires execution readiness review. Layer 3 promotion does not freeze Layer 4 implementation.
 
 For promoted methods, the execution readiness review should usually become a Layer 3/4 `MethodExecutionPlanningRecord`. The planning pass reads the method repository once and separates findings into a Layer 3 `ExecutionSurfaceSpec`, a Layer 4 `BackendAdapterSpec`, a rewrite decision, environment assignment, and validation requirements.
+
+v0.7.1 distinguishes static template acceptance from implementation and production readiness. A method can be structurally reviewable while still failing implementation readiness because environment probes, minimal fixtures, runtime measurement, output schema observation, provenance observation, or symbol-level bindings are missing. Production readiness remains `fail` until runtime implementation, validation, and provenance exist.
 
 Illustrative entry review:
 

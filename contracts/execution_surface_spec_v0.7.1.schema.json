@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ExecutionSurfaceSpec v0.7.1",
+  "description": "Blueprint-level Layer 3 execution surface schema aligned with MethodExecutionPlanningRecord v0.7.1. This schema is permissive for planning drafts and does not imply runtime support.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "surface_id",
+    "task_family",
+    "visibility",
+    "input_contract",
+    "parameter_policy",
+    "validation_contract",
+    "failure_policy",
+    "authority_status"
+  ],
+  "properties": {
+    "surface_id": {
+      "type": "string"
+    },
+    "task_family": {
+      "type": "string"
+    },
+    "inherits_from": {
+      "type": "string"
+    },
+    "method_id": {
+      "type": "string"
+    },
+    "visibility": {
+      "type": "string"
+    },
+    "authority_status": {
+      "type": "string"
+    },
+    "surface_status": {
+      "type": "string"
+    },
+    "authority_note": {
+      "type": "string"
+    },
+    "example_status": {
+      "type": "string"
+    },
+    "functional_surfaces": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "input_contract": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "spatial_coordinate_source": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "multi_sample_policy": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "target_domain_count_policy": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "parameter_policy": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "expose_to_agent": {
+          "type": [
+            "array",
+            "object",
+            "null"
+          ]
+        },
+        "expose_to_agent_with_constraints": {
+          "type": [
+            "array",
+            "object",
+            "null"
+          ]
+        },
+        "infer_from_input": {
+          "type": [
+            "array",
+            "object",
+            "null"
+          ]
+        },
+        "fixed_by_adapter": {
+          "type": [
+            "array",
+            "object",
+            "null"
+          ]
+        },
+        "backend_default": {
+          "type": [
+            "array",
+            "object",
+            "null"
+          ]
+        },
+        "forbidden_for_agent": {
+          "type": [
+            "array",
+            "object",
+            "null"
+          ]
+        }
+      }
+    },
+    "clustering_backend_policy": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "semantic_inputs": {
+      "type": "array",
+      "items": {
+        "type": [
+          "string",
+          "object"
+        ]
+      }
+    },
+    "semantic_parameters": {
+      "type": "array",
+      "items": {
+        "type": [
+          "string",
+          "object"
+        ]
+      }
+    },
+    "semantic_outputs": {
+      "type": "array",
+      "items": {
+        "type": [
+          "string",
+          "object"
+        ]
+      }
+    },
+    "layer4_reference_policy": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "validation_contract": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "failure_policy": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "provenance_policy": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

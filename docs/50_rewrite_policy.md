@@ -14,7 +14,7 @@ The current proposal evaluates rewrite decisions from an `agent-runtime` perspec
 
 BioHarness aggressively standardizes interfaces, contracts, validation, artifacts, and provenance, but conservatively rewrites scientific algorithms.
 
-The v0.6 `rewrite_plan` separates `interface_standardization` from `algorithmic_rewrite`. This distinction is required because BioHarness can often normalize execution safely without changing the scientific algorithm.
+The v0.7.1 `rewrite_decision` separates `interface_standardization` from `algorithmic_rewrite`. This distinction is required because BioHarness can often normalize execution safely without changing the scientific algorithm.
 
 ## Interface Standardization
 
@@ -33,6 +33,8 @@ These changes should make execution safer and more auditable without changing th
 
 In a `MethodExecutionPlanningRecord`, `interface_standardization` should record the planned scope, rationale, validation required, evidence references, and confidence. Typical scope includes I/O conversion, parameter normalization, artifact export, failure translation, provenance, filesystem policy, and stable object-field assignment.
 
+Interface standardization is expected during Layer 3/4 co-design. Agent-facing surfaces should hide low-level backend knobs while adapters standardize output names, directory layout, temporary directories, log policy, validation artifacts, and provenance.
+
 ## Algorithmic Rewriting
 
 Algorithmic rewriting should be conservative. It includes reimplementing:
@@ -47,6 +49,8 @@ Algorithmic rewriting should be conservative. It includes reimplementing:
 A convenient reimplementation is not automatically scientifically equivalent.
 
 In a `MethodExecutionPlanningRecord`, `algorithmic_rewrite` must state whether algorithm core would be touched. If algorithm core is touched, fidelity comparison and explicit approval are required before implementation work. The planning record should name excluded algorithmic components when BioHarness intends to wrap or standardize around them rather than rewrite them.
+
+Algorithmic rewrite requires explicit rationale and fidelity checks. It should default to hold/manual review unless scientific equivalence can be evaluated.
 
 ## Level A: Core Anchor
 
@@ -81,11 +85,15 @@ Use when the method is scientifically useful but the public interface is not age
 
 Do not rewrite the algorithm; stabilize I/O, logging, artifacts, and validation.
 
+Strong wrappers may be implementation-ready only after environment probe, minimal smoke fixture, and output schema observation. Static dependency risk alone is not enough to place a method on final environment hold.
+
 ## Level D: Compatibility Rewrite
 
 Use when original code depends on old or conflicting packages, but the algorithmic logic can be safely migrated onto BioHarness backbone packages.
 
 Require fidelity tests or at least documented comparison checks.
+
+Compatibility rewrite requires comparison against original behavior before equivalence is claimed.
 
 ## Level E: Algorithmic Rewrite / Hold
 
@@ -96,6 +104,8 @@ Prefer:
 - legacy capsule
 - hold
 - manual review required
+
+Algorithmic rewrite should remain a hold/manual-review path unless scientific equivalence can be evaluated.
 
 ## Rewrite Signals
 

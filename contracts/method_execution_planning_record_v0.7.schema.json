@@ -1,0 +1,220 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MethodExecutionPlanningRecord v0.7/v0.7.1",
+  "description": "Blueprint-level Layer 3/4 co-design record. v0.7.1 is a small patch over v0.7. It is not a runtime API and does not imply production support.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "method_execution_planning_record"
+  ],
+  "properties": {
+    "method_execution_planning_record": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "record_version",
+        "method_id",
+        "task_family",
+        "storage_policy",
+        "layer2_to_layer3_handoff",
+        "hard_constraints_for_layer3",
+        "audit_evidence_registry",
+        "canonical_surface_reference",
+        "layer3_agent_surface",
+        "layer4_adapter_draft",
+        "environment_plan",
+        "rewrite_decision",
+        "validation_runtime_plan",
+        "risk_register",
+        "decision_log",
+        "acceptance_gate"
+      ],
+      "properties": {
+        "record_id": {
+          "type": "string"
+        },
+        "record_version": {
+          "enum": [
+            "v0.7",
+            "v0.7.1"
+          ]
+        },
+        "method_id": {
+          "type": "string"
+        },
+        "task_family": {
+          "type": "string"
+        },
+        "planning_status": {
+          "type": "string"
+        },
+        "authority_status": {
+          "type": "string"
+        },
+        "storage_policy": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "layer2_to_layer3_handoff": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "hard_constraints_for_layer3": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "audit_evidence_registry": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "code_mind_map": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "function_surface_map": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "canonical_surface_reference": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "layer3_agent_surface": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "parameter_policy": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "expose_to_agent_with_constraints": {
+                  "type": [
+                    "array",
+                    "object",
+                    "null"
+                  ]
+                }
+              }
+            },
+            "clustering_backend_policy": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          }
+        },
+        "layer4_adapter_draft": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "function_surface_bindings": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": true,
+                "properties": {
+                  "binding_status": {
+                    "enum": [
+                      "backend_bound",
+                      "wrapper_added",
+                      "not_applicable",
+                      "requires_followup"
+                    ]
+                  },
+                  "implementation_blocker": {
+                    "type": "boolean"
+                  },
+                  "resolution_required_before": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "evidence_resolution": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "level": {
+                  "enum": [
+                    "file_level",
+                    "symbol_level",
+                    "line_level",
+                    "runtime_observed"
+                  ]
+                },
+                "implementation_ready": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        },
+        "environment_plan": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "rewrite_decision": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "validation_runtime_plan": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "static_acceptance_gate": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "runtime_acceptance_gate": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "risk_register": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "decision_log": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "subagent_work_plan": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "acceptance_gate": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "template_acceptance_status": {
+              "enum": [
+                "pass",
+                "partial",
+                "fail"
+              ]
+            },
+            "implementation_readiness_status": {
+              "enum": [
+                "pass",
+                "partial",
+                "fail"
+              ]
+            },
+            "production_readiness_status": {
+              "enum": [
+                "pass",
+                "partial",
+                "fail"
+              ]
+            }
+          }
+        },
+        "next_action_decision": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      }
+    }
+  }
+}

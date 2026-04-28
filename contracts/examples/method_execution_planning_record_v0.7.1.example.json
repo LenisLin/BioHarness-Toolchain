@@ -1,0 +1,272 @@
+{
+  "example_status": "synthetic_v0.7.1_example",
+  "authority_note": "Synthetic illustrative example only; not a live method audit output and not a production support claim.",
+  "method_execution_planning_record": {
+    "record_id": "synthetic_spatial_domain_method_v0_7_1_example",
+    "record_version": "v0.7.1",
+    "method_id": "synthetic_spatial_domain_method",
+    "task_family": "spatial_domain_identification",
+    "planning_status": "synthetic_example",
+    "authority_status": "blueprint",
+    "storage_policy": {
+      "generic_template_location": "project_repo_allowed",
+      "method_specific_intermediate_location": "NAS_required",
+      "project_docs_allowed": "false_for_method_specific_intermediates"
+    },
+    "layer2_to_layer3_handoff": {
+      "full_handoff": {
+        "method_role": "synthetic example only",
+        "selection_context": "Demonstrates v0.7.1 schema shape without representing a live audit."
+      }
+    },
+    "hard_constraints_for_layer3": {
+      "required_input_object": "AnnData",
+      "required_spatial_information": "semantic coordinate source",
+      "multi_sample_policy": "requires additional review"
+    },
+    "audit_evidence_registry": {
+      "repository_snapshot": {
+        "url": "https://example.invalid/synthetic-spatial-domain-method",
+        "commit_or_release": "synthetic_reference_only"
+      },
+      "evidence_items": [
+        {
+          "evidence_id": "E_SYNTHETIC_SOURCE_FILE",
+          "source_type": "source_code",
+          "path_or_url": "synthetic_backend/example_backend_method.py",
+          "summary": "Synthetic file-level placeholder for schema demonstration.",
+          "confidence": "low",
+          "evidence_resolution": {
+            "level": "file_level",
+            "implementation_ready": false
+          }
+        }
+      ]
+    },
+    "canonical_surface_reference": {
+      "surface_id": "canonical.spatial_domain_identification.domain_assignment",
+      "status": "existing",
+      "inherits_from": "canonical.spatial_domain_identification.domain_assignment"
+    },
+    "layer3_agent_surface": {
+      "surface_id": "example.spatial_domain_identification.synthetic_spatial_domain_method.v0_7_1",
+      "inherits_from": "canonical.spatial_domain_identification.domain_assignment",
+      "visibility": "agent_harness_readable",
+      "functional_surfaces": [
+        "input_check",
+        "method_preprocessing",
+        "core_structure_building",
+        "model_fit_or_inference",
+        "output_assignment",
+        "artifact_export",
+        "final_validation",
+        "visualization"
+      ],
+      "spatial_coordinate_source": {
+        "allowed_modes": [
+          "obsm_spatial",
+          "obs_x_y_columns",
+          "adapter_validated_custom_mapping"
+        ]
+      },
+      "multi_sample_policy": {
+        "status": "examples_observed_but_bioharness_contract_not_validated",
+        "supported_claim": "no_joint_multislice_contract_claim"
+      },
+      "target_domain_count_policy": {
+        "status": "not_directly_guaranteed",
+        "mapping": "May require resolution search or post-hoc selection."
+      },
+      "parameter_policy": {
+        "expose_to_agent_with_constraints": [
+          "target_domain_count",
+          "output_label_key_alias_optional"
+        ],
+        "fixed_by_adapter": [
+          "BioHarness_output_field_prefix",
+          "output_directory_layout"
+        ],
+        "forbidden_for_agent": [
+          "raw_backend_coordinate_key_tuple",
+          "temporary_file_name",
+          "backend_output_prefix"
+        ]
+      },
+      "validation_contract": {
+        "preflight_checks": [
+          "input_object_is_anndata",
+          "spatial_coordinates_resolve"
+        ],
+        "postrun_checks": [
+          "domain_label_column_exists",
+          "artifact_manifest_written"
+        ]
+      },
+      "failure_policy": {
+        "typed_failures": [
+          "missing_coordinates",
+          "backend_symbol_unresolved"
+        ]
+      },
+      "provenance_policy": {
+        "record_inputs": true,
+        "record_parameters": true,
+        "record_runtime_observation": false
+      }
+    },
+    "layer4_adapter_draft": {
+      "backend_adapter_id": "example.backend_adapter.synthetic_spatial_domain_method.v0_7_1",
+      "linked_surface_id": "example.spatial_domain_identification.synthetic_spatial_domain_method.v0_7_1",
+      "backend_method": "example_backend_method",
+      "authority_status": "blueprint",
+      "implementation_status": "not_implemented",
+      "evidence_authority": {
+        "registry_file": "this_synthetic_record",
+        "registry_section": "Audit Evidence Registry"
+      },
+      "evidence_resolution": {
+        "level": "file_level",
+        "implementation_ready": false
+      },
+      "runtime_language": "python",
+      "integration_mode": "wrapper_adapter_blueprint",
+      "backend_entrypoints": [
+        {
+          "name": "source_symbol_not_resolved_in_current_inventory",
+          "role": "model_fit_or_inference",
+          "implementation_blocker": true,
+          "resolution_required_before": "MVP_adapter_implementation"
+        }
+      ],
+      "function_surface_bindings": [
+        {
+          "layer3_stage": "input_check",
+          "binding_status": "backend_bound",
+          "backend_files_or_functions": [
+            "example_backend_method.validate_input"
+          ],
+          "implementation_blocker": false
+        },
+        {
+          "layer3_stage": "method_preprocessing",
+          "binding_status": "wrapper_added",
+          "backend_files_or_functions": [],
+          "implementation_blocker": false
+        },
+        {
+          "layer3_stage": "core_structure_building",
+          "binding_status": "backend_bound",
+          "backend_files_or_functions": [
+            "example_backend_method.prepare_graph"
+          ],
+          "implementation_blocker": false
+        },
+        {
+          "layer3_stage": "model_fit_or_inference",
+          "binding_status": "requires_followup",
+          "backend_files_or_functions": [
+            "source_symbol_not_resolved_in_current_inventory"
+          ],
+          "implementation_blocker": true,
+          "resolution_required_before": "MVP_adapter_implementation"
+        },
+        {
+          "layer3_stage": "output_assignment",
+          "binding_status": "backend_bound",
+          "backend_files_or_functions": [
+            "example_backend_method.assign_labels"
+          ],
+          "implementation_blocker": false
+        },
+        {
+          "layer3_stage": "artifact_export",
+          "binding_status": "wrapper_added",
+          "backend_files_or_functions": [],
+          "implementation_blocker": false
+        },
+        {
+          "layer3_stage": "final_validation",
+          "binding_status": "wrapper_added",
+          "backend_files_or_functions": [],
+          "implementation_blocker": false
+        },
+        {
+          "layer3_stage": "visualization",
+          "binding_status": "not_applicable",
+          "backend_files_or_functions": [],
+          "implementation_blocker": false
+        }
+      ],
+      "parameter_mapping": {
+        "target_domain_count": "resolution_or_cluster_hint"
+      },
+      "input_conversion": {
+        "coordinate_source": "semantic_to_backend_mapping"
+      },
+      "output_mapping": {
+        "domain_labels": "adata.obs[BioHarness_standardized_label_key]"
+      },
+      "artifact_mapping": {
+        "manifest": "artifacts/manifest.json"
+      },
+      "filesystem_policy": {
+        "temporary_directory_policy": "adapter_managed"
+      },
+      "failure_translation": {
+        "unresolved_backend_symbol": "implementation_blocker"
+      },
+      "environment_binding": {
+        "environment_status": "probe_required",
+        "runtime_observed": false
+      },
+      "smoke_test": {
+        "status": "not_written"
+      },
+      "fidelity_test": {
+        "status": "not_written"
+      },
+      "rewrite_level": "thin_adapter",
+      "visibility": "implementation_debug_audit_only"
+    },
+    "environment_plan": {
+      "environment_decision": [
+        "environment_probe_required"
+      ],
+      "environment_hold_status": "not_justified_yet"
+    },
+    "rewrite_decision": {
+      "interface_standardization": "planned",
+      "algorithm_core_touched": false
+    },
+    "validation_runtime_plan": {
+      "runtime_measurement": "not_observed",
+      "output_schema_observation": "not_observed",
+      "provenance_observation": "not_observed"
+    },
+    "static_acceptance_gate": {
+      "status": "synthetic_example_only"
+    },
+    "runtime_acceptance_gate": {
+      "status": "blocked_until_runtime_implementation_exists"
+    },
+    "risk_register": {
+      "risks": [
+        "unresolved_backend_symbol"
+      ]
+    },
+    "decision_log": [
+      {
+        "decision": "Use synthetic example only.",
+        "rationale": "Avoid method-specific live audit artifacts in repository examples."
+      }
+    ],
+    "acceptance_gate": {
+      "template_acceptance_status": "partial",
+      "implementation_readiness_status": "fail",
+      "production_readiness_status": "fail"
+    },
+    "next_action_decision": {
+      "next_action": "resolve_backend_symbols_before_any_adapter_work"
+    }
+  }
+}

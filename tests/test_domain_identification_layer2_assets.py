@@ -1,15 +1,36 @@
-from pathlib import Path
 import json
+import os
+from pathlib import Path
+
+import pytest
+
+
+RUN_EXTERNAL = os.environ.get("BIOHARNESS_EXTERNAL_ARTIFACT_TESTS") == "1"
+
+pytestmark = pytest.mark.skipif(
+    not RUN_EXTERNAL,
+    reason="External NAS artifact tests require BIOHARNESS_EXTERNAL_ARTIFACT_TESTS=1",
+)
+
+NAS_ROOT = Path(
+    os.environ.get(
+        "BIOHARNESS_NAS_ROOT",
+        "/mnt/NAS_21T/ProjectData/BioHarness",
+    )
+)
 
 
 PILOT_PATH = Path(
-    "/mnt/NAS_21T/ProjectData/BioHarness/results/layer2/spatial_domain_identification/2026-04-16_domain_identification_layer2_pilot.md"
+    NAS_ROOT
+    / "results/layer2/spatial_domain_identification/2026-04-16_domain_identification_layer2_pilot.md"
 )
 SUBTABLE_MD_PATH = Path(
-    "/mnt/NAS_21T/ProjectData/BioHarness/results/layer2/spatial_domain_identification/2026-04-16_domain_identification_layer2_subtable.md"
+    NAS_ROOT
+    / "results/layer2/spatial_domain_identification/2026-04-16_domain_identification_layer2_subtable.md"
 )
 SUBTABLE_JSON_PATH = Path(
-    "/mnt/NAS_21T/ProjectData/BioHarness/results/layer2/spatial_domain_identification/2026-04-16_domain_identification_layer2_subtable.json"
+    NAS_ROOT
+    / "results/layer2/spatial_domain_identification/2026-04-16_domain_identification_layer2_subtable.json"
 )
 
 

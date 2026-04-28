@@ -40,6 +40,32 @@
       "items": {
         "type": "string"
       }
+    },
+    "static_acceptance_gate": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "runtime_acceptance_gate": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "runtime_measurement": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "output_schema_observed": {
+      "type": [
+        "boolean",
+        "object"
+      ],
+      "additionalProperties": true
+    },
+    "provenance_observed": {
+      "type": [
+        "boolean",
+        "object"
+      ],
+      "additionalProperties": true
     }
   }
 }

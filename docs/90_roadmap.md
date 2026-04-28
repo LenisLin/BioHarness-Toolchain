@@ -12,7 +12,8 @@ The first vertical remains spatial transcriptomics downstream analysis. Runtime 
 
 - Layer 1 has been largely established as a toolbox/task-family catalog.
 - Layer 2 is being completed topic by topic.
-- Spatial domain identification is the first Layer 2 pilot approaching completion.
+- Spatial domain identification is the first Layer 2 pilot.
+- BANKSY v0.7.0 is accepted as a Layer3/4 template trial, but not MVP implementation-ready.
 - Layer 3/4 have not entered production implementation.
 
 ## Next Phase
@@ -26,14 +27,25 @@ Layer 2 spatial domain identification closure:
 
 Layer 3/4 co-design pilot:
 
-- adopt `MethodExecutionPlanningRecord v0.6` for promoted-method planning
-- run pilots in order: BANKSY, SpaGCN, hold / legacy / no-clean-API negative case
+- adopt `MethodExecutionPlanningRecord v0.7.1` for promoted-method planning
+- treat BANKSY v0.7.0 as an accepted template trial, not an implementation-ready adapter
+- complete the v0.7.1 template/documentation/schema patch
+- then run SpaGCN Layer3/4 co-design
+- then run a hold / legacy / no-clean-API negative case
 - produce Layer 3 `ExecutionSurfaceSpec` drafts
 - produce Layer 4 `BackendAdapterSpec` drafts
 - assign environment profiles
 - record rewrite decisions
 - freeze the template and co-design process before claiming production adapters
 - choose 1-2 methods for eventual MVP implementation only after the planning process is accepted
+
+Current pilot artifact:
+
+- BANKSY v0.7.0 target root is `/mnt/NAS_21T/ProjectData/BioHarness/results/layer3_4/spatial_domain_identification/BANKSY/v0.7.0/`. BANKSY source retrieval outputs remain under `/mnt/NAS_21T/ProjectData/BioHarness/results/layer3_4/spatial_domain_identification/banksy/`.
+
+The BANKSY v0.6.1 recovery package is now a failed/stress-test example for the planning workflow, not the current template and not a final source. Method-specific outputs remain outside project docs because they are intermediate method-engineering artifacts. Live method audit packs are NAS artifacts. Project docs describe the process, not the live intermediate outputs. They do not move Layer 3/4 into production implementation.
+
+BANKSY environment probing is a separate future task. SpaGCN Layer3/4 co-design is next after the v0.7.1 patch; SpaGCN is not complete.
 
 Do not wait for every topic's Layer 2 to be fully complete before piloting Layer 3/4. Use spatial domain identification as a vertical slice to validate the whole design. Lessons from the vertical slice should feed back into Layer 2 field definitions for other topics.
 
@@ -80,9 +92,9 @@ First method-family candidate:
 
 - `spatial_domain_detection`
 
-For promoted candidate backends, perform `MethodExecutionPlanningRecord v0.6` work and draft separate Layer 3 `ExecutionSurfaceSpec` and Layer 4 `BackendAdapterSpec` artifacts, without claiming implementation.
+For promoted candidate backends, perform `MethodExecutionPlanningRecord v0.7.1` work and draft separate Layer 3 `ExecutionSurfaceSpec` and Layer 4 `BackendAdapterSpec` artifacts, without claiming implementation.
 
-The first pilot order is BANKSY, SpaGCN, and then a hold / legacy / no-clean-API negative case. The target is to freeze the template and co-design process, not to immediately claim a production adapter.
+The first pilot order is BANKSY v0.7.0 as the accepted template trial, the v0.7.1 patch, SpaGCN, and then a hold / legacy / no-clean-API negative case. The target is to freeze the template and co-design process, not to immediately claim a production adapter.
 
 ## Milestone 3: Environment Capsules
 

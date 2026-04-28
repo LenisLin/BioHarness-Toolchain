@@ -1,0 +1,156 @@
+{
+  "surface_id": "example.spatial_domain_identification.synthetic_spatial_domain_method.v0_7_1",
+  "task_family": "spatial_domain_identification",
+  "method_id": "synthetic_spatial_domain_method",
+  "inherits_from": "canonical.spatial_domain_identification.domain_assignment",
+  "visibility": "agent_harness_readable",
+  "authority_status": "blueprint",
+  "surface_status": "draft",
+  "example_status": "synthetic_v0.7.1_example",
+  "authority_note": "Synthetic illustrative example only; not a live method audit output and not a production support claim.",
+  "functional_surfaces": [
+    "input_check",
+    "method_preprocessing",
+    "core_structure_building",
+    "model_fit_or_inference",
+    "output_assignment",
+    "artifact_export",
+    "final_validation",
+    "visualization"
+  ],
+  "input_contract": {
+    "primary_object": "AnnData",
+    "required_modalities": [
+      "expression_matrix",
+      "spatial_coordinates"
+    ],
+    "optional_modalities": [
+      "histology_image"
+    ],
+    "minimum_dataset_assumptions": "synthetic example; no runtime fixture declared"
+  },
+  "semantic_inputs": [
+    {
+      "name": "adata",
+      "kind": "anndata_object"
+    },
+    {
+      "name": "coordinate_source",
+      "kind": "semantic_coordinate_source"
+    }
+  ],
+  "spatial_coordinate_source": {
+    "allowed_modes": [
+      "obsm_spatial",
+      "obs_x_y_columns",
+      "adapter_validated_custom_mapping"
+    ],
+    "default_mode": "obsm_spatial",
+    "adapter_responsibility": "Translate the semantic coordinate source into backend-specific coordinate keys."
+  },
+  "multi_sample_policy": {
+    "status": "examples_observed_but_bioharness_contract_not_validated",
+    "supported_claim": "no_joint_multislice_contract_claim",
+    "agent_visible_summary": "Multi-sample usage requires additional review before default surface exposure."
+  },
+  "target_domain_count_policy": {
+    "status": "not_directly_guaranteed",
+    "mapping": "May require resolution search or post-hoc selection.",
+    "agent_action": "Ask whether approximate granularity is acceptable when exact domain count is requested."
+  },
+  "parameter_policy": {
+    "expose_to_agent": [
+      "target_domain_count",
+      "coordinate_source_mode",
+      "output_label_key_alias_optional"
+    ],
+    "expose_to_agent_with_constraints": [
+      {
+        "name": "target_domain_count",
+        "type": "integer",
+        "minimum": 2,
+        "maximum": 50,
+        "note": "Semantic target only; exact count is not guaranteed by this synthetic surface."
+      }
+    ],
+    "infer_from_input": [
+      "has_histology_image",
+      "coordinate_shape"
+    ],
+    "fixed_by_adapter": [
+      "BioHarness_output_field_prefix",
+      "output_directory_layout",
+      "temporary_directory_policy",
+      "log_file_policy"
+    ],
+    "backend_default": [
+      "optimization_schedule"
+    ],
+    "forbidden_for_agent": [
+      "raw_backend_coordinate_key_tuple",
+      "temporary_file_name",
+      "unsafe_memory_flag",
+      "backend_output_prefix"
+    ]
+  },
+  "clustering_backend_policy": {
+    "allowed_values": [
+      "default_validated_path",
+      "optional_backend_disabled_until_verified"
+    ],
+    "agent_selectable": false
+  },
+  "semantic_parameters": [
+    {
+      "name": "target_domain_count",
+      "agent_visible": true
+    },
+    {
+      "name": "output_label_key_alias_optional",
+      "agent_visible": true
+    }
+  ],
+  "semantic_outputs": [
+    {
+      "name": "domain_labels",
+      "stored_in": "adata.obs"
+    },
+    {
+      "name": "run_summary",
+      "stored_in": "artifact_manifest"
+    }
+  ],
+  "validation_contract": {
+    "preflight_checks": [
+      "input_object_is_anndata",
+      "spatial_coordinates_resolve",
+      "expression_matrix_nonempty"
+    ],
+    "postrun_checks": [
+      "domain_label_column_exists",
+      "label_count_nonzero",
+      "artifact_manifest_written"
+    ],
+    "runtime_evidence_required_before_support_claim": true
+  },
+  "failure_policy": {
+    "typed_failures": [
+      "missing_coordinates",
+      "unsupported_multi_sample_contract",
+      "domain_count_not_guaranteed",
+      "backend_symbol_unresolved"
+    ],
+    "default_action": "stop_for_review"
+  },
+  "provenance_policy": {
+    "record_inputs": true,
+    "record_parameters": true,
+    "record_backend_reference": true,
+    "record_runtime_observation": false
+  },
+  "layer4_reference_policy": {
+    "backend_adapter_spec_id": "example.backend_adapter.synthetic_spatial_domain_method.v0_7_1",
+    "visibility": "implementation_debug_audit_only",
+    "layer4_hidden_by_default": true
+  }
+}

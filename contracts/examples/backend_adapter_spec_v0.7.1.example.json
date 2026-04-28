@@ -1,0 +1,185 @@
+{
+  "backend_adapter_id": "example.backend_adapter.synthetic_spatial_domain_method.v0_7_1",
+  "linked_surface_id": "example.spatial_domain_identification.synthetic_spatial_domain_method.v0_7_1",
+  "backend_method": "example_backend_method",
+  "authority_status": "blueprint",
+  "implementation_status": "not_implemented",
+  "example_status": "synthetic_v0.7.1_example",
+  "authority_note": "Synthetic illustrative example only; not a live method audit output and not a production support claim.",
+  "native_repository": {
+    "url": "https://example.invalid/synthetic-spatial-domain-method",
+    "commit_or_release": "synthetic_reference_only"
+  },
+  "evidence_authority": {
+    "registry_file": "synthetic_method_execution_planning_record",
+    "registry_section": "Audit Evidence Registry",
+    "note": "Synthetic evidence IDs are illustrative placeholders only."
+  },
+  "evidence_resolution": {
+    "level": "file_level",
+    "implementation_ready": false,
+    "evidence_resolution": "Critical backend entrypoints still require symbol-level or line-level confirmation before adapter implementation."
+  },
+  "runtime_language": "python",
+  "environment_profile_candidate": "synthetic_python_spatial_domain_blueprint",
+  "integration_mode": "wrapper_adapter_blueprint",
+  "backend_entrypoints": [
+    {
+      "name": "example_backend_method.prepare_graph",
+      "role": "core_structure_building",
+      "evidence_refs": [
+        "E_SYNTHETIC_SOURCE_FILE"
+      ],
+      "implementation_blocker": false
+    },
+    {
+      "name": "source_symbol_not_resolved_in_current_inventory",
+      "role": "model_fit_or_inference",
+      "evidence_refs": [
+        "E_SYNTHETIC_SOURCE_FILE"
+      ],
+      "implementation_blocker": true,
+      "resolution_required_before": "MVP_adapter_implementation"
+    }
+  ],
+  "function_surface_bindings": [
+    {
+      "layer3_stage": "input_check",
+      "binding_status": "backend_bound",
+      "backend_files_or_functions": [
+        "example_backend_method.validate_input"
+      ],
+      "adapter_responsibility": "Confirm AnnData shape and coordinate availability before dispatch.",
+      "evidence_refs": [
+        "E_SYNTHETIC_SOURCE_FILE"
+      ],
+      "implementation_blocker": false
+    },
+    {
+      "layer3_stage": "method_preprocessing",
+      "binding_status": "wrapper_added",
+      "backend_files_or_functions": [],
+      "adapter_responsibility": "Normalize semantic BioHarness input fields into the backend's expected object layout.",
+      "evidence_refs": [],
+      "implementation_blocker": false
+    },
+    {
+      "layer3_stage": "core_structure_building",
+      "binding_status": "backend_bound",
+      "backend_files_or_functions": [
+        "example_backend_method.prepare_graph"
+      ],
+      "adapter_responsibility": "Call the backend graph-building routine after input conversion.",
+      "evidence_refs": [
+        "E_SYNTHETIC_SOURCE_FILE"
+      ],
+      "implementation_blocker": false
+    },
+    {
+      "layer3_stage": "model_fit_or_inference",
+      "binding_status": "requires_followup",
+      "backend_files_or_functions": [
+        "source_symbol_not_resolved_in_current_inventory"
+      ],
+      "adapter_responsibility": "Resolve the exact model-fit entrypoint before implementation.",
+      "evidence_refs": [
+        "E_SYNTHETIC_SOURCE_FILE"
+      ],
+      "implementation_blocker": true,
+      "resolution_required_before": "MVP_adapter_implementation"
+    },
+    {
+      "layer3_stage": "output_assignment",
+      "binding_status": "backend_bound",
+      "backend_files_or_functions": [
+        "example_backend_method.assign_labels"
+      ],
+      "adapter_responsibility": "Map backend labels into the BioHarness output field.",
+      "evidence_refs": [
+        "E_SYNTHETIC_SOURCE_FILE"
+      ],
+      "implementation_blocker": false
+    },
+    {
+      "layer3_stage": "artifact_export",
+      "binding_status": "wrapper_added",
+      "backend_files_or_functions": [],
+      "adapter_responsibility": "Write manifest, logs, and optional visual summaries in BioHarness layout.",
+      "evidence_refs": [],
+      "implementation_blocker": false
+    },
+    {
+      "layer3_stage": "final_validation",
+      "binding_status": "wrapper_added",
+      "backend_files_or_functions": [],
+      "adapter_responsibility": "Run BioHarness postrun checks for label column, nonempty labels, and artifact manifest.",
+      "evidence_refs": [],
+      "implementation_blocker": false
+    },
+    {
+      "layer3_stage": "visualization",
+      "binding_status": "not_applicable",
+      "backend_files_or_functions": [],
+      "adapter_responsibility": "No visualization is exposed by this synthetic backend draft.",
+      "evidence_refs": [],
+      "implementation_blocker": false
+    }
+  ],
+  "parameter_mapping": {
+    "target_domain_count": {
+      "backend_parameter": "resolution_or_cluster_hint",
+      "mapping_status": "requires_calibration"
+    },
+    "output_label_key_alias_optional": {
+      "backend_parameter": "not_backend_visible",
+      "mapping_status": "adapter_managed"
+    }
+  },
+  "input_conversion": {
+    "adata": "pass_through_after_preflight",
+    "coordinate_source": "adapter_converts_semantic_source_to_backend_coordinate_keys"
+  },
+  "output_mapping": {
+    "domain_labels": "adata.obs[BioHarness_standardized_label_key]",
+    "run_summary": "artifact_manifest.json"
+  },
+  "artifact_mapping": {
+    "manifest": "artifacts/manifest.json",
+    "logs": "logs/adapter.log"
+  },
+  "filesystem_policy": {
+    "temporary_directory_policy": "adapter_managed",
+    "output_directory_layout": "BioHarness_standard_layout",
+    "backend_output_prefix_agent_visible": false
+  },
+  "failure_translation": {
+    "missing_coordinates": "input_contract_failure",
+    "unresolved_backend_symbol": "implementation_blocker",
+    "empty_backend_labels": "postrun_validation_failure"
+  },
+  "environment_binding": {
+    "environment_status": "probe_required",
+    "package_manager": "not_declared_for_synthetic_example",
+    "runtime_observed": false
+  },
+  "smoke_test": {
+    "status": "not_written",
+    "required_before": "runtime_acceptance_gate"
+  },
+  "fidelity_test": {
+    "status": "not_written",
+    "required_if_algorithm_core_touched": true
+  },
+  "rewrite_level": "thin_adapter",
+  "rewrite_rationale": "Adapter standardizes inputs, outputs, artifacts, and failures without changing algorithm core.",
+  "algorithm_core_touched": false,
+  "visibility": "implementation_debug_audit_only",
+  "implementation_blocker": true,
+  "resolution_required_before": "MVP_adapter_implementation",
+  "blocking_issues": [
+    {
+      "issue": "model_fit_or_inference entrypoint unresolved",
+      "resolution_required_before": "MVP_adapter_implementation"
+    }
+  ]
+}

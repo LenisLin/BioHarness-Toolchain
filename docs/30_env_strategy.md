@@ -54,7 +54,7 @@ The repository blueprint may also carry optional operational fields such as `app
 
 ## `environment_plan` In Layer 3/4 Method Planning
 
-`environment_plan` is an independent artifact inside the `MethodExecutionPlanningRecord v0.6`. It is separate from `rewrite_plan`: an environment conflict does not automatically imply a rewrite, and a rewrite proposal does not remove the need to document environment evidence.
+`environment_plan` is an independent artifact inside the `MethodExecutionPlanningRecord v0.7.1`. It is separate from `rewrite_decision`: an environment conflict does not automatically imply a rewrite, and a rewrite proposal does not remove the need to document environment evidence.
 
 For promoted methods, the plan should record:
 
@@ -64,15 +64,22 @@ For promoted methods, the plan should record:
 - `install_files`
 - `lock_or_container_available`
 - `dependency_conflict_risk`
-- `known_conflicting_dependencies`
+- `known_dependency_risks`
 - `gpu_policy`
 - `cuda_policy`
 - `cpu_fallback_policy`
 - `shared_environment_feasibility`
 - `isolation_strategy`
 - `environment_decision`
+- `environment_hold_status`
+- `environment_subagent_report`
+- `required_probes`
 
-Allowed planning decisions include `shared_capsule`, `dedicated_capsule`, `legacy_capsule`, `wrapper_boundary`, `compatibility_rewrite_considered`, and `hold_due_to_environment`.
+Preferred pre-probe planning decisions include `environment_probe_required`, `shared_capsule_unknown`, `dedicated_capsule_may_be_required`, and `wrapper_boundary_required`.
+
+Static dependency risk does not justify final environment hold. `hold_due_to_environment` must not be used as a final decision unless an environment subagent report cites a failed probe or impossible dependency constraint. If no environment probe has run, `environment_hold_status` must be `not_justified_yet` or `unknown`, not `justified`.
+
+Environment risk may trigger a probe, a dedicated capsule, a wrapper boundary, or an optional-path exclusion. It should not automatically trigger method hold. Optional runtime paths, such as R/rpy2/mclust or method-specific GPU extras, should be separated from the core path and kept unavailable to the agent until verified.
 
 These are planning decisions only. They do not claim that a capsule, wrapper, or compatibility rewrite exists.
 

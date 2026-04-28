@@ -33,7 +33,26 @@
     },
     "engineering_audit": {
       "type": "object",
-      "additionalProperties": true
+      "additionalProperties": true,
+      "properties": {
+        "evidence_resolution": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "level": {
+              "enum": [
+                "file_level",
+                "symbol_level",
+                "line_level",
+                "runtime_observed"
+              ]
+            },
+            "implementation_ready": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
     },
     "layer3_surface_draft": {
       "type": "object",
@@ -41,7 +60,20 @@
     },
     "layer4_binding_draft": {
       "type": "object",
-      "additionalProperties": true
+      "additionalProperties": true,
+      "properties": {
+        "evidence_resolution": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "function_surface_bindings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      }
     },
     "environment": {
       "type": "object",

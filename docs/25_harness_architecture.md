@@ -25,6 +25,8 @@ Layer 2 remains a pure documentation and knowledge layer. Layer 3 is not raw pac
 
 Layer 1/2 are agent-facing knowledge layers. Layer 3 is the first machine-readable execution-planning layer. Layer 4 is the concrete backend implementation layer.
 
+Current Layer 3/4 planning uses `MethodExecutionPlanningRecord v0.7.1`, a small patch over v0.7. The architecture is unchanged: Layer 3 is the agent/harness-facing functional execution surface, and Layer 4 is the backend adapter, wrapper, or rewrite binding hidden by default.
+
 ## Layer 3/4 Co-design
 
 Layer 3 and Layer 4 are distinct layers in the system. Layer 3 is the method's functional execution surface. Layer 4 is the backend function, interface, and implementation binding.
@@ -40,6 +42,8 @@ This avoids reading the same package twice while preserving final separation.
 | Main artifact | `ExecutionSurfaceSpec` | `BackendAdapterSpec` | Generated together, stored separately |
 | Rewrite role | Preliminary wrapper/rewrite signal | Final rewrite level and implementation plan | Rewrite decision refined during audit |
 | Example | `model_fit_or_inference`, `output_assignment`, `artifact_export` | backend `train()`, `predict()`, file outputs, parameter mapping | Layer 3 names stable stages; Layer 4 binds them |
+
+Every Layer 3 functional stage must have an explicit Layer 4 binding status: `backend_bound`, `wrapper_added`, `not_applicable`, or `requires_followup`. No Layer 3 stage should be silently omitted from Layer 4; unresolved critical bindings block implementation readiness even when the co-design pack is structurally reviewable.
 
 ## Progressive Disclosure To The Agent
 

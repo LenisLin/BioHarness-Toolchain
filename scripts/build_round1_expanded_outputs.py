@@ -2,13 +2,17 @@ from __future__ import annotations
 
 import argparse
 import csv
+import os
 from collections import Counter
 from pathlib import Path
 
 
 RUN_DATE = "2026-04-11"
 WINDOW = ("2015-01-01", "2026-04-11")
-AUTHORITATIVE_CSV = "/mnt/NAS_21T/ProjectData/BioHarness/results/layer1_method_registry/registry/layer1_spatial_method_registry.csv"
+AUTHORITATIVE_CSV = os.environ.get(
+    "BIOHARNESS_LAYER1_REGISTRY_CSV",
+    "/mnt/NAS_21T/ProjectData/BioHarness/results/layer1_method_registry/registry/layer1_spatial_method_registry.csv",
+)
 AUTHORITATIVE_REPORT = "/tmp/bioharness_layer1_generated/reports/layer1_registry_reconcile_report.md"
 
 SCRATCH_FIELDS = [

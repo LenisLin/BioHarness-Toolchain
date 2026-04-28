@@ -1,25 +1,35 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "BackendAdapterSpec",
-  "description": "Layer 4 implementation-facing contract for binding a Layer 3 ExecutionSurfaceSpec to backend adapter, wrapper, or rewrite details.",
+  "title": "BackendAdapterSpec v0.7.1",
+  "description": "Blueprint-level Layer 4 adapter, wrapper, or rewrite binding schema aligned with MethodExecutionPlanningRecord v0.7.1. This schema is permissive for planning drafts and does not imply runtime support.",
   "type": "object",
+  "additionalProperties": true,
   "required": [
-    "adapter_id",
-    "surface_id",
+    "backend_adapter_id",
+    "linked_surface_id",
+    "backend_method",
+    "authority_status",
+    "implementation_status",
+    "evidence_authority",
     "runtime_language",
-    "environment_profile",
-    "entrypoint",
+    "integration_mode",
+    "backend_entrypoints",
+    "function_surface_bindings",
+    "parameter_mapping",
+    "input_conversion",
+    "output_mapping",
+    "artifact_mapping",
+    "filesystem_policy",
+    "failure_translation",
+    "environment_binding",
+    "smoke_test",
+    "fidelity_test",
     "rewrite_level",
-    "visibility"
+    "visibility",
+    "authority_note"
   ],
   "properties": {
-    "adapter_id": {
-      "type": "string"
-    },
     "backend_adapter_id": {
-      "type": "string"
-    },
-    "surface_id": {
       "type": "string"
     },
     "linked_surface_id": {
@@ -65,9 +75,6 @@
     "environment_profile_candidate": {
       "type": "string"
     },
-    "environment_profile": {
-      "type": "string"
-    },
     "integration_mode": {
       "type": [
         "string",
@@ -75,60 +82,20 @@
       ],
       "additionalProperties": true
     },
-    "entrypoint": {
-      "type": "string"
-    },
-    "backend_function_or_entrypoint": {
-      "type": "string"
-    },
-    "implementation_blocker": {
-      "type": "boolean"
-    },
-    "resolution_required_before": {
-      "type": "string"
-    },
     "backend_entrypoints": {
       "type": "array",
       "items": {
         "type": "object",
-        "additionalProperties": true
+        "additionalProperties": true,
+        "properties": {
+          "implementation_blocker": {
+            "type": "boolean"
+          },
+          "resolution_required_before": {
+            "type": "string"
+          }
+        }
       }
-    },
-    "call_graph": {
-      "type": [
-        "array",
-        "object"
-      ]
-    },
-    "parameter_mapping": {
-      "type": [
-        "object",
-        "array"
-      ]
-    },
-    "input_conversion": {
-      "type": [
-        "object",
-        "array"
-      ]
-    },
-    "output_mapping": {
-      "type": [
-        "object",
-        "array"
-      ]
-    },
-    "artifact_mapping": {
-      "type": [
-        "object",
-        "array"
-      ]
-    },
-    "failure_translation": {
-      "type": [
-        "object",
-        "array"
-      ]
     },
     "function_surface_bindings": {
       "type": "array",
@@ -140,7 +107,6 @@
             "type": "string"
           },
           "binding_status": {
-            "type": "string",
             "enum": [
               "backend_bound",
               "wrapper_added",
@@ -166,32 +132,54 @@
         }
       }
     },
+    "parameter_mapping": {
+      "type": [
+        "object",
+        "array"
+      ]
+    },
+    "input_conversion": {
+      "type": [
+        "object",
+        "array"
+      ]
+    },
+    "output_mapping": {
+      "type": [
+        "object",
+        "array"
+      ]
+    },
+    "artifact_mapping": {
+      "type": [
+        "object",
+        "array"
+      ]
+    },
     "filesystem_policy": {
       "type": "object",
       "additionalProperties": true
+    },
+    "failure_translation": {
+      "type": [
+        "object",
+        "array"
+      ]
     },
     "environment_binding": {
       "type": "object",
       "additionalProperties": true
     },
     "smoke_test": {
-      "type": "object"
+      "type": "object",
+      "additionalProperties": true
     },
     "fidelity_test": {
-      "type": "object"
+      "type": "object",
+      "additionalProperties": true
     },
     "rewrite_level": {
-      "type": "string",
-      "enum": [
-        "core_anchor",
-        "thin_adapter",
-        "strong_wrapper",
-        "compatibility_rewrite",
-        "algorithmic_rewrite",
-        "legacy_capsule",
-        "hold",
-        "requires_followup"
-      ]
+      "type": "string"
     },
     "rewrite_rationale": {
       "type": "string"
@@ -200,16 +188,12 @@
       "type": "boolean"
     },
     "visibility": {
-      "type": "string",
-      "enum": [
-        "implementation_debug_audit_only",
-        "agent_debug_view"
-      ]
-    },
-    "example_status": {
       "type": "string"
     },
-    "authority_note": {
+    "implementation_blocker": {
+      "type": "boolean"
+    },
+    "resolution_required_before": {
       "type": "string"
     },
     "blocking_issues": {
@@ -220,6 +204,12 @@
           "object"
         ]
       }
+    },
+    "example_status": {
+      "type": "string"
+    },
+    "authority_note": {
+      "type": "string"
     }
   }
 }

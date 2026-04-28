@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EnvironmentSubagentReport",
+  "description": "Blueprint-level report recording environment risk review and required probes. Static dependency risk alone does not justify final environment hold.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "method_id",
+    "report_status",
+    "authority_status",
+    "conclusion"
+  ],
+  "properties": {
+    "method_id": {
+      "type": "string"
+    },
+    "report_status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "complete",
+        "requires_probe"
+      ]
+    },
+    "authority_status": {
+      "type": "string"
+    },
+    "reviewed_inputs": {
+      "type": "array"
+    },
+    "conclusion": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "environment_hold_status": {
+          "type": "string",
+          "enum": [
+            "not_justified_yet",
+            "justified",
+            "unknown"
+          ]
+        },
+        "recommended_decision": {
+          "type": "array"
+        }
+      }
+    },
+    "rationale": {
+      "type": "array"
+    },
+    "required_probes": {
+      "type": "array"
+    },
+    "do_not_claim": {
+      "type": "array"
+    }
+  }
+}

@@ -2,7 +2,7 @@
 
 This is a lightweight engineering audit template. It is not an implementation claim, not a runtime layer, and not agent-facing by default.
 
-For current full Layer 3/4 method planning, prefer `method_execution_planning_record_template.md`. This file remains a compact inspection note template.
+For current full Layer 3/4 method planning, prefer `method_execution_planning_record_template.md`, which points to `MethodExecutionPlanningRecord v0.7.1`. This file remains a compact inspection note template.
 
 Fill it after Layer 2 method selection for a promoted method. A completed audit should produce separate Layer 3 and Layer 4 artifacts: an `ExecutionSurfaceSpec` for the functional surface and a `BackendAdapterSpec` for the backend binding. It may also record a `RewriteDecision`, `EnvironmentProfile` assignment, and validation/fidelity requirements.
 
@@ -18,6 +18,9 @@ repository:
   license:
   last_checked:
 engineering_audit:
+  evidence_resolution:
+    level: file_level | symbol_level | line_level | runtime_observed
+    implementation_ready: true | false
   install_files:
     -
   environment_files:
@@ -69,6 +72,16 @@ layer3_surface_draft:
     -
 layer4_binding_draft:
   entrypoint:
+  evidence_resolution:
+    level: file_level | symbol_level | line_level | runtime_observed
+    implementation_ready: true | false
+  function_surface_bindings:
+    - layer3_stage:
+      binding_status: backend_bound | wrapper_added | not_applicable | requires_followup
+      backend_files_or_functions:
+      adapter_responsibility:
+      evidence_refs:
+      implementation_blocker:
   function_bindings:
   parameter_mapping:
   input_conversion:

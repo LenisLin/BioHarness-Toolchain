@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EnvironmentPlan",
+  "description": "Blueprint-level environment planning artifact for a promoted method. Static dependency risk does not justify final environment hold without probe evidence or impossible dependency constraints.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "method_id",
+    "environment_decision",
+    "environment_hold_status"
+  ],
+  "properties": {
+    "method_id": {
+      "type": "string"
+    },
+    "environment_profile_candidate": {
+      "type": "string"
+    },
+    "expected_capsule": {
+      "type": "string"
+    },
+    "native_package_manager": {
+      "type": "string"
+    },
+    "install_files": {
+      "type": "array"
+    },
+    "lock_or_container_available": {
+      "type": "string"
+    },
+    "dependency_conflict_risk": {
+      "type": "string"
+    },
+    "known_dependency_risks": {
+      "type": "array"
+    },
+    "gpu_policy": {
+      "type": "string"
+    },
+    "cuda_policy": {
+      "type": "string"
+    },
+    "cpu_fallback_policy": {
+      "type": "string"
+    },
+    "shared_environment_feasibility": {
+      "type": "string"
+    },
+    "capsule_uncertainty": {
+      "type": "string"
+    },
+    "isolation_strategy": {
+      "type": "string"
+    },
+    "optional_paths": {
+      "type": "array"
+    },
+    "environment_decision": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "environment_hold_status": {
+      "type": "string",
+      "enum": [
+        "not_justified_yet",
+        "justified",
+        "unknown"
+      ]
+    },
+    "environment_subagent_report": {
+      "type": "string"
+    },
+    "required_probes": {
+      "type": "array"
+    },
+    "evidence_refs": {
+      "type": "array"
+    },
+    "open_questions": {
+      "type": "array"
+    }
+  }
+}

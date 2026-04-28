@@ -16,7 +16,7 @@ Validation is substrate-level quality control. It does not replace scientific re
 
 ## `validation_runtime_plan` In Method Planning
 
-`MethodExecutionPlanningRecord v0.6` uses `validation_runtime_plan` to separate callability, contract validation, visual sanity, reproducibility, rewrite comparison, and runtime cost evidence.
+`MethodExecutionPlanningRecord v0.7.1` uses `validation_runtime_plan` to separate callability, preflight checks, postrun checks, contract tests, visual sanity, reproducibility, rewrite comparison, output schema observation, provenance observation, and runtime cost evidence. It also includes static/runtime acceptance gates and split `acceptance_gate` statuses that derive review, implementation, and production readiness from explicit checks rather than manual labels.
 
 The `callability_check` has three layers:
 
@@ -26,11 +26,44 @@ The `callability_check` has three layers:
 
 Visual sanity is sanity only. It can catch blank plots, missing labels, missing spatial alignment, or obvious artifact failures, but it is not biological correctness and not algorithmic equivalence.
 
+```yaml
+visual_checks:
+  purpose: sanity_only
+  known_limitations:
+    - visual plausibility is not biological correctness
+    - visual similarity does not prove algorithmic equivalence
+```
+
 Reproducibility checks should cover random seed policy, determinism expectations, repeated runs, label permutation awareness, and stochastic components.
 
 Rewrite comparison, when required, should cover schema equivalence, domain count, no empty domain, label permutation handling, ARI/NMI/AMI where meaningful, spatial pattern sanity, and runtime/memory delta.
 
 Runtime cost records should include wall time, peak memory, device used, and fixture size.
+
+Runtime measurement cannot be faked or inferred from static docs. It must come from an actual probe, fixture run, or observed runtime execution.
+
+Static acceptance and runtime acceptance must stay separate:
+
+```yaml
+static_acceptance_gate:
+  required_files_exist:
+  yaml_valid:
+  layer3_layer4_separation_valid:
+  evidence_authority_present:
+  required_sections_present:
+  no_production_claims:
+  status:
+
+runtime_acceptance_gate:
+  environment_import_probe:
+  minimal_fixture_smoke_run:
+  runtime_measurement:
+  output_schema_observed:
+  provenance_observed:
+  status:
+```
+
+A Layer3/4 review pack can pass static acceptance. Runtime acceptance remains blocked until probes and fixtures run. Production support requires runtime acceptance.
 
 ## Validation Stages
 
@@ -57,6 +90,9 @@ Layer 4 validation checks backend binding quality:
 - artifact capture is explicit
 - failure translation is mapped to typed failures
 - smoke or fidelity checks are defined when feasible
+- every Layer3 functional surface has a Layer4 binding status
+- critical backend entrypoints and output mappings reach symbol-level or line-level evidence before implementation starts
+- unresolved backend symbols are marked as implementation blockers
 
 ### Fidelity Checks
 
@@ -76,6 +112,9 @@ For spatial domain identification, fidelity may include:
 - awareness that label permutations are possible
 - visual/artifact sanity checks
 - provenance and random seed capture
+- repeated-run policy
+- output schema observation
+- contract vs fidelity vs smoke-test separation
 
 Simple smoke tests do not establish exact biological equivalence.
 

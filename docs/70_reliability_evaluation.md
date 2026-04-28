@@ -17,9 +17,12 @@ The evaluation target is runtime reliability for LLM-facing bioinformatics execu
 - first-run success rate
 - environment-related failure rate
 - output contract satisfaction rate
+- output schema observation rate
+- provenance observation rate
 - average repair turns
 - median tool-call count
 - median wall-clock time
+- peak memory on fixture runs
 - token/context spent on setup and debugging
 - cross-machine replay success rate
 - provenance completeness
@@ -40,6 +43,8 @@ The evaluation target is runtime reliability for LLM-facing bioinformatics execu
 - notebook/script export completeness
 - successful handoff between adapters
 - consistency of output schema across datasets
+- random seed capture and repeated-run policy compliance
+- label permutation handling for clustering/domain-identification outputs
 
 ## Benchmark Design Principles
 
@@ -48,6 +53,9 @@ The evaluation target is runtime reliability for LLM-facing bioinformatics execu
 - Include dependency and data-contract perturbations that reflect realistic failure modes.
 - Compare against an agent baseline that receives tool documentation but no curated execution harness.
 - Record failures as typed events so repair behavior can be measured.
+- Distinguish smoke tests, contract tests, visual sanity checks, fidelity checks, and runtime measurements.
+- Treat visual plausibility as sanity only; it is not biological correctness or algorithmic equivalence.
+- Runtime measurements must be observed from actual runs, not inferred from static documentation.
 
 ## Perturbation Benchmark
 

@@ -48,6 +48,10 @@ This mapping keeps the human-readable selection logic separate from the lower ex
 
 Although Layer 3 and Layer 4 may be co-designed by engineers during method onboarding, the runtime presentation remains separated. The default brain reasons over Layer 3 surfaces, not raw backend function graphs.
 
+Current Layer 3/4 planning uses `MethodExecutionPlanningRecord v0.7.1`. This does not change the runtime boundary: Layer 3 remains the agent/harness-facing functional surface and Layer 4 remains hidden by default. v0.7.1 adds review-time evidence resolution and explicit Layer4 binding coverage so a method can pass static template review without implying adapter implementation or runtime support.
+
+Agent-facing parameters should be semantic and constrained. Low-level output namespaces, directory layouts, temporary paths, backend output prefixes, unsafe memory flags, internal object keys, and backend optimization knobs should be fixed by the adapter or forbidden for agent control. Optional backend paths that need R, rpy2, mclust, GPU stacks, or similar runtime dependencies should not be agent-selectable until an environment probe verifies them.
+
 ## Runtime Interpretation
 
 ### Harness

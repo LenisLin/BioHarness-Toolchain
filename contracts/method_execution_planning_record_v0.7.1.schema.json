@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MethodExecutionPlanningRecord v0.7.1",
+  "description": "Canonical current schema path for MethodExecutionPlanningRecord v0.7.1. This planning record is a blueprint-level Layer 3/4 co-design and evidence ledger, not a runtime API and not a production support claim. The v0.7 schema path is retained for compatibility.",
+  "allOf": [
+    {
+      "$ref": "method_execution_planning_record_v0.7.schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "method_execution_planning_record": {
+          "type": "object",
+          "properties": {
+            "record_version": {
+              "const": "v0.7.1"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

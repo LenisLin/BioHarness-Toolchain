@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AcceptanceGate",
+  "description": "Blueprint-level acceptance gate for Layer 3/4 review packs.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "required_files_exist": {
+      "type": "string"
+    },
+    "layer3_surface_yaml_valid": {
+      "type": "string"
+    },
+    "layer4_adapter_yaml_valid": {
+      "type": "string"
+    },
+    "environment_plan_valid": {
+      "type": "string"
+    },
+    "review_pack_links_valid": {
+      "type": "string"
+    },
+    "evidence_authority_present": {
+      "type": "string"
+    },
+    "layer3_no_backend_function_names": {
+      "type": "string"
+    },
+    "layer4_required_sections_present": {
+      "type": "string"
+    },
+    "environment_hold_not_final_without_probe": {
+      "type": "string"
+    },
+    "coordinate_contract_normalized": {
+      "type": "string"
+    },
+    "multi_sample_policy_normalized": {
+      "type": "string"
+    },
+    "target_domain_count_policy_present": {
+      "type": "string"
+    },
+    "validation_taxonomy_complete": {
+      "type": "string"
+    },
+    "risk_register_present": {
+      "type": "string"
+    },
+    "decision_log_present": {
+      "type": "string"
+    },
+    "production_claim_absent": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pass",
+        "partial",
+        "fail"
+      ]
+    },
+    "template_acceptance_status": {
+      "type": "string",
+      "enum": [
+        "pass",
+        "partial",
+        "fail"
+      ]
+    },
+    "implementation_readiness_status": {
+      "type": "string",
+      "enum": [
+        "pass",
+        "partial",
+        "fail"
+      ]
+    },
+    "production_readiness_status": {
+      "type": "string",
+      "enum": [
+        "pass",
+        "partial",
+        "fail"
+      ]
+    },
+    "overall_status": {
+      "type": "string"
+    },
+    "rationale": {
+      "type": "array",
+      "items": {
+        "type": [
+          "string",
+          "object"
+        ]
+      }
+    },
+    "static_acceptance_gate": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "runtime_acceptance_gate": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

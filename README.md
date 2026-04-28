@@ -30,6 +30,16 @@ This repository separates tool knowledge from tool execution. Layer 1 and Layer 
 
 Blueprint stage. The repository contains documentation, JSON schemas, illustrative examples, tests, and Layer 1 / Layer 2 spatial transcriptomics artifacts. Runtime implementation details remain roadmap items unless a specific file says otherwise.
 
+Current Layer 3/4 method planning uses `MethodExecutionPlanningRecord v0.7.1`, a small patch over v0.7. BANKSY v0.7.0 is accepted as a template trial only; no method has runtime support in this repository.
+
+## Packaging Hygiene
+
+Manual review exports should exclude generated/cache files such as `.git/`, `.pytest_cache/`, `__pycache__/`, and `*.pyc`. Recommended export:
+
+```bash
+git archive --format=zip --output BioHarness-Toolchain-ST-docs.zip HEAD
+```
+
 ## Documentation Map
 
 - [Overview](docs/00_overview.md)
@@ -46,5 +56,6 @@ Blueprint stage. The repository contains documentation, JSON schemas, illustrati
 - [Reliability evaluation](docs/70_reliability_evaluation.md)
 - [Layer 3 and Layer 4 design](docs/80_layer3_layer4_design.md)
 - [Layer 3/4 co-design](docs/82_layer3_4_codesign.md)
+- [Layer 3/4 method execution planning protocol](docs/83_layer3_4_method_execution_planning_protocol.md)
 - [Spatial domain Layer 3 entry example](docs/85_spatial_domain_layer3_entry_example.md)
 - [Roadmap](docs/90_roadmap.md)

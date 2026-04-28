@@ -2,19 +2,100 @@
 
 ## Purpose
 
-Record a working blueprint for how Round 2 may later decide whether a tool should stay behind a thin adapter, move behind a stronger wrapper, or enter a rewrite track.
+Record a working blueprint for how the substrate phase may later decide whether a tool should stay behind a thin adapter, move behind a stronger wrapper, or enter a rewrite track.
 
 ## Status
 
-This document is a working blueprint and is not yet frozen. It does not override the current authority boundaries in [docs/15_round1_baseline_and_round2_prep.md](/home/lenislin/Experiment/projects/BioHarness-Toolchain-ST/docs/15_round1_baseline_and_round2_prep.md).
+This document is a working blueprint and is not yet frozen. It does not override the current authority boundaries in [docs/15_layer1_method_registry_and_substrate_transition.md](15_layer1_method_registry_and_substrate_transition.md).
 
 ## Current Working Direction
 
-The current proposal evaluates rewrite decisions from an `agent-runtime` perspective rather than from software novelty alone. The default order under discussion is:
+The current proposal evaluates rewrite decisions from an `agent-runtime` perspective rather than from software novelty alone. Rewriting is justified by execution reliability, validation quality, maintainability, or resource safety, not by architectural preference.
 
-1. keep mature frameworks behind a thin adapter
-2. add a `wrapper` when the public callable surface needs tightening
-3. escalate to rewrite only when wrapper-level control is not enough
+BioHarness aggressively standardizes interfaces, contracts, validation, artifacts, and provenance, but conservatively rewrites scientific algorithms.
+
+The v0.6 `rewrite_plan` separates `interface_standardization` from `algorithmic_rewrite`. This distinction is required because BioHarness can often normalize execution safely without changing the scientific algorithm.
+
+## Interface Standardization
+
+Interface standardization is encouraged and central to BioHarness:
+
+- canonical AnnData / SpatialData / Seurat / SpatialExperiment input handling
+- parameter normalization
+- output mapping
+- artifact layout
+- logging
+- typed failure translation
+- provenance capture
+- environment binding
+
+These changes should make execution safer and more auditable without changing the scientific algorithm.
+
+In a `MethodExecutionPlanningRecord`, `interface_standardization` should record the planned scope, rationale, validation required, evidence references, and confidence. Typical scope includes I/O conversion, parameter normalization, artifact export, failure translation, provenance, filesystem policy, and stable object-field assignment.
+
+## Algorithmic Rewriting
+
+Algorithmic rewriting should be conservative. It includes reimplementing:
+
+- graph construction
+- model training
+- loss functions
+- Bayesian inference
+- clustering logic
+- post-processing algorithms
+
+A convenient reimplementation is not automatically scientifically equivalent.
+
+In a `MethodExecutionPlanningRecord`, `algorithmic_rewrite` must state whether algorithm core would be touched. If algorithm core is touched, fidelity comparison and explicit approval are required before implementation work. The planning record should name excluded algorithmic components when BioHarness intends to wrap or standardize around them rather than rewrite them.
+
+## Level A: Core Anchor
+
+Mature ecosystem package. Do not rewrite.
+
+Examples:
+
+- AnnData
+- Scanpy
+- Squidpy
+- SpatialData
+- Seurat
+- SpatialExperiment
+- PyTorch
+
+Use thin adapters, contracts, validators, and parameter templates.
+
+## Level B: Thin Adapter
+
+Use when a method has a stable API/CLI, clear inputs, clear outputs, and manageable dependencies.
+
+## Level C: Strong Wrapper
+
+Use when the method is scientifically useful but the public interface is not agent-friendly:
+
+- notebook-only
+- hard-coded paths
+- unclear output names
+- inconsistent logs
+- manual preprocessing assumptions
+- weak error semantics
+
+Do not rewrite the algorithm; stabilize I/O, logging, artifacts, and validation.
+
+## Level D: Compatibility Rewrite
+
+Use when original code depends on old or conflicting packages, but the algorithmic logic can be safely migrated onto BioHarness backbone packages.
+
+Require fidelity tests or at least documented comparison checks.
+
+## Level E: Algorithmic Rewrite / Hold
+
+Use for complex methods where rewriting risks changing scientific meaning.
+
+Prefer:
+
+- legacy capsule
+- hold
+- manual review required
 
 ## Rewrite Signals
 
@@ -37,10 +118,17 @@ The following signals would raise rewrite priority if this blueprint is accepted
 
 ## Guardrails
 
-- Round 1 inclusion does not imply rewrite priority.
+- Layer 1 registry inclusion does not imply rewrite priority.
 - Large, mature frameworks should not become rewrite targets by default.
 - Rewrite should be justified by execution reliability, validation quality, or operator burden, not by abstract architectural preference.
 - When the main pain point is interface control rather than algorithmic weakness, use a wrapper first.
+- Rewrite classification can be proposed during Layer 3/4 co-design.
+- Actual rewrite implementation should require an additional approval step or documented rationale.
+- A compatibility rewrite should require fidelity checks or documented comparison checks.
+- Any plan that touches algorithm core must trigger fidelity comparison and approval before implementation.
+- A convenient reimplementation is not automatically scientifically equivalent.
+- Topic-level rewrite or wrapper review should begin only after the topic completes the current Layer 2 artifact set and transition gate in [docs/90_roadmap.md](90_roadmap.md).
+- The substrate phase should not interpret a convenient reimplementation as scientific improvement unless benchmark or validation evidence supports that claim.
 
 ## Deferred Questions
 

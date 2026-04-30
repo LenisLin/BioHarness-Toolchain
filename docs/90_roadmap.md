@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Record the current staged transition from Layer 1 registry curation into reusable `Layer 2` topic work, then into a domain-limited spatial transcriptomics execution harness.
+Record the current staged transition from Layer 1 registry curation into reusable `Layer 2` method-selection work, then into a domain-limited spatial transcriptomics execution harness.
 
 ## Current Decision
 
@@ -11,19 +11,20 @@ The first vertical remains spatial transcriptomics downstream analysis. Runtime 
 ## Current Status
 
 - Layer 1 has been largely established as a toolbox/task-family catalog.
-- Layer 2 is being completed topic by topic.
-- Spatial domain identification is the first Layer 2 pilot.
+- Layer 2 topic completion standard is being established from the spatial domain identification canonical example.
+- Layer 2 is being completed Analysis Problem by Analysis Problem.
+- Spatial domain identification is the canonical completed working/evidence example.
 - BANKSY v0.7.0 is accepted as a Layer3/4 template trial, but not MVP implementation-ready.
 - Layer 3/4 have not entered production implementation.
 
 ## Next Phase
 
-Layer 2 spatial domain identification closure:
+Layer 2 topic completion standard and formal rendering:
 
-- finish method table
-- finish decision tree
-- clarify field coverage
-- identify promoted methods for co-design
+- land the Layer 2 topic completion standard from the spatial domain identification canonical example
+- keep the formal method-selection standard as the compact agent-facing rendering contract
+- complete each future Analysis Problem as a full topic package before formal rendering
+- identify promoted methods for representative Layer 3/4 co-design after topic closure
 
 Layer 3/4 co-design pilot:
 
@@ -51,26 +52,33 @@ Do not wait for every topic's Layer 2 to be fully complete before piloting Layer
 
 ## Layer 2 Gate
 
-Before any topic moves into `Layer 3`, it should have:
+Before an Analysis Problem moves into formal Layer 2 method-selection presentation and later Layer 3 entry review, it should have a complete topic package:
 
-- a frozen candidate set
-- a topic `subtable .csv`
-- a topic `field registry .json`
-- a completed benchmark or review pass when suitable literature exists, or an explicit logic review otherwise
-- a standalone `decision tree`
-- at least one review or audit pass
+- `README.md`
+- `topic_scope.md`
+- `field_registry.json`
+- `method_table.csv`
+- `method_table.md`
+- `method_table.json`
+- `review_decision_tree.md`
+- `closure.md`
 
-A topic should not be treated as ready for `Layer 3` unless this gate is complete. Crossing into `Layer 3` means the topic is eligible for execution-surface planning, environment-profile binding, public interface contract work, rewrite or wrapper evaluation, and validation-hook planning. It does not by itself freeze any per-tool execution design.
+The complete topic package precedes formal rendering. The formal Layer 2 output is one agent-facing Markdown file per completed Analysis Problem. That file should contain a problem boundary, a method feature table, and an embedded decision tree.
+
+A topic should not be treated as ready for formal rendering unless the complete working/evidence package exists. Representative Layer 3/4 audit handoff should come from the topic closure package and should not be treated as runtime support.
+
+Crossing into Layer 3 means the topic is eligible for execution-surface planning, environment-profile binding, public interface contract work, rewrite or wrapper evaluation, and validation-hook planning. It does not by itself freeze any per-tool execution design or runtime support.
 
 Layer 3/4 conceptual separation remains in force during this gate. Once promoted, a method can enter a `MethodExecutionPlanningRecord` that produces separate Layer 3 and Layer 4 drafts from the same repository/code inspection.
 
 ## Milestone 1: Layer 1 / Layer 2 Knowledge Stabilization
 
 - Compact Layer 1 toolbox catalog.
-- Task-family cards.
-- Layer 2 method field registry.
-- Spatial domain identification Layer 2 pilot.
-- Decision tree format.
+- Analysis Problem cards.
+- Layer 2 method-selection standard.
+- Layer 2 topic completion standard.
+- Formal Layer 2 method-selection files for completed Analysis Problems.
+- Spatial domain identification canonical completed working/evidence example.
 - Layer 3 entry review template.
 
 ## Milestone 2: Foundation Adapters And First Method-Family Co-design

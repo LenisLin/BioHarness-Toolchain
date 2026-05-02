@@ -19,8 +19,11 @@ Use the following evidence order when sources conflict:
 
 For the current Layer 1 registry baseline, the strongest evidence comes from:
 
-- `/mnt/NAS_21T/ProjectData/BioHarness/results/layer1_method_registry/registry/layer1_spatial_method_registry.csv`
-- `/mnt/NAS_21T/ProjectData/BioHarness/results/layer1_method_registry/reports/2026-04-26_layer1_method_registry_current_summary.md`
+- `/mnt/NAS_21T/ProjectData/BioHarness/results/layer1/registry/layer1_spatial_method_registry.csv`
+- `/mnt/NAS_21T/ProjectData/BioHarness/results/layer1/reports/2026-04-26_layer1_method_registry_current_summary.md`
+- `/mnt/NAS_21T/ProjectData/BioHarness/results/layer1/registry/2026-05-01_six_topic_layer1_supplement_manual_validation.md`
+- `/mnt/NAS_21T/ProjectData/BioHarness/results/layer1/registry/2026-05-01_high_priority_journal_sweep_and_backbone_correction.md`
+- `/mnt/NAS_21T/ProjectData/BioHarness/results/layer2/2026-05-02_layer2_manual_science_confirmation_report.md`
 - `scripts/build_round1_expanded_outputs.py`
 - `scripts/build_round2_targeted_consolidation.py`
 - `tests/test_round1_registry_generator.py`
@@ -45,8 +48,8 @@ Layer 3/4 detailed architecture, core-library selection, rewrite scope, unified-
 
 Current evidence is internally consistent on the 15-analysis-problem baseline:
 
-- the current master CSV contains 137 rows across 15 analysis problems
-- the current NAS Layer 1 summary records the current registry state
+- the current master CSV contains 136 data rows across 15 analysis problems
+- the current NAS Layer 1 registry file is the row-count authority; supporting NAS notes record retained summaries, later Layer 1 supplement decisions, and later manual science confirmations
 - the current scripts and tests encode the 15-topic taxonomy, including `Spatial Trajectory Analysis` and `Spatial Clonal Analysis`
 
 ### Historical background
@@ -63,7 +66,7 @@ Layer 1 registry status does not settle how later substrate work will prioritize
 
 The primary registry file is:
 
-- `/mnt/NAS_21T/ProjectData/BioHarness/results/layer1_method_registry/registry/layer1_spatial_method_registry.csv`
+- `/mnt/NAS_21T/ProjectData/BioHarness/results/layer1/registry/layer1_spatial_method_registry.csv`
 
 The most defensible reading of the current file is:
 
@@ -73,7 +76,7 @@ The most defensible reading of the current file is:
 
 The evidence for that interpretation is concrete:
 
-- the current file has 137 rows across 15 analysis problems
+- the current file has 136 data rows across 15 analysis problems
 - the current file contains `STT`, `spVelo`, `CalicoST`, `FICTURE`, and `CONCERT`
 - the current file places `segger` under `Segmentation / Cell segmentation / transcript assignment`
 

@@ -10,20 +10,19 @@ The first vertical remains spatial transcriptomics downstream analysis. Runtime 
 
 ## Current Status
 
-- Layer 1 has been largely established as a toolbox/task-family catalog.
-- Layer 2 topic completion standard is being established from the spatial domain identification canonical example.
-- Layer 2 is being completed Analysis Problem by Analysis Problem.
-- Spatial domain identification is the canonical completed working/evidence example.
+- Layer 1/2 agent-facing knowledge is now represented in the repo `knowledge_registry/` as 20 active `Analysis Problem` routes plus Layer 2 topic files.
+- Layer 2 topic completion standard remains anchored in NAS working/evidence packages and the repo method-selection standard.
+- Spatial domain identification remains an early canonical working/evidence example; the current agent-facing registry is broader than that pilot.
 - BANKSY v0.7.0 is accepted as a Layer3/4 template trial, but not MVP implementation-ready.
 - Layer 3/4 have not entered production implementation.
 
 ## Next Phase
 
-Layer 2 topic completion standard and formal rendering:
+Layer 2 topic completion standard and knowledge-registry maintenance:
 
-- land the Layer 2 topic completion standard from the spatial domain identification canonical example
-- keep the formal method-selection standard as the compact agent-facing rendering contract
-- complete each future Analysis Problem as a full topic package before formal rendering
+- keep the Layer 2 topic completion standard aligned with completed NAS working/evidence packages
+- keep `knowledge_registry/layer2/method_selection_standard.md` as the compact agent-facing rendering contract
+- complete any future Analysis Problem as a full topic package before adding it to `knowledge_registry/layer2`
 - identify promoted methods for representative Layer 3/4 co-design after topic closure
 
 Layer 3/4 co-design pilot:
@@ -52,7 +51,7 @@ Do not wait for every topic's Layer 2 to be fully complete before piloting Layer
 
 ## Layer 2 Gate
 
-Before an Analysis Problem moves into formal Layer 2 method-selection presentation and later Layer 3 entry review, it should have a complete topic package:
+Before an Analysis Problem moves into `knowledge_registry/layer2` method-selection presentation and later Layer 3 entry review, it should have a complete topic package:
 
 - `README.md`
 - `topic_scope.md`
@@ -63,9 +62,9 @@ Before an Analysis Problem moves into formal Layer 2 method-selection presentati
 - `review_decision_tree.md`
 - `closure.md`
 
-The complete topic package precedes formal rendering. The formal Layer 2 output is one agent-facing Markdown file per completed Analysis Problem. That file should contain a problem boundary, a method feature table, and an embedded decision tree.
+The complete topic package precedes knowledge-registry rendering. The Layer 2 output is one agent-facing Markdown file per completed Analysis Problem. That file should contain a problem boundary, a method feature table, and an embedded decision tree.
 
-A topic should not be treated as ready for formal rendering unless the complete working/evidence package exists. Representative Layer 3/4 audit handoff should come from the topic closure package and should not be treated as runtime support.
+A topic should not be treated as ready for knowledge-registry rendering unless the complete working/evidence package exists. Representative Layer 3/4 audit handoff should come from the topic closure package and should not be treated as runtime support.
 
 Crossing into Layer 3 means the topic is eligible for execution-surface planning, environment-profile binding, public interface contract work, rewrite or wrapper evaluation, and validation-hook planning. It does not by itself freeze any per-tool execution design or runtime support.
 
@@ -73,11 +72,11 @@ Layer 3/4 conceptual separation remains in force during this gate. Once promoted
 
 ## Milestone 1: Layer 1 / Layer 2 Knowledge Stabilization
 
-- Compact Layer 1 toolbox catalog.
-- Analysis Problem cards.
+- Repo `knowledge_registry/` with compact Layer 1 routing and 20 active Analysis Problems.
+- Layer 1/2 selection protocol for closed-world agent use.
 - Layer 2 method-selection standard.
 - Layer 2 topic completion standard.
-- Formal Layer 2 method-selection files for completed Analysis Problems.
+- Layer 2 method-selection files for completed Analysis Problems.
 - Spatial domain identification canonical completed working/evidence example.
 - Layer 3 entry review template.
 

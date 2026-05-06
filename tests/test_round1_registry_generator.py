@@ -112,6 +112,11 @@ def test_authoritative_rows_match_final_merge_decisions(tmp_path):
         "Neighborhood / interaction-effect modeling",
         "Spacia",
     ) in keys
+    assert (
+        "Cell-Cell Communication",
+        "Ligand-receptor communication inference",
+        "Renoir",
+    ) in keys
 
     assert ("Domain / Clustering", "Spatial domain identification", "BANKSY") in keys
     assert (
@@ -133,8 +138,50 @@ def test_authoritative_rows_match_final_merge_decisions(tmp_path):
         "Joint segmentation plus annotation",
         "segger",
     ) not in keys
-    assert len(rows) == 131
-    assert len(method_names) == 125
+    assert len(rows) == 137
+    assert len(method_names) == 130
+    assert ("Cell Type Inference", "Cell type deconvolution", "FAST") not in keys
+    old_ccc_name = "ST" + "Case"
+    assert (
+        "Cell-Cell Communication",
+        "Ligand-receptor communication inference",
+        old_ccc_name,
+    ) not in keys
+    assert (
+        "Cell-Cell Communication",
+        "Ligand-receptor communication inference",
+        "DeepTalk",
+    ) in keys
+    assert (
+        "Cell-Cell Communication",
+        "Neighborhood / interaction-effect modeling",
+        "COZI",
+    ) in keys
+    assert (
+        "Comparative Analysis",
+        "Spatial differential expression / comparison",
+        "SPADE",
+    ) in keys
+    assert (
+        "Comparative Analysis",
+        "Spatial differential expression / comparison",
+        "STcompare",
+    ) in keys
+    assert (
+        "Spatial Clonal Analysis",
+        "Spatial subclone detection",
+        "CalicoST",
+    ) in keys
+    assert (
+        "Spatial Trajectory Analysis",
+        "Spatial trajectory inference",
+        "STT",
+    ) in keys
+    assert (
+        "Spatial Trajectory Analysis",
+        "Spatial trajectory inference",
+        "spVelo",
+    ) in keys
 
     for removed_method in {
         "SpaDCN",
@@ -159,16 +206,26 @@ def test_authoritative_rows_match_final_merge_decisions(tmp_path):
         "SPIDER": "https://github.com/deepomicslab/SPIDER",
         "SpaceFlow": "https://github.com/hongleir/SpaceFlow",
         "STCC": "https://github.com/hucongcong97/STCC",
-        "STCase": "https://github.com/Lzcstan/STCase",
+        "DeepTalk": "https://github.com/JiangBioLab/DeepTalk",
+        "COZI": "https://github.com/SchapiroLabor/coziR",
+        "CalicoST": "https://github.com/raphael-group/CalicoST",
         "SMART": "https://github.com/yyolanda/SMART",
         "SpotGF": "https://github.com/illuminate6060/SpotGF",
+        "STcompare": "https://github.com/JEFworks-Lab/STcompare",
+        "STT": "https://github.com/cliffzhou92/STT",
         "UCS": "https://github.com/YangLabHKUST/UCS",
         "conST": "https://github.com/ys-zong/conST",
         "stPlus": "https://github.com/xy-chen16/stPlus",
+        "spVelo": "https://github.com/VivLon/spVelo",
         "Redeconve": "https://github.com/ZxZhou4150/Redeconve",
+        "Renoir": "https://github.com/Zafar-Lab/Renoir",
     }
     for method_name, github_url in expected_github_urls.items():
         assert rows_by_name[method_name][0]["GitHub URL"] == github_url
+
+    assert rows_by_name["Renoir"][0]["Method Family"] == "Ligand-target activity mapping"
+    assert rows_by_name["Renoir"][0]["DOI"] == "10.1038/s41467-026-72388-7"
+    assert rows_by_name["Renoir"][0]["Venue"] == "Nature Communications"
 
     assert rows_by_name["STCC"][0]["Accessibility"] == "Yes"
 
@@ -179,6 +236,9 @@ def test_baseline_authority_doc_reflects_current_layer1_state():
     baseline = Path("docs/15_layer1_method_registry_and_substrate_transition.md").read_text()
 
     assert "15 analysis problems" in baseline
+    assert "137 data rows" in baseline
+    assert "results/layer1/registry/layer1_spatial_method_registry.csv" in baseline
+    assert "results/layer1_method_registry/registry" not in baseline
     assert "first-layer overview registry" in baseline
     assert "Layer 1 registry inclusion does not imply later core candidacy" in baseline
     assert "tool substrate" in baseline

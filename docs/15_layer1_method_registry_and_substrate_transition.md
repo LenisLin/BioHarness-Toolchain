@@ -4,22 +4,30 @@
 
 This document is the current authority inside `docs/` for the Layer 1 method-registry baseline and the agreed transition from broad ecosystem evidence toward BioHarness substrate design.
 
+For agent-facing Layer 1/2 routing and method-selection entry, use the repo `knowledge_registry/`.
+
 It is intentionally a state document. It is not a run log and not a detailed Layer 3/4 architecture spec.
 
 ## Authority And Current Source Of Truth
 
-### Current formal state
+### Current state
 
 Use the following evidence order when sources conflict:
 
-1. Current NAS result artifacts and current script/test encoded behavior.
-2. Current Layer 1 method-registry contents.
-3. Repository-level framing documents such as `README.md` and `docs/00_overview.md`.
-4. Older discussion text only as historical context.
+1. `knowledge_registry/` for current agent-facing Layer 1/2 routing and method-selection presentation.
+2. Current NAS source/evidence artifacts and current script/test encoded behavior.
+3. Current Layer 1 method-registry contents.
+4. Repository-level framing documents such as `README.md` and `docs/00_overview.md`.
+5. Older discussion text only as historical context.
 
 For the current Layer 1 registry baseline, the strongest evidence comes from:
 
+- `knowledge_registry/layer1/task_catalog.md`
+- `knowledge_registry/layer2/method_selection_standard.md`
 - `/mnt/NAS_21T/ProjectData/BioHarness/results/layer1/registry/layer1_spatial_method_registry.csv`
+- `/mnt/NAS_21T/ProjectData/BioHarness/results/layer1/registry/2026-05-06_layer1_layer2_reconciliation_note.md`
+- `/mnt/NAS_21T/ProjectData/BioHarness/results/layer2/2026-05-06_layer1_layer2_reconciliation_report.md`
+- `/mnt/NAS_21T/ProjectData/BioHarness/results/layer2/2026-05-06_layer2_topic_confirmation_status.csv`
 - `/mnt/NAS_21T/ProjectData/BioHarness/results/layer1/reports/2026-04-26_layer1_method_registry_current_summary.md`
 - `/mnt/NAS_21T/ProjectData/BioHarness/results/layer1/registry/2026-05-01_six_topic_layer1_supplement_manual_validation.md`
 - `/mnt/NAS_21T/ProjectData/BioHarness/results/layer1/registry/2026-05-01_high_priority_journal_sweep_and_backbone_correction.md`
@@ -39,16 +47,18 @@ Layer 3/4 detailed architecture, core-library selection, rewrite scope, unified-
 
 ## Layer 1 Registry Baseline Status
 
-### Current formal state
+### Current state
 
-- The current Layer 1 method registry covers 15 analysis problems.
+- The repo-authoritative agent-facing Layer 1/2 knowledge registry covers 20 active `Analysis Problem` routes under `knowledge_registry/`.
+- The current broad Layer 1 method source registry still covers 15 analysis problems.
 - The current master registry is a first-layer overview registry, not a stable-core-only registry.
 - The registry row unit remains `Analysis Problem + Subtask + Method Name`.
 - Layer 1 registry inclusion records that a method belongs in the current broad evidence registry. It does not by itself mean stable-core status, framework-ready status, Layer 3 surface candidacy, or rewrite priority.
 
-Current evidence is internally consistent on the 15-analysis-problem baseline:
+Current evidence is internally consistent when separating the 20-topic agent-facing knowledge registry from the older 15-analysis-problem broad source registry:
 
 - the current master CSV contains 137 data rows across 15 analysis problems
+- `knowledge_registry/layer1/task_catalog.md` records 20 active agent-facing `Analysis Problem` routes from the 2026-05-06 reconciliation
 - the current NAS Layer 1 registry file is the row-count authority; supporting NAS notes record retained summaries, later Layer 1 supplement decisions, and later manual science confirmations
 - the current scripts and tests encode the 15-topic taxonomy, including `Spatial Trajectory Analysis` and `Spatial Clonal Analysis`
 
@@ -62,7 +72,7 @@ Layer 1 registry status does not settle how later substrate work will prioritize
 
 ## Current Interpretation Of The Master Registry
 
-### Current formal state
+### Current state
 
 The primary registry file is:
 
@@ -72,6 +82,7 @@ The most defensible reading of the current file is:
 
 - it is the operative first-layer master registry for the current baseline
 - it is a broad method evidence registry, not a default agent-facing toolbox catalog
+- it does not override the current 20-topic agent-facing `knowledge_registry/`
 - it should be interpreted by current content and the current Layer 1 summary, not by older staged report filenames
 
 The evidence for that interpretation is concrete:
@@ -90,7 +101,7 @@ This migration does not change CSV schema and does not define future registry ve
 
 ## Substrate Transition Note
 
-### Current formal state
+### Current state
 
 The project is no longer framed as continued broad method-table expansion.
 
@@ -134,3 +145,5 @@ This document does not do any of the following:
 This document carries forward the valid state summary from earlier baseline/preparation documents while removing staged progress terminology from current project framing.
 
 Current readers should use this file for the local Layer 1 method-registry baseline and substrate-transition summary, and use the current NAS result artifacts plus current scripts/tests when they need the underlying evidence.
+
+Current agents should use `knowledge_registry/` for Layer 1/2 problem routing and method-selection handoff.

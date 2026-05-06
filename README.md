@@ -10,7 +10,7 @@ Tool calling is not the same as reliable tool execution. In bioinformatics, a fu
 
 BioHarness-Toolchain converts open-ended spatial transcriptomics tool use into a staged substrate: Layer 1 routes an agent to the correct task family; Layer 2 selects methods using curated evidence and decision trees; Layer 3 exposes stable execution surfaces; Layer 4 binds those surfaces to dependency-isolated backend adapters, wrappers, or rewrites.
 
-This repository separates tool knowledge from tool execution. Layer 1 and Layer 2 are knowledge layers used for task-family routing and method selection. Layer 3 defines stable execution surfaces that can be reasoned about without reading backend package internals. Layer 4 binds those surfaces to concrete backend adapters, wrappers, or rewrites. The default reasoning brain should normally stop at Layer 3.
+This repository separates tool knowledge from tool execution. Layer 1 and Layer 2 are knowledge layers used for task-family routing and method selection. Their current repo-authoritative agent-facing entry is `knowledge_registry/`. Layer 3 defines stable execution surfaces that can be reasoned about without reading backend package internals. Layer 4 binds those surfaces to concrete backend adapters, wrappers, or rewrites. The default reasoning brain should normally stop at Layer 3.
 
 ## What This Repository Is
 
@@ -28,7 +28,7 @@ This repository separates tool knowledge from tool execution. Layer 1 and Layer 
 
 ## Status
 
-Blueprint stage. The repository contains documentation, JSON schemas, illustrative examples, tests, and Layer 1 / Layer 2 spatial transcriptomics artifacts. Runtime implementation details remain roadmap items unless a specific file says otherwise.
+Blueprint stage. The repository contains documentation, JSON schemas, illustrative examples, tests, and the repo-authoritative Layer 1/2 spatial transcriptomics `knowledge_registry/`. Runtime implementation details remain roadmap items unless a specific file says otherwise.
 
 Current Layer 3/4 method planning uses `MethodExecutionPlanningRecord v0.7.1`, a small patch over v0.7. BANKSY v0.7.0 is accepted as a template trial only; no method has runtime support in this repository.
 
@@ -46,6 +46,7 @@ git archive --format=zip --output BioHarness-Toolchain-ST-docs.zip HEAD
 - [Scope](docs/10_scope.md)
 - [Layer 1 method registry and substrate transition](docs/15_layer1_method_registry_and_substrate_transition.md)
 - [Tool taxonomy and Layer 2 rules](docs/20_tool_taxonomy.md)
+- [Layer 1/2 knowledge registry](knowledge_registry/README.md)
 - [Harness architecture](docs/25_harness_architecture.md)
 - [Environment strategy](docs/30_env_strategy.md)
 - [Agent runtime reference](docs/35_agent_runtime_reference.md)

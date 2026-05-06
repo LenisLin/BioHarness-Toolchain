@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Layer12SelectionPolicy",
+  "type": "object",
+  "required": [
+    "policy_id",
+    "policy_version",
+    "registry_root",
+    "authority_status",
+    "scope",
+    "closed_world_policy",
+    "workflow",
+    "tie_breaking",
+    "handoff_fields",
+    "forbidden_claims",
+    "routes"
+  ],
+  "properties": {
+    "policy_id": {
+      "type": "string"
+    },
+    "policy_version": {
+      "type": "string"
+    },
+    "registry_root": {
+      "type": "string"
+    },
+    "authority_status": {
+      "type": "string"
+    },
+    "scope": {
+      "type": "string"
+    },
+    "closed_world_policy": {
+      "type": "object",
+      "required": [
+        "default_candidate_space",
+        "external_package_exception",
+        "agent_must_not"
+      ],
+      "properties": {
+        "default_candidate_space": {
+          "type": "string"
+        },
+        "external_package_exception": {
+          "type": "string"
+        },
+        "agent_must_not": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "workflow": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "tie_breaking": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "handoff_fields": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "forbidden_claims": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "routes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "analysis_problem",
+          "analysis_target",
+          "main_input_or_signal",
+          "target_output",
+          "route"
+        ],
+        "properties": {
+          "analysis_problem": {
+            "type": "string"
+          },
+          "analysis_target": {
+            "type": "string"
+          },
+          "main_input_or_signal": {
+            "type": "string"
+          },
+          "target_output": {
+            "type": "string"
+          },
+          "route": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
+

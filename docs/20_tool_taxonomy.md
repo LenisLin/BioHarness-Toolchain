@@ -23,9 +23,9 @@ Those remain in topic artifacts or later-phase documents.
 
 Layer 1 is the compact agent-facing toolbox catalog. Its stable routing unit is the `Analysis Problem`.
 
-Formal Layer 2 is entered only after an agent has selected a Layer 1 `Analysis Problem`. It presents method-selection results for that analysis problem.
+Layer 2 is entered only after an agent has selected a Layer 1 `Analysis Problem`. It presents method-selection results for that analysis problem.
 
-The registry `Subtask` field is not a formal Layer 2 hierarchy level. It may inform working analysis or branch structure, but formal Layer 2 files should use analysis-topic and method-branch language instead of subtask directories or subtask package names.
+The registry `Subtask` field is not a Layer 2 knowledge-registry hierarchy level. It may inform working analysis or branch structure, but Layer 2 topic files should use analysis-topic and method-branch language instead of subtask directories or subtask package names.
 
 If two method branches cannot share a candidate-set context, field model, or decision tree, they may later be discussed as separate analysis topics. That split is a manual decision, not an automatic consequence of the registry `Subtask` field.
 
@@ -35,7 +35,7 @@ Layer 1 and Layer 2 are agent-facing knowledge layers. Layer 2 answers `when to 
 
 `Layer 2` exists to support `when to choose`, not `how to run`.
 
-Layer 2 has a heavy working/evidence completion standard under `/mnt/NAS_21T/ProjectData/BioHarness/results/layer2/TOPIC_COMPLETION_STANDARD.md`, and a lightweight formal presentation standard under `/mnt/NAS_21T/ProjectData/BioHarness/results/formal/layer2/method_selection_standard.md`.
+Layer 2 has a heavy working/evidence completion standard under `/mnt/NAS_21T/ProjectData/BioHarness/results/layer2/TOPIC_COMPLETION_STANDARD.md`, and a lightweight repo-authoritative presentation standard under `knowledge_registry/layer2/method_selection_standard.md`.
 
 It operates at the level of:
 
@@ -78,14 +78,14 @@ typical_outputs:
   - domain labels
   - spatial plots
   - optional latent embedding
-route_to_layer2: formal/layer2/domain_clustering.md
+route_to_layer2: knowledge_registry/layer2/domain_clustering.md
 ```
 
 ## Recommended Layer 2 Field Set
 
-Working/evidence schemas may vary by Analysis Problem, but they should preserve enough information to construct the formal method feature table and embedded decision tree.
+Working/evidence schemas may vary by Analysis Problem, but they should preserve enough information to construct the knowledge-registry method feature table and embedded decision tree.
 
-Formal method feature tables should use compact, positive selection fields:
+Knowledge-registry method feature tables should use compact, positive selection fields:
 
 - `Method`
 - `Selection role`
@@ -133,9 +133,11 @@ This signal is preliminary. If a method is promoted after Layer 2 selection, a L
 
 Layer 2 has two artifact classes.
 
-Working/evidence artifacts support construction, review, and consistency checks. They remain outside the formal presentation layer, normally under the non-formal Layer 2 results workspace.
+For Layer 1/2 knowledge-registry rendering, enumerate topics from active Layer 1 registry `Analysis Problem` values, then resolve each problem to its current Layer 2 topic package using the active confirmation or reconciliation status mapping. The Layer 2 workspace can contain dated pilot folders alongside current packages; dated pilots keep their own date-specific scope, and the active mapping provides the current package for each `Analysis Problem`. This source-selection rule is Layer 1/2 only.
 
-Before a formal Layer 2 topic Markdown file is generated, the corresponding working/evidence materials must include:
+Working/evidence artifacts support construction, review, and consistency checks. They remain outside the knowledge-registry presentation layer, normally under the non-registry Layer 2 results workspace.
+
+Before a Layer 2 topic Markdown file is generated in `knowledge_registry/layer2`, the corresponding working/evidence materials must include:
 
 - `README.md`
 - `topic_scope.md`
@@ -146,19 +148,19 @@ Before a formal Layer 2 topic Markdown file is generated, the corresponding work
 - `review_decision_tree.md`
 - `closure.md`
 
-Formal artifacts are final agent-facing method-selection files under `formal/layer2`. Each completed Analysis Problem should have one formal Markdown file containing:
+Knowledge-registry artifacts are final agent-facing method-selection files under `knowledge_registry/layer2`. Each completed Analysis Problem should have one Markdown file containing:
 
 1. `Problem boundary`
 2. `Method feature table`
 3. `Decision tree`
 
-Do not create a formal topic Markdown for unfinished topics.
+Do not create a topic Markdown for unfinished topics.
 
 ## Field Model
 
 ### Working/evidence fields
 
-Working/evidence fields carry reusable and topic-local selection signals that support candidate-set review, method characterization, and formal presentation.
+Working/evidence fields carry reusable and topic-local selection signals that support candidate-set review, method characterization, and knowledge-registry presentation.
 
 Examples include:
 
@@ -170,9 +172,9 @@ Examples include:
 - code access state
 - evidence-source classification
 
-### Formal fields
+### Knowledge-registry fields
 
-Formal fields should be compact and decision-useful. They should use positive selection language and should not include exclusionary columns such as `Avoid when` or `Do Not Start With This When`.
+Knowledge-registry fields should be compact and decision-useful. They should use positive selection language and should not include exclusionary columns such as `Avoid when` or `Do Not Start With This When`.
 
 ### Topic-local fields
 
@@ -194,7 +196,7 @@ Some fields may exist only during topic bootstrapping.
 
 The working/evidence package includes `review_decision_tree.md`. That file records the benchmark/review pass or logic review, coverage checks, evidence spot-checks, and the decision-tree basis for the topic.
 
-The formal decision tree is then embedded in the formal `Layer 2` topic Markdown.
+The decision tree is then embedded in the `knowledge_registry/layer2` topic Markdown.
 
 It must satisfy all of the following:
 
@@ -204,13 +206,13 @@ It must satisfy all of the following:
 - keep benchmark or review evidence as branch-local ranking support rather than root-level universal ranking
 - use condition-branch language that an agent can follow directly
 
-The formal decision tree should be embedded in the same formal topic Markdown file as the problem boundary and method feature table. The heavier review detail stays in `review_decision_tree.md`.
+The decision tree should be embedded in the same topic Markdown file as the problem boundary and method feature table. The heavier review detail stays in `review_decision_tree.md`.
 
 ## Benchmark And Review Use
 
 When suitable benchmark or review literature exists for a topic:
 
-- a benchmark or review pass is required before formal topic generation
+- a benchmark or review pass is required before topic generation
 - the evidence should be used for branch-local ranking, tie-breaks, or metric-specific ordering
 - it should not replace task-fit branching
 - it should not be converted into a global all-method ranking
@@ -234,9 +236,9 @@ The expected `Layer 2` workflow for an Analysis Problem is:
 6. run a benchmark/review pass when suitable literature exists, otherwise run a logic review
 7. derive the review decision tree
 8. write topic closure with representative Layer 3/4 audit batch
-9. generate one formal topic Markdown with a problem boundary, method feature table, and embedded decision tree
+9. generate one `knowledge_registry/layer2` topic Markdown with a problem boundary, method feature table, and embedded decision tree
 
-A topic should not be treated as ready for formal rendering unless the complete working/evidence package exists. Representative `Layer 3/4` audit handoff should come from the topic closure package and should not be treated as runtime support.
+A topic should not be treated as ready for knowledge-registry rendering unless the complete working/evidence package exists. Representative `Layer 3/4` audit handoff should come from the topic closure package and should not be treated as runtime support.
 
 Layer 3 entry review should not become a second independent repository audit. Review and audit concerns should already be handled inside the benchmark/review or logic-review material. For promoted methods, Layer 3 entry should normally start the Layer 3/4 co-design workflow described in [Layer 3/4 Co-design](82_layer3_4_codesign.md), while keeping final Layer 3 and Layer 4 artifacts separate.
 
@@ -255,7 +257,7 @@ Topic-specific branch logic, edge-case method placement, and local comparator de
 This document does not:
 
 - freeze any one topic's local decision tree
-- create any topic-specific formal method-selection file
+- create any topic-specific method-selection file outside the knowledge-registry gate
 - define benchmark whitelist contents
 - define runtime implementations
 - define execution-surface counts

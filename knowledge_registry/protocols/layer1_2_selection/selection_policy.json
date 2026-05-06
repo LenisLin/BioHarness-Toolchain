@@ -1,0 +1,194 @@
+{
+  "$schema": "./selection_policy.schema.json",
+  "policy_id": "bioharness.layer1_2_selection",
+  "policy_version": "2026-05-06",
+  "registry_root": "knowledge_registry",
+  "authority_status": "repo_authoritative_layer1_2_knowledge",
+  "scope": "spatial_transcriptomics_downstream_layer1_2_selection",
+  "closed_world_policy": {
+    "default_candidate_space": "Use only the 20 active Analysis Problem values and the selected Layer 2 topic's listed methods for ordinary selection tasks.",
+    "external_package_exception": "If the user explicitly requests a method, package, paper, or update outside the registry, mark out_of_formal_review and do not silently merge it into ordinary Layer 1/2 selection.",
+    "agent_must_not": [
+      "start by searching for packages",
+      "add methods from memory",
+      "invent new Analysis Problem routes",
+      "promote backbone workflow packages into method-table candidates unless the topic file says so",
+      "claim default methods or execution readiness"
+    ]
+  },
+  "workflow": [
+    "Parse the user's scientific object and target output.",
+    "Select the Layer 1 Analysis Problem from knowledge_registry/layer1/task_catalog.md.",
+    "Use main input or signal only to break ties after object and output are considered.",
+    "Open the exact Layer 2 route listed for the selected Analysis Problem.",
+    "Use the Layer 2 Problem boundary, Method feature table, and Decision tree for branch-local method selection.",
+    "Return a bounded handoff with route, rationale, candidate methods, caveats, and out_of_formal status."
+  ],
+  "tie_breaking": [
+    "Prefer scientific object and target output over package names.",
+    "Split multi-endpoint requests into multiple Layer 1 routes.",
+    "Ask for clarification when route ambiguity changes the method candidate set.",
+    "Keep benchmark or review evidence branch-local; do not convert it into a universal all-method ranking."
+  ],
+  "handoff_fields": [
+    "layer1_route",
+    "route_reason",
+    "layer2_file",
+    "branch_logic",
+    "candidate_methods",
+    "caveats",
+    "out_of_formal_status"
+  ],
+  "forbidden_claims": [
+    "default_method",
+    "runtime_support",
+    "adapter_available",
+    "execution_ready",
+    "docker_or_conda_available",
+    "layer3_surface_available",
+    "layer4_backend_available",
+    "experimental_causal_proof_from_model_output"
+  ],
+  "routes": [
+    {
+      "analysis_problem": "Artifact Correction",
+      "analysis_target": "technical or ambient artifacts in spatial measurements",
+      "main_input_or_signal": "measured spatial expression, coordinates, optional image or platform artifact signal",
+      "target_output": "artifact-corrected spatial data object or correction report",
+      "route": "knowledge_registry/layer2/artifact_correction.md"
+    },
+    {
+      "analysis_problem": "Cell Type Inference",
+      "analysis_target": "cell identity, cell-type composition, or spatial cell-type placement",
+      "main_input_or_signal": "spatial expression, optional scRNA reference, marker genes, or annotations",
+      "target_output": "cell-type labels, proportions, deconvolution maps, or annotation confidence",
+      "route": "knowledge_registry/layer2/cell_type_inference.md"
+    },
+    {
+      "analysis_problem": "Cell-Cell Communication",
+      "analysis_target": "communication, interaction, or neighborhood-effect signal between cells, spots, or cell groups",
+      "main_input_or_signal": "expression with cell labels or groups, spatial coordinates, LR priors, or neighborhood context",
+      "target_output": "interaction scores, communication networks, spatial LR signals, or pathway-aware CCC summaries",
+      "route": "knowledge_registry/layer2/cell_cell_communication.md"
+    },
+    {
+      "analysis_problem": "Data Quality Control",
+      "analysis_target": "sample, spot, cell, gene, or image-derived data quality",
+      "main_input_or_signal": "raw or early spatial expression object with coordinates and quality metrics",
+      "target_output": "quality flags, filtered data object, or QC report",
+      "route": "knowledge_registry/layer2/data_quality_control.md"
+    },
+    {
+      "analysis_problem": "Denoising / Signal Recovery",
+      "analysis_target": "same-resolution noisy or sparse measured spatial expression signal",
+      "main_input_or_signal": "measured spatial expression matrix with region, graph, or neighborhood context",
+      "target_output": "denoised or recovered expression values at measured spatial units",
+      "route": "knowledge_registry/layer2/denoising_signal_recovery.md"
+    },
+    {
+      "analysis_problem": "Domain / Clustering",
+      "analysis_target": "spatially coherent tissue domains, regions, or structural compartments",
+      "main_input_or_signal": "spatial expression, coordinates, optional image features or graph context",
+      "target_output": "domain labels, spatial clusters, embeddings, or region assignments",
+      "route": "knowledge_registry/layer2/domain_clustering.md"
+    },
+    {
+      "analysis_problem": "Gene Expression Prediction / Imputation",
+      "analysis_target": "unmeasured, missing, or cross-modal gene expression values",
+      "main_input_or_signal": "spatial expression plus spatial layout, reference data, image, or gene/cell networks",
+      "target_output": "predicted, imputed, or completed spatial gene-expression maps",
+      "route": "knowledge_registry/layer2/gene_expression_prediction_imputation.md"
+    },
+    {
+      "analysis_problem": "Graph / Neighborhood",
+      "analysis_target": "local spatial neighborhoods, tissue niches, graphs, or cell-neighborhood structure",
+      "main_input_or_signal": "coordinates, cell labels, expression, morphology, or sample-level neighborhood context",
+      "target_output": "spatial graphs, neighborhood features, niche labels, or local-context representations",
+      "route": "knowledge_registry/layer2/graph_neighborhood.md"
+    },
+    {
+      "analysis_problem": "Integration",
+      "analysis_target": "multiple spatial samples, slices, batches, technologies, or coordinate systems",
+      "main_input_or_signal": "multi-sample or multi-modal spatial expression with coordinates and optional images",
+      "target_output": "integrated embeddings, aligned coordinates, harmonized samples, or joint representations",
+      "route": "knowledge_registry/layer2/integration.md"
+    },
+    {
+      "analysis_problem": "Normalization",
+      "analysis_target": "technical scaling or normalization of measured spatial expression",
+      "main_input_or_signal": "raw or quality-controlled count matrix with spatial sample metadata",
+      "target_output": "normalized expression object ready for downstream analysis",
+      "route": "knowledge_registry/layer2/normalization.md"
+    },
+    {
+      "analysis_problem": "Panel Design",
+      "analysis_target": "gene panel or feature set for targeted spatial assays",
+      "main_input_or_signal": "candidate genes, references, prior marker sets, or assay constraints",
+      "target_output": "selected spatial gene panel or feature set",
+      "route": "knowledge_registry/layer2/panel_design.md"
+    },
+    {
+      "analysis_problem": "Phenotype- / Cohort-linked Spatial Feature and Niche Analysis",
+      "analysis_target": "phenotype-, cohort-, or outcome-linked spatial features and tissue niches",
+      "main_input_or_signal": "spatial features, niche labels, patient/sample metadata, phenotype, or outcome variables",
+      "target_output": "phenotype-associated spatial features, niche scores, or cohort-level associations",
+      "route": "knowledge_registry/layer2/phenotype_cohort_linked_spatial_feature_niche_analysis.md"
+    },
+    {
+      "analysis_problem": "Program Discovery",
+      "analysis_target": "latent tissue states, multicellular programs, modules, or coordinated expression programs",
+      "main_input_or_signal": "spatial expression with optional cell labels, niches, or multi-sample context",
+      "target_output": "program scores, latent factors, module assignments, or spatial program maps",
+      "route": "knowledge_registry/layer2/program_discovery.md"
+    },
+    {
+      "analysis_problem": "Segmentation",
+      "analysis_target": "cells, spots, transcripts, boundaries, or spatial units",
+      "main_input_or_signal": "imaging, transcript locations, morphology, or spatial molecular measurements",
+      "target_output": "segmentation labels, cell boundaries, spatial units, or transcript-to-cell assignments",
+      "route": "knowledge_registry/layer2/segmentation.md"
+    },
+    {
+      "analysis_problem": "Spatial Clonal Analysis",
+      "analysis_target": "clones, subclones, copy-number states, or lineage-derived tumor structures",
+      "main_input_or_signal": "spatial molecular data with genotype, copy-number, mutation, or lineage signal",
+      "target_output": "spatial clone labels, subclone maps, or clonal composition summaries",
+      "route": "knowledge_registry/layer2/spatial_clonal_analysis.md"
+    },
+    {
+      "analysis_problem": "Spatial Contrast Testing",
+      "analysis_target": "condition, group, niche, domain, or tissue-context differences",
+      "main_input_or_signal": "spatial features with condition, group, domain, niche, or sample metadata",
+      "target_output": "differential spatial features, contrast statistics, or condition-associated effects",
+      "route": "knowledge_registry/layer2/spatial_contrast_testing.md"
+    },
+    {
+      "analysis_problem": "Spatial Perturbation Analysis",
+      "analysis_target": "spatial response to perturbation, intervention, screen, or altered tissue state",
+      "main_input_or_signal": "spatial expression plus perturbation labels, guides, treatment, or intervention metadata",
+      "target_output": "perturbation-response effects, spatial response maps, or niche-aware perturbation summaries",
+      "route": "knowledge_registry/layer2/spatial_perturbation_analysis.md"
+    },
+    {
+      "analysis_problem": "Spatial Trajectory Analysis",
+      "analysis_target": "spatially organized transitions, progressions, dynamics, or lineage-like states",
+      "main_input_or_signal": "spatial expression, coordinates, optional time, pseudotime, lineage, or state cues",
+      "target_output": "spatial trajectories, transition maps, ordered states, or spatial dynamics summaries",
+      "route": "knowledge_registry/layer2/spatial_trajectory_analysis.md"
+    },
+    {
+      "analysis_problem": "Spatially Variable Gene Detection",
+      "analysis_target": "genes with spatially structured expression patterns",
+      "main_input_or_signal": "spatial expression with coordinates, optional cell-type or domain context",
+      "target_output": "ranked spatially variable genes, pattern classes, or spatial gene sets",
+      "route": "knowledge_registry/layer2/spatially_variable_gene_detection.md"
+    },
+    {
+      "analysis_problem": "Super-resolution",
+      "analysis_target": "finer spatial resolution or subspot spatial structure",
+      "main_input_or_signal": "lower-resolution spatial expression with coordinates, optional image or reference signal",
+      "target_output": "higher-resolution expression representation or refined spatial tissue map",
+      "route": "knowledge_registry/layer2/super_resolution.md"
+    }
+  ]
+}

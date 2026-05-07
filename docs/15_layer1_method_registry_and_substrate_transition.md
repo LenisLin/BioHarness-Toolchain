@@ -57,7 +57,7 @@ Layer 3/4 detailed architecture, core-library selection, rewrite scope, unified-
 
 Current evidence is internally consistent when separating the 20-topic agent-facing knowledge registry from the older 15-analysis-problem broad source registry:
 
-- the current master CSV contains 137 data rows across 15 analysis problems
+- the current master CSV contains 140 data rows across 15 analysis problems
 - `knowledge_registry/layer1/task_catalog.md` records 20 active agent-facing `Analysis Problem` routes from the 2026-05-06 reconciliation
 - the current NAS Layer 1 registry file is the row-count authority; supporting NAS notes record retained summaries, later Layer 1 supplement decisions, and later manual science confirmations
 - the current scripts and tests encode the 15-topic taxonomy, including `Spatial Trajectory Analysis` and `Spatial Clonal Analysis`
@@ -87,7 +87,7 @@ The most defensible reading of the current file is:
 
 The evidence for that interpretation is concrete:
 
-- the current file has 137 data rows across 15 analysis problems
+- the current file has 140 data rows across 15 analysis problems
 - the current file contains `STT`, `spVelo`, `CalicoST`, `FICTURE`, `CONCERT`, and `Renoir`
 - the current file places `segger` under `Segmentation / Cell segmentation / transcript assignment`
 

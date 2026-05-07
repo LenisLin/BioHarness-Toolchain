@@ -97,6 +97,13 @@ def test_authoritative_rows_match_final_merge_decisions(tmp_path):
     assert ("Domain / Clustering", "Spatial domain identification", "Pianno") in keys
     assert ("Cell Type Inference", "Cell type deconvolution", "Tangram") in keys
     assert ("Cell Type Inference", "Cell type deconvolution", "CytoSPACE") in keys
+    assert ("Domain / Clustering", "Spatial domain identification", "GASTON") in keys
+    assert (
+        "Super-resolution",
+        "Resolution enhancement of spot-based spatial transcriptomics",
+        "PanoSpace",
+    ) in keys
+    assert ("Integration", "Multi-slice alignment / integration", "SpatialZ") in keys
     assert (
         "Cell-Cell Communication",
         "Neighborhood / interaction-effect modeling",
@@ -125,7 +132,7 @@ def test_authoritative_rows_match_final_merge_decisions(tmp_path):
             and row["Subtask"] == "Spatial domain identification"
             for row in rows
         )
-        == 27
+        == 28
     )
     assert sum(row["Method Name"] == "BANKSY" for row in rows) == 1
     assert (
@@ -138,8 +145,8 @@ def test_authoritative_rows_match_final_merge_decisions(tmp_path):
         "Joint segmentation plus annotation",
         "segger",
     ) not in keys
-    assert len(rows) == 137
-    assert len(method_names) == 130
+    assert len(rows) == 140
+    assert len(method_names) == 133
     assert ("Cell Type Inference", "Cell type deconvolution", "FAST") not in keys
     old_ccc_name = "ST" + "Case"
     assert (
@@ -209,6 +216,9 @@ def test_authoritative_rows_match_final_merge_decisions(tmp_path):
         "DeepTalk": "https://github.com/JiangBioLab/DeepTalk",
         "COZI": "https://github.com/SchapiroLabor/coziR",
         "CalicoST": "https://github.com/raphael-group/CalicoST",
+        "GASTON": "https://github.com/StannisZhou/GASTON",
+        "PanoSpace": "https://github.com/hehuifeng/PanoSpace",
+        "SpatialZ": "https://github.com/broadinstitute/Spatial-Z",
         "SMART": "https://github.com/yyolanda/SMART",
         "SpotGF": "https://github.com/illuminate6060/SpotGF",
         "STcompare": "https://github.com/JEFworks-Lab/STcompare",
@@ -236,7 +246,7 @@ def test_baseline_authority_doc_reflects_current_layer1_state():
     baseline = Path("docs/15_layer1_method_registry_and_substrate_transition.md").read_text()
 
     assert "15 analysis problems" in baseline
-    assert "137 data rows" in baseline
+    assert "140 data rows" in baseline
     assert "results/layer1/registry/layer1_spatial_method_registry.csv" in baseline
     assert "results/layer1_method_registry/registry" not in baseline
     assert "first-layer overview registry" in baseline

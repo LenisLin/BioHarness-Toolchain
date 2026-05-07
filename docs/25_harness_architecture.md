@@ -19,7 +19,7 @@ BioHarness-Toolchain converts open-ended spatial transcriptomics tool use into a
 | Layer 3 | Which stable execution surface should be invoked? | Visible after method selection | `ExecutionSurfaceSpec` | Execution-planning, not backend internals |
 | Layer 4 | How is the selected surface actually run? | Hidden by default; visible for implementation/debug/audit | `BackendAdapterSpec`, wrapper, rewrite, call graph | Concrete execution binding |
 
-Layer 1 should not expose 137 method rows to the agent by default. The current Layer 1 method registry can be treated as a backing registry and evidence source, not necessarily the default compact Layer 1 view.
+Layer 1 should not expose 140 method rows to the agent by default. The current Layer 1 method registry can be treated as a backing registry and evidence source, not necessarily the default compact Layer 1 view.
 
 Layer 2 remains a pure documentation and knowledge layer. Layer 3 is not raw package documentation; it is a stable, machine-readable execution surface. Layer 4 maps execution surfaces to concrete backend functions and environment-bound implementations.
 

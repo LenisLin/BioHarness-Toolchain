@@ -4,7 +4,7 @@
 
 Use this Layer 2 file after Layer 1 routes the task to `Super-resolution`.
 
-This topic covers finer-geometry reconstruction, enhanced-resolution representation, generated high-density profiles, and measured high-density or submicron representation when the output remains anchored to target-sample measured spatial expression or spatial omics. Keep measured-versus-inferred status explicit: `FICTURE` stays on the measured high-density or submicron representation side, not the generated-upsampling side.
+This topic covers finer-geometry reconstruction, enhanced-resolution representation, generated high-density profiles, continuous whole-slide single-cell reconstruction, and measured high-density or submicron representation when the output remains anchored to target-sample measured spatial expression or spatial omics. Keep measured-versus-inferred status explicit: `FICTURE` stays on the measured high-density or submicron representation side, not the generated-upsampling side.
 
 Use another Layer 1 problem first when the output is unmeasured expression predicted without a target-sample measured spatial anchor, same-grid denoising or recovery, direct cell segmentation, or cell type labeling. Pseudo-cell, single-cell-resolution, high-density, or cell-level outputs in this topic remain inferred reconstructions unless the input already contains measured fine-geometry signal.
 
@@ -16,6 +16,7 @@ Use another Layer 1 problem first when the output is unmeasured expression predi
 | iStar | histology-guided inference of super-resolution tissue architecture | target-sample spot-based spatial transcriptomics with matched histology | super-resolved tissue architecture and inferred fine-resolution expression map | tissue architecture inference | required | reference-free | high-resolution tissue map | histology-guided architecture inference | Optional GPU; code available |
 | scstGCN | single-cell-resolution spatial gene-expression inference from fused expression, location, and image signals | target-sample spot-based ST, spatial coordinates, and histology image | inferred single-cell-resolution spatial gene-expression map | single-cell-resolution expression | required | reference-free | single-cell-resolution expression map | graph/image fusion | Optional GPU; code available |
 | Spotiphy | single-cell spatial whole-transcriptome reconstruction across an entire tissue section | target-sample section-level spatial transcriptomics with image/context features | pseudo-single-cell whole-transcriptome spatial map | pseudo-single-cell whole transcriptome | required | unclear | pseudo-single-cell whole-section map | pseudo-single-cell reconstruction | Optional GPU; code available |
+| PanoSpace | continuous whole-slide single-cell reconstruction from low-resolution ST with matched histology and scRNA-seq | target-sample low-resolution spatial transcriptomics with matched histology and matched scRNA-seq reference | continuous whole-slide single-cell-resolution spatial transcriptome map | continuous whole-slide single-cell reconstruction | required | required | continuous whole-slide single-cell map | reference- and histology-guided continuous whole-slide reconstruction | Optional GPU; code available |
 | TESLA | super-resolution reconstruction for tumor ecosystem analysis | target-sample spatial transcriptomics with histology image | super-resolved spatial expression and tissue-ecosystem maps | tumor ecosystem super-resolution | required | reference-free | histology-guided super-resolution map | histology-guided reconstruction | Optional GPU; code available |
 | XFuse | deep-learning fusion of image and expression data for super-resolved spatial transcriptomics | target-sample spatial transcriptomics with matched histology | super-resolved spatial expression map | super-resolved expression | required | reference-free | super-resolved expression grid | deep image-expression fusion | Optional GPU; code available |
 | ImSpiRE | image feature-aided subspot resolution enhancement and imputation of unmeasured tissue regions | target-sample spatial transcriptomics with histology image features | image-aided enhanced-resolution spatial expression map | subspot resolution enhancement | required | reference-free | subspot transcriptional profile | image-feature-aided optimal transport | CPU; code available |
@@ -43,6 +44,10 @@ If the requested output is inferred single-cell-resolution or pseudo-cell recons
 - Prefer / consider `scstGCN` for graph-plus-image single-cell-resolution expression inference.
 - Prefer / consider `Spotiphy` for pseudo-single-cell whole-section reconstruction.
 - Prefer / consider `Thor` when histology-aware cell-level investigation is the intended framing.
+
+If the requested output is continuous whole-slide single-cell reconstruction from low-resolution ST plus matched histology and scRNA-seq:
+- Prefer / consider `PanoSpace`.
+- Keep this branch in `Super-resolution` when the endpoint is finer-geometry reconstruction of the same measured sample signal rather than plain cell-type placement.
 
 If large tissue area or generated higher-density representation is central:
 - Prefer / consider `iSCALE` for large-area cellular-level reconstruction.

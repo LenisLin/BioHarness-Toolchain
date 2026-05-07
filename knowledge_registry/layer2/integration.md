@@ -4,7 +4,7 @@
 
 Use this Layer 2 file after Layer 1 routes the task to `Integration`.
 
-This topic covers alignment, latent integration, 3D reconstruction, batch correction, multimodal integration, mosaic multi-omics integration, and cross-sample harmonization for spatial omics. These branches are not interchangeable: coordinate transforms, latent embeddings, count-level correction, 3D tissue maps, and modality-completion outputs should remain distinct during selection.
+This topic covers alignment, latent integration, 3D reconstruction, dense atlas generation with virtual slicing, batch correction, multimodal integration, mosaic multi-omics integration, and cross-sample harmonization for spatial omics. These branches are not interchangeable: coordinate transforms, latent embeddings, count-level correction, 3D tissue maps, virtual-slice outputs, and modality-completion outputs should remain distinct during selection.
 
 The current Integration freeze is accepted as 22 candidate rows. `SpaMosaic`, `INSPIRE`, `SpatialCOC`, and `SSpMosaic` are official Integration candidates in the current state, not temporary footnotes. No single best-method sequence is implied by this table or tree.
 
@@ -27,6 +27,7 @@ Use another Layer 1 problem first when the requested endpoint is cell type infer
 | STalign | coordinate-framework alignment through diffeomorphic metric mapping | spatial transcriptomics data with coordinates and optionally cross-technology spatial maps | diffeomorphic transform and aligned spatial coordinates | coordinate alignment | diffeomorphic mapping | cross-section or cross-technology spatial maps | geometry distortion | CPU; code available |
 | STAligner | graph-attention integration across samples, conditions, technologies, and developmental stages | multiple spatial transcriptomics datasets across conditions, technologies, or stages | integrated embedding and aligned spatial domains | latent embedding integration | graph attention representation | cross-condition or cross-technology samples | biological signal removal | Optional GPU; code available |
 | STAIR | end-to-end spatial transcriptomic alignment, integration, and 3D reconstruction | serial spatial transcriptomics sections for alignment, integration, and 3D reconstruction | aligned integrated sections and reconstructed 3D tissue map | 3D reconstruction | end-to-end 3D integration | serial sections for 3D reconstruction | model opacity and scale burden | Optional GPU; code available |
+| SpatialZ | reconstruct dense 3D atlases and generate virtual slices from planar spatial transcriptomics sections | serial spatial transcriptomics sections with expression, coordinates, and inter-section continuity cues | dense 3D cell atlas and in silico virtual sections | 3D atlas reconstruction / virtual slicing | dense 3D atlas reconstruction | serial sections for atlas reconstruction | atlas-scale interpolation bias | Optional GPU; code available |
 | MaskGraphene | interpretable joint representation for multi-slice and multi-condition integration | multi-slice and multi-condition spatial transcriptomics datasets | joint integrated representation with interpretability hooks | latent embedding integration | masked self-supervised graph representation | multi-slice and multi-condition samples | representation-objective ambiguity | Optional GPU; code available |
 | spCLUE | contrastive unified analysis across single-slice and multi-slice data | single-slice and multi-slice spatial transcriptomics datasets | unified spatial representation for single-slice and multi-slice analysis | latent embedding integration | contrastive representation | single-slice and multi-slice samples | representation-objective ambiguity | Optional GPU; code available |
 | VR-Omics | automated integration of multi-slice data in 2D and 3D | multi-slice spatial transcriptomics data for 2D or 3D integration | integrated 2D or 3D multi-slice spatial map | 2D/3D multi-slice integration | automated 2D/3D integration | multi-slice 2D or 3D data | automation opacity | Optional GPU; code available |
@@ -45,6 +46,7 @@ If the deliverable is explicit coordinate alignment or slice correspondence:
 
 If the deliverable is stitching, 3D reconstruction, or serial-section tissue assembly:
 - Prefer / consider `SANTO`, `SPACEL`, `STAIR`, or `VR-Omics` according to whether the central cue is stitching, deep tissue architecture, end-to-end 3D reconstruction, or automated 2D/3D integration.
+- Prefer / consider `SpatialZ` when dense 3D atlas reconstruction or in silico virtual slicing is the central deliverable.
 - Keep model opacity, scale burden, and reconstruction assumptions separate from ordinary batch correction.
 
 If the deliverable is latent representation integration across samples, conditions, technologies, or slices:

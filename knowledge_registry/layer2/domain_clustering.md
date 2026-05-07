@@ -4,7 +4,7 @@
 
 Use this Layer 2 file after Layer 1 routes the task to `Domain / Clustering`.
 
-This topic covers spatial domain identification, tissue-region clustering, interpretable topic or semantic domain outputs, reference-informed segmentation, and alignment-aware or multimodal domain comparison. The main branch families here are expression-plus-coordinates methods, graph or neighborhood-prior methods, Bayesian or probabilistic clustering, image or morphology-informed domains, multi-slice or batch-aware domain comparison, multimodal-integration-aware domains, interpretable topic or semantic outputs, and reference-informed segmentation.
+This topic covers spatial domain identification, tissue-region clustering, topographic or continuous-gradient domain structure, interpretable topic or semantic domain outputs, reference-informed segmentation, and alignment-aware or multimodal domain comparison. The main branch families here are expression-plus-coordinates methods, graph or neighborhood-prior methods, Bayesian or probabilistic clustering, topographic or isodepth-aware domain methods, image or morphology-informed domains, multi-slice or batch-aware domain comparison, multimodal-integration-aware domains, interpretable topic or semantic outputs, and reference-informed segmentation.
 
 Use another Layer 1 problem first when the main task is cell-type deconvolution, SVG detection, gene-expression prediction, or image-only segmentation without a domain-selection endpoint. Do not flatten topic, module, embedding, or semantic outputs into ordinary cluster labels, do not assume image-guided domains are stable without matched morphology, and do not equate integration quality with domain quality.
 
@@ -46,6 +46,7 @@ Use another Layer 1 problem first when the main task is cell-type deconvolution,
 | stDyer | identify spatial domains with graph- or neighborhood-aware spatial structure | spatial expression matrix and spatial coordinates | discrete spatial domain labels | spatial graph/neighborhood prior | none apparent | single-slice first; cross-slice support unclear | discrete spatial domain labels | expression + spatial coordinates branch | Optional GPU; code access unclear |
 | SpatialLeiden | identify spatial domains with graph- or neighborhood-aware spatial structure | spatial expression matrix and spatial coordinates | discrete spatial domain labels | spatial graph/neighborhood prior | none apparent | single-slice first; cross-slice support unclear | discrete spatial domain labels | expression + spatial coordinates branch | CPU; code access unclear |
 | GraphPCA | learn a spatial embedding or low-dimensional representation for downstream domain labeling | spatial expression matrix and spatial coordinates | spatial embedding or topics supporting domain labels | spatial graph/neighborhood prior | none apparent | single-slice first; cross-slice support unclear | embedding for downstream domain labels | expression + spatial coordinates branch | CPU; code access unclear |
+| GASTON | identify topographic domains and continuous spatial gradients through interpretable deep learning | spatial expression matrix and spatial coordinates | continuous isodepth coordinates, boundary-aware topographic maps, or gradient-informed domain structure | interpretable isodepth / topographic prior | none apparent | single-slice first; cross-slice support unclear | continuous topographic coordinate plus domain boundaries | expression + spatial coordinates branch | Optional GPU; code available |
 | iIMPACT | identify spatial domains using matched image or morphology cues with expression | spatial expression, coordinates, and histology/image features when available | discrete spatial domain labels | image plus spatial-neighborhood prior | histology/image-informed | explicit or plausible multi-slice/batch branch | discrete spatial domain labels | expression + image/morphology branch | Optional GPU; code access unclear |
 | MNMST | identify spatial domains with graph- or neighborhood-aware spatial structure | spatial expression matrix and spatial coordinates | discrete spatial domain labels | spatial graph/neighborhood prior | none apparent | single-slice first; cross-slice support unclear | discrete spatial domain labels | expression + spatial coordinates branch | CPU; code access unclear |
 | SpaDo | align and label spatial domains across slices, samples, or batches | one or more spatial expression slices with coordinates | slice-aligned domain labels | spatial coordinates or neighborhood structure | none apparent | explicit or plausible multi-slice/batch branch | slice-aligned domain labels | expression + spatial coordinates branch | CPU; code access unclear |
@@ -79,6 +80,10 @@ If a statistical or probabilistic clustering frame is preferred:
 If graph, neighborhood, or spatial-representation learning is the main route:
 - Prefer / consider `ADEPT`, `CCST`, `GraphST`, `SEDR`, `SpaceFlow`, `STAGATE`, `STCC`, `stDyer`, or `stLearn`.
 - Consider `BINARY` when binarized graph-convolution framing is the real modeling cue.
+
+If layered organization, continuous gradients, or isodepth-like topography are central:
+- Prefer / consider `GASTON`.
+- Keep continuous topographic coordinates and boundary-aware maps distinct from plain discrete cluster labels.
 
 If CPU-first neighborhood screening or spatially aware low-dimensional structure is the practical branch cue:
 - Prefer / consider `BANKSY`, `GraphPCA`, `MNMST`, `PROST`, `SpatialLeiden`, or `SpatialPCA`.

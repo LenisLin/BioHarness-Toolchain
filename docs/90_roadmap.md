@@ -14,6 +14,7 @@ The first vertical remains spatial transcriptomics downstream analysis. Runtime 
 - Layer 2 topic completion standard remains anchored in NAS working/evidence packages and the repo method-selection standard.
 - Spatial domain identification remains an early canonical working/evidence example; the current agent-facing registry is broader than that pilot.
 - BANKSY v0.7.0 is accepted as a Layer3/4 template trial, but not MVP implementation-ready.
+- The current spatial domain identification Layer3/4 next step is to document the six-phase planning sequence that will precede the 8-method planning pilot based on the NAS 27-tool freeze, pure random sampling, fixed seed `20260508`, and `MethodExecutionPlanningRecord v0.7.1` records.
 - Layer 3/4 have not entered production implementation.
 
 ## Next Phase
@@ -29,7 +30,16 @@ Layer 3/4 co-design pilot:
 
 - adopt `MethodExecutionPlanningRecord v0.7.1` for promoted-method planning
 - treat BANKSY v0.7.0 as an accepted template trial, not an implementation-ready adapter
-- complete the v0.7.1 template/documentation/schema patch
+- align the Layer3/4 planning documentation with the current repository-reading and environment-abstraction discussion sequence
+- discuss `Repository Evidence Index` for repository/documentation evidence reading
+- discuss `Environment Configuration Abstraction` for environment planning, capsule candidates, incompatible routes, and future minimal check targets
+- discuss `Layer3 Execution Surface Unification`
+- discuss `Layer4 Binding / Wrapper / Rewrite Decision`
+- discuss `Bounded-Equivalence Validation Plan`
+- discuss `8-Method Planning Pilot Walkthrough`
+- only after that discussion, run the 8-method planning pilot design based on the NAS 27-tool freeze, pure random sampling, fixed seed `20260508`, and `MethodExecutionPlanningRecord v0.7.1`
+- keep the planning pilot separate from environment execution checks, fixture smoke runs, fidelity runs, runtime measurement, and method-specific record generation
+- keep parent or canonical execution-surface abstraction separate from concrete method-to-surface binding; concrete Layer4 binding should not move toward implementation readiness before a minimal environment configuration or future check path exists
 - then run SpaGCN Layer3/4 co-design
 - then run a hold / legacy / no-clean-API negative case
 - produce Layer 3 `ExecutionSurfaceSpec` drafts
@@ -43,9 +53,9 @@ Current pilot artifact:
 
 - BANKSY v0.7.0 target root is `/mnt/NAS_21T/ProjectData/BioHarness/results/layer3_4/spatial_domain_identification/BANKSY/v0.7.0/`. BANKSY source retrieval outputs remain under `/mnt/NAS_21T/ProjectData/BioHarness/results/layer3_4/spatial_domain_identification/banksy/`.
 
-The BANKSY v0.6.1 recovery package is now a failed/stress-test example for the planning workflow, not the current template and not a final source. Method-specific outputs remain outside project docs because they are intermediate method-engineering artifacts. Live method audit packs are NAS artifacts. Project docs describe the process, not the live intermediate outputs. They do not move Layer 3/4 into production implementation.
+The BANKSY v0.6.1 recovery package is now a failed/stress-test example for the planning workflow, not the current template and not a final source. Method-specific outputs remain outside project docs because they are intermediate method-engineering artifacts. Live method engineering packs are NAS artifacts. Project docs describe the process, not the live intermediate outputs. They do not move Layer 3/4 into production implementation.
 
-BANKSY environment probing is a separate future task. SpaGCN Layer3/4 co-design is next after the v0.7.1 patch; SpaGCN is not complete.
+BANKSY environment checking is a separate future task. SpaGCN Layer3/4 co-design is next after the planning documentation alignment; SpaGCN is not complete. The 8-method planning pilot does not change BANKSY or SpaGCN implementation-readiness status.
 
 Do not wait for every topic's Layer 2 to be fully complete before piloting Layer 3/4. Use spatial domain identification as a vertical slice to validate the whole design. Lessons from the vertical slice should feed back into Layer 2 field definitions for other topics.
 
@@ -64,7 +74,7 @@ Before an Analysis Problem moves into `knowledge_registry/layer2` method-selecti
 
 The complete topic package precedes knowledge-registry rendering. The Layer 2 output is one agent-facing Markdown file per completed Analysis Problem. That file should contain a problem boundary, a method feature table, and an embedded decision tree.
 
-A topic should not be treated as ready for knowledge-registry rendering unless the complete working/evidence package exists. Representative Layer 3/4 audit handoff should come from the topic closure package and should not be treated as runtime support.
+A topic should not be treated as ready for knowledge-registry rendering unless the complete working/evidence package exists. Representative Layer 3/4 planning handoff should come from the topic closure package and should not be treated as runtime support.
 
 Crossing into Layer 3 means the topic is eligible for execution-surface planning, environment-profile binding, public interface contract work, rewrite or wrapper evaluation, and validation-hook planning. It does not by itself freeze any per-tool execution design or runtime support.
 

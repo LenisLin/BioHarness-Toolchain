@@ -21,7 +21,9 @@ BioHarness-Toolchain converts open-ended spatial transcriptomics tool use into a
 
 Layer 1 should not expose 140 method rows to the agent by default. The current Layer 1 method registry can be treated as a backing registry and evidence source, not necessarily the default compact Layer 1 view.
 
-Layer 2 remains a pure documentation and knowledge layer. Layer 3 is not raw package documentation; it is a stable, machine-readable execution surface. Layer 4 maps execution surfaces to concrete backend functions and environment-bound implementations.
+Layer 2 remains a pure documentation and knowledge layer. Layer 3 is not raw package documentation and not a backend API. Layer 3 defines `execution surface` contracts: cross-method, task-family or method-specific semantic interfaces that align inputs, parameters, outputs, validation, failure semantics, provenance, and environment expectations.
+
+Layer 4 maps those execution surfaces to concrete backend functions, scripts, wrappers, rewrites, filesystem behavior, environment evidence, and typed failure translation. Layer 4 is where method-specific complexity is recorded and hidden from the default agent.
 
 Layer 1/2 are agent-facing knowledge layers. Layer 3 is the first machine-readable execution-planning layer. Layer 4 is the concrete backend implementation layer.
 
@@ -29,11 +31,11 @@ Current Layer 3/4 planning uses `MethodExecutionPlanningRecord v0.7.1`, a small 
 
 ## Layer 3/4 Co-design
 
-Layer 3 and Layer 4 are distinct layers in the system. Layer 3 is the method's functional execution surface. Layer 4 is the backend function, interface, and implementation binding.
+Layer 3 and Layer 4 are distinct layers in the system. Layer 3 defines the execution surface that the agent or harness can reason over after Layer 2 method selection. Layer 4 defines how a specific method satisfies that surface through backend calls, wrappers, input/output conversion, environment binding, artifact handling, and failure translation.
 
-During current engineering planning, both are produced together from a `MethodExecutionPlanningRecord`. BioHarness does not ask engineers to inspect a method repository once for Layer 3 and again for Layer 4. Instead, one planning record extracts both the functional surface and the backend binding. The final artifacts remain separated: `ExecutionSurfaceSpec` for Layer 3, `BackendAdapterSpec` for Layer 4.
+Layer 3/4 co-design exists because reading a method repository reveals both semantic capability and backend constraints. One planning record extracts both, but final artifacts remain separated: `ExecutionSurfaceSpec` for Layer 3 and `BackendAdapterSpec` for Layer 4.
 
-This avoids reading the same package twice while preserving final separation.
+Layer 3 should reduce the agent's burden of repeatedly reading method-specific README files, notebooks, input conventions, and output locations. Layer 4 should preserve those backend details for implementation, debugging, and audit.
 
 | Aspect | Layer 3 | Layer 4 | Co-design implication |
 | --- | --- | --- | --- |
@@ -41,9 +43,9 @@ This avoids reading the same package twice while preserving final separation.
 | Default agent visibility | Visible after Layer 2 selection | Hidden by default | Present separately despite shared audit |
 | Main artifact | `ExecutionSurfaceSpec` | `BackendAdapterSpec` | Generated together, stored separately |
 | Rewrite role | Preliminary wrapper/rewrite signal | Final rewrite level and implementation plan | Rewrite decision refined during audit |
-| Example | `model_fit_or_inference`, `output_assignment`, `artifact_export` | backend `train()`, `predict()`, file outputs, parameter mapping | Layer 3 names stable stages; Layer 4 binds them |
+| Example | `model_fit_or_inference`, `output_assignment`, `artifact_export` | backend `train()`, `predict()`, file outputs, parameter mapping | Layer 3 names functional coverage points inside the surface; Layer 4 binds them |
 
-Every Layer 3 functional stage must have an explicit Layer 4 binding status: `backend_bound`, `wrapper_added`, `not_applicable`, or `requires_followup`. No Layer 3 stage should be silently omitted from Layer 4; unresolved critical bindings block implementation readiness even when the co-design pack is structurally reviewable.
+Every required functional coverage point in a Layer 3 execution surface must have an explicit Layer 4 binding status: `backend_bound`, `wrapper_added`, `not_applicable`, or `requires_followup`. No required part of the surface should be silently omitted from Layer 4; unresolved critical bindings block implementation readiness even when the co-design pack is structurally reviewable.
 
 ## Progressive Disclosure To The Agent
 
@@ -96,15 +98,15 @@ Layer 2 should not define callable signatures, package commands, environment bin
 
 ## Layer 3: Execution Surface
 
-Layer 3 defines stable, machine-readable execution surfaces. An `ExecutionSurfaceSpec` should describe semantic inputs, semantic parameters, semantic outputs, environment profile, preflight checks, post-run checks, typed failure modes, artifacts, and provenance expectations.
+Layer 3 defines stable, machine-readable execution surfaces. An `ExecutionSurfaceSpec` describes the semantic interface that a task-family or method-specific surface exposes: semantic inputs, constrained parameters, expected outputs, environment expectations, preflight checks, post-run checks, typed failure modes, artifacts, and provenance expectations.
 
-Layer 3 allows an agent to reason about execution without reading backend package internals.
+Layer 3 does not expose backend function names, backend file paths, implementation call graphs, package-private parameters, temporary paths, or low-level output namespaces. It allows an agent to plan execution through a stable scientific interface without reading backend package internals.
 
 ## Layer 4: Backend Adapter / Wrapper / Rewrite
 
-Layer 4 binds a Layer 3 surface to concrete backend logic. It may include adapter code, wrapper behavior, compatibility rewrites, call graphs, parameter mappings, input conversion, output mapping, artifact capture, and typed failure translation.
+Layer 4 binds a Layer 3 execution surface to concrete backend logic. It records backend entrypoints, wrappers, compatibility rewrites, call graphs, parameter mappings, input conversion, output mapping, artifact capture, filesystem policy, environment evidence, smoke/fidelity plans, and typed failure translation.
 
-Layer 4 is available for implementation, debugging, and audit. It is not part of the default agent context.
+Layer 4 is available for implementation, debugging, and audit. It is hidden from the default agent context.
 
 ## Data Contracts
 

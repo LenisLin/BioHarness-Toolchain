@@ -74,9 +74,9 @@ The first MVP should include foundation adapters plus at least one method-family
 
 Layer 2 can cover many methods. Not every Layer 2 method should enter Layer 3/4 planning.
 
-Only promoted methods should receive `MethodExecutionPlanningRecord` work. For each promoted method, engineers should derive both a functional surface and backend binding from one planning record. The outputs remain separate: a Layer 3 `ExecutionSurfaceSpec` and a Layer 4 `BackendAdapterSpec`.
+Only promoted methods should receive `MethodExecutionPlanningRecord` work. For each promoted method, engineers should derive both a Layer 3 execution surface and a Layer 4 backend binding from one planning record. The Layer 3 surface aligns the agent-facing interface across methods; the Layer 4 draft records method-specific functions, wrappers, conversions, environment evidence, and failure translation. The outputs remain separate: a Layer 3 `ExecutionSurfaceSpec` and a Layer 4 `BackendAdapterSpec`.
 
-The current generic method execution planning template is `MethodExecutionPlanningRecord v0.7.1`. It preserves the v0.7 architecture and adds stricter review rules: every Layer 3 functional surface must have Layer 4 binding coverage, evidence resolution must be recorded, and acceptance is split across template acceptance, implementation readiness, and production readiness.
+The current generic method execution planning template is `MethodExecutionPlanningRecord v0.7.1`. It preserves the v0.7 architecture and adds stricter review rules: every required functional coverage point in the Layer 3 execution surface must have Layer 4 binding coverage, evidence resolution must be recorded, and acceptance is split across template acceptance, implementation readiness, and production readiness.
 
 Each promoted method must inherit the task-family canonical surface before generating a method-specific Layer 3 surface. For spatial domain identification, method-specific surfaces such as `spatial_domain_identification.banksy.v1` should inherit from `spatial_domain_identification.canonical.v1`.
 
@@ -91,7 +91,7 @@ The preferred first co-design pilot remains `spatial_domain_detection` / `spatia
 
 This order validates the template and co-design process. It does not freeze BANKSY or SpaGCN as default methods and does not claim that any adapter is implemented.
 
-The BANKSY v0.7.0 target is `/mnt/NAS_21T/ProjectData/BioHarness/results/layer3_4/spatial_domain_identification/BANKSY/v0.7.0/`. BANKSY source retrieval outputs are stored under `/mnt/NAS_21T/ProjectData/BioHarness/results/layer3_4/spatial_domain_identification/banksy/`. The BANKSY v0.6.1 recovery package is a failed/stress-test example for the co-design workflow, not the current template and not a final source. These artifacts are blueprint/protocol evidence only; they do not claim a production adapter, environment capsule, runtime validator, smoke fixture, or runtime-cost result. BANKSY is not MVP implementation-ready, and its environment probe is a separate future task.
+The BANKSY v0.7.0 target is `/mnt/NAS_21T/ProjectData/BioHarness/results/layer3_4/spatial_domain_identification/BANKSY/v0.7.0/`. BANKSY source retrieval outputs are stored under `/mnt/NAS_21T/ProjectData/BioHarness/results/layer3_4/spatial_domain_identification/banksy/`. The BANKSY v0.6.1 recovery package is a failed/stress-test example for the co-design workflow, not the current template and not a final source. These artifacts are blueprint/protocol evidence only; they do not claim a production adapter, environment capsule, runtime validator, smoke fixture, or runtime-cost result. BANKSY is not MVP implementation-ready, and its environment execution check is a separate future task.
 
 For spatial domain identification, the first co-design batch should cover a representative set rather than every method:
 

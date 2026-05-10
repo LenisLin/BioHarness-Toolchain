@@ -12,8 +12,8 @@ This document is a blueprint. Draft method execution planning records may exist 
 
 Layer 3 and Layer 4 are architecturally distinct:
 
-- Layer 3 is the functional execution surface. It describes the stable functional capabilities a method exposes to BioHarness and to the agent or harness after Layer 2 method selection.
-- Layer 4 is the backend implementation binding. It describes concrete backend functions, scripts, parameters, call graphs, file I/O, environment binding, wrapper or rewrite decisions, error translation, and implementation details.
+- Layer 3 is the execution surface layer. It describes the stable semantic interface a task family or promoted method exposes to BioHarness and to the agent or harness after Layer 2 method selection.
+- Layer 4 is the backend binding layer. It describes concrete backend functions, scripts, wrappers, parameters, call graphs, file I/O, environment binding, rewrite decisions, error translation, and implementation evidence.
 
 Layer 3/4 are not merged in the architecture. They are co-designed in the engineering workflow and separated in the final artifacts.
 
@@ -64,9 +64,9 @@ Runtime/developer/audit sees Layer 4 when needed
 
 ## Canonical Surface To Method-Specific Realization
 
-Each promoted method must inherit from a canonical task-family surface before it becomes a method-specific Layer 3 surface. The canonical surface defines the shared execution stages, standard outputs, common failure modes, and validation expectations for the task family.
+Each promoted method must inherit from a canonical task-family execution surface before it becomes a method-specific Layer 3 surface. The canonical surface defines the shared semantic interface, standard outputs, common failure modes, validation expectations, and provenance expectations for the task family.
 
-The method-specific realization adds only semantic method differences that the agent or harness needs: constraints, bounded parameters, optional requirements, artifacts, typed failures, and validation hooks. It must not expose backend file paths, raw functions, package-private parameters, or implementation call graphs. Those details stay in Layer 4.
+The method-specific realization adds only execution-relevant scientific constraints: required or forbidden modalities, coordinate expectations, image or reference requirements, bounded semantic parameters, output artifacts, typed failures, and validation hooks. It must not expose backend file paths, raw functions, package-private parameters, or implementation call graphs. Those details stay in Layer 4.
 
 For spatial domain identification, `spatial_domain_identification.banksy.v1` should inherit from `spatial_domain_identification.canonical.v1` when BANKSY is used as a promoted planning pilot.
 
@@ -88,13 +88,13 @@ Current audit notes should record evidence resolution as `file_level`, `symbol_l
 
 ### ExecutionSurfaceSpec
 
-Layer 3 artifact. Describes functional surfaces, semantic inputs, semantic parameters, semantic outputs, preflight checks, post-run checks, typed failure modes, artifacts, provenance expectations, and environment profile. A method-specific surface must include `inherits_from` pointing to the canonical family surface.
+Layer 3 artifact. Describes the aligned execution surface for a task family or promoted method: semantic inputs, semantic parameters, semantic outputs, preflight checks, post-run checks, typed failure modes, artifacts, provenance expectations, and environment profile. A method-specific surface must include `inherits_from` pointing to the canonical family surface.
 
-Functional surfaces may include validation, method-local preprocessing, graph or structure construction, model fitting, inference, output writing, visualization, artifact generation, and validation.
+The surface may include functional coverage for validation, method-local preprocessing, graph or structure construction, model fitting, inference, output writing, visualization, artifact generation, and validation, but those coverage points are not backend functions.
 
 ### BackendAdapterSpec
 
-Layer 4 artifact. Describes backend entrypoints, function bindings, parameter mappings, input conversion, output mapping, artifact mapping, call graph, filesystem policy, environment binding, error translation, smoke tests, fidelity checks, and rewrite level. Every Layer3 functional surface must have a Layer4 `function_surface_bindings` entry marked `backend_bound`, `wrapper_added`, `not_applicable`, or `requires_followup`; critical `requires_followup` bindings block implementation readiness.
+Layer 4 artifact. Describes backend entrypoints, function-surface bindings, parameter mappings, input conversion, output mapping, artifact mapping, call graph, filesystem policy, environment binding, error translation, smoke tests, fidelity checks, and rewrite level. `function_surface_bindings` records how a method satisfies the Layer3 execution surface through backend functions, wrappers, or explicit non-applicability. Critical `requires_followup` bindings block implementation readiness.
 
 Layer4 drafts can use `source_symbol_not_resolved_in_current_inventory` only as draft evidence debt. It must be paired with `implementation_blocker: true` and `resolution_required_before: MVP_adapter_implementation`, and it prevents implementation readiness when it affects model fitting, inference, output assignment, or parameter mapping.
 
@@ -118,11 +118,11 @@ The v0.7.1 record separates interface standardization from algorithmic rewrite. 
 
 Maps the method to `scverse-core`, `r-seurat-core`, `r-bioc-spatial`, `deep-spatial`, `image-spatial`, `reporting`, or another explicitly defined capsule.
 
-Environment planning is independent from rewrite planning. Environment conflict does not automatically imply algorithmic rewrite. Static dependency risk does not justify final environment hold; environment risk may trigger a probe, a dedicated capsule, a wrapper boundary, or an optional-path exclusion.
+Environment planning is independent from rewrite planning. Environment conflict does not automatically imply algorithmic rewrite. Static dependency risk does not justify final environment hold; environment risk may trigger a future execution check, a dedicated capsule, a wrapper boundary, or an optional-path exclusion.
 
 ### Acceptance Gates
 
-Layer3/4 co-design review separates static acceptance from runtime acceptance. Static acceptance can pass when required files exist, YAML is valid, Layer3/Layer4 separation holds, evidence authority is present, required sections exist, and production claims are absent. Runtime acceptance remains blocked until environment import probes, minimal fixture smoke runs, runtime and memory measurement, output schema observation, and provenance observation exist.
+Layer3/4 co-design review separates static acceptance from runtime acceptance. Static acceptance can pass when required files exist, YAML is valid, Layer3/Layer4 separation holds, evidence authority is present, required sections exist, and production claims are absent. Runtime acceptance remains blocked until environment import checks, minimal fixture smoke runs, runtime and memory measurement, output schema observation, and provenance observation exist.
 
 The top-level `acceptance_gate` records `template_acceptance_status`, `implementation_readiness_status`, and `production_readiness_status`. A method can pass template acceptance while failing implementation readiness. Production readiness remains `fail` until runtime implementation, validation, and provenance are complete.
 

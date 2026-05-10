@@ -40,7 +40,7 @@ Rewrite comparison, when required, should cover schema equivalence, domain count
 
 Runtime cost records should include wall time, peak memory, device used, and fixture size.
 
-Runtime measurement cannot be faked or inferred from static docs. It must come from an actual probe, fixture run, or observed runtime execution.
+Runtime measurement cannot be faked or inferred from static docs. It must come from an actual execution check, fixture run, or observed runtime execution.
 
 Static acceptance and runtime acceptance must stay separate:
 
@@ -55,7 +55,7 @@ static_acceptance_gate:
   status:
 
 runtime_acceptance_gate:
-  environment_import_probe:
+  environment_import_check:
   minimal_fixture_smoke_run:
   runtime_measurement:
   output_schema_observed:
@@ -63,7 +63,7 @@ runtime_acceptance_gate:
   status:
 ```
 
-A Layer3/4 review pack can pass static acceptance. Runtime acceptance remains blocked until probes and fixtures run. Production support requires runtime acceptance.
+A Layer3/4 review pack can pass static acceptance. Runtime acceptance remains blocked until execution checks and fixtures run. Production support requires runtime acceptance.
 
 ## Validation Stages
 
@@ -117,6 +117,25 @@ For spatial domain identification, fidelity may include:
 - contract vs fidelity vs smoke-test separation
 
 Simple smoke tests do not establish exact biological equivalence.
+
+## Bounded Equivalence For Spatial Domain Identification
+
+Spatial domain identification validation should use bounded equivalence rather than byte-level identity. Many relevant methods include stochastic clustering, representation learning, resolution search, GPU/CPU numerical differences, label permutation, and package-version drift. A validation claim is therefore valid only inside the stated fixture, seed, version, metric, and tolerance boundaries.
+
+For wrapper-only paths, validation should confirm that the algorithm core is not touched and that the standardized interface preserves the original method's functional behavior within the declared scope:
+
+- input and output schemas match the Layer 3/4 contract
+- labels align one-to-one with observations or the declared output table
+- domain count or granularity is reported with the correct guarantee status
+- no empty or degenerate domains appear when the method contract forbids them
+- declared artifacts, validation report, and provenance record are present
+- random-seed behavior and repeated-run policy are recorded
+
+For compatibility rewrites, validation must compare the original implementation and the BioHarness-compatible path on the same fixture where feasible. Comparison should account for label permutation and stochastic variation, and may use ARI, NMI, adjusted mutual information, domain-count agreement, no-empty-domain checks, spatial-pattern sanity, output-schema agreement, and runtime or memory deltas.
+
+For algorithmic rewrites, bounded-equivalence evaluation is not enough by itself to authorize implementation. Any plan that touches graph construction, model training, loss functions, Bayesian inference, clustering logic, or other scientific algorithm core should remain hold or manual-review until the equivalence scope, fixture design, and approval requirement are explicit.
+
+Visual plausibility remains a sanity check only. A nonblank spatial plot, visually coherent domains, or successful runtime completion does not prove biological correctness or algorithmic equivalence.
 
 ### `preflight`
 

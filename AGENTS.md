@@ -66,6 +66,16 @@ Keep it short. Put detailed topic logic and evolving substrate design in the rel
 - When work is topic-specific, update the relevant topic artifact before promoting anything into repo-wide instructions.
 - Do not backfill topic-specific Layer 2 detail into this file unless it changes repo-wide policy.
 
+## Engineering Trial Vs Formal Development
+
+- For non-trivial workflow expansion, first distinguish whether the task is an engineering trial or formal development.
+- Treat unclear early-stage work as an engineering trial unless the task explicitly asks for executable or runtime support.
+- During engineering trials, prefer documentation-first reading, minimum-common-denominator integration, and small staged experiments.
+- Record trial assumptions and findings, but do not turn ordinary unknowns into formal blockers unless they affect the stated trial goal.
+- During formal development, define preconditions, environment execution checks, validation gates, and acceptance checks before claiming executable support.
+- Keep trial findings, prototype behavior, runtime support, production readiness, and stable architecture claims clearly separate.
+- A successful trial may inform formal development, but does not by itself establish stable APIs, runtime support, or production readiness.
+
 ## Verification And Claims
 
 - Do not claim a check passed unless you ran it.

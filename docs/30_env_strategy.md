@@ -73,15 +73,39 @@ For promoted methods, the plan should record:
 - `environment_decision`
 - `environment_hold_status`
 - `environment_subagent_report`
-- `required_probes`
+- `future_check_targets`
 
-Preferred pre-probe planning decisions include `environment_probe_required`, `shared_capsule_unknown`, `dedicated_capsule_may_be_required`, and `wrapper_boundary_required`.
+Preferred pre-check planning decisions include `environment_check_required`, `shared_capsule_unknown`, `dedicated_capsule_may_be_required`, and `wrapper_boundary_required`.
 
-Static dependency risk does not justify final environment hold. `hold_due_to_environment` must not be used as a final decision unless an environment subagent report cites a failed probe or impossible dependency constraint. If no environment probe has run, `environment_hold_status` must be `not_justified_yet` or `unknown`, not `justified`.
+Static dependency risk does not justify final environment hold. `hold_due_to_environment` must not be used as a final decision unless an environment subagent report cites a failed execution check or impossible dependency constraint. If no environment check has run, `environment_hold_status` must be `not_justified_yet` or `unknown`, not `justified`.
 
-Environment risk may trigger a probe, a dedicated capsule, a wrapper boundary, or an optional-path exclusion. It should not automatically trigger method hold. Optional runtime paths, such as R/rpy2/mclust or method-specific GPU extras, should be separated from the core path and kept unavailable to the agent until verified.
+Environment risk may trigger a future execution check, a dedicated capsule, a wrapper boundary, or an optional-path exclusion. It should not automatically trigger method hold. Optional runtime paths, such as R/rpy2/mclust or method-specific GPU extras, should be separated from the core path and kept unavailable to the agent until verified.
 
 These are planning decisions only. They do not claim that a capsule, wrapper, or compatibility rewrite exists.
+
+## Dependency Evidence Extraction For Method Planning
+
+For spatial domain identification, Phase 1 `Repository Evidence Index` provides install, dependency, runtime, and automation evidence references. Phase 2 `Environment Configuration Abstraction` uses those references to form environment planning fields without local installation or execution checks. The fuller extraction fields below serve Phase 2 environment planning and concrete method-to-surface binding work.
+
+For Layer 3/4 method planning, `install_files` must refer to concrete evidence paths rather than a generic statement that installation material exists. A method planning record should preserve enough dependency evidence to support later conflict analysis and capsule grouping without claiming that an environment has already been solved.
+
+For every install, dependency, or runtime-configuration evidence item, record at planning level:
+
+- `path`: repository-relative path or URL section for the evidence
+- `source_type`: setup file, package descriptor, environment file, lockfile, container file, CI file, README install section, notebook install cell, script header, optional-runtime note, or inferred import clue
+- `package_manager`: pip, conda, mamba, poetry, uv, R, Bioconductor, GitHub source install, system package manager, container, or mixed
+- `declared_dependencies`: package names or install commands as declared by the source
+- `version_constraints`: exact pins, ranges, unconstrained versions, or implicit latest-source installs
+- `channel_or_source`: conda channel, PyPI, Bioconductor, GitHub repository, local path, system package source, or unknown
+- `optional_or_core`: whether the dependency path is required for the core workflow or only for optional clustering, plotting, image, GPU, R/Python bridge, or reporting behavior
+- `extras`: extras, optional groups, feature flags, or documented alternate install paths
+- `system_libraries`: compiler, OS library, BLAS/LAPACK, image library, geospatial library, Java, or other non-Python/R dependency hints
+- `gpu_cuda_constraints`: GPU requirement, CUDA version, torch/tensorflow build, CPU fallback, or unknown status
+- `python_r_bridge`: rpy2, reticulate, Rscript boundary, mclust, Seurat, Bioconductor, or other cross-language dependency
+- `conflict_candidates`: dependency-version or runtime-boundary risks that should be checked later
+- `future_check_target`: import check, optional-path check, minimal fixture run, GPU check, R bridge check, or no immediate check identified
+
+Static dependency evidence may justify planning decisions such as `environment_check_required`, `shared_capsule_unknown`, `dedicated_capsule_may_be_required`, `wrapper_boundary_required`, or optional-path exclusion. It must not be used by itself to claim that an environment capsule is available, that runtime support exists, or that a method should receive a final environment hold.
 
 ## Candidate Environment Capsules
 

@@ -1,6 +1,6 @@
 # Method Execution Planning Record Template v0.7
 
-This historical v0.7 template is retained for compatibility. The current generic template is [Method Execution Planning Record Template v0.7.1](method_execution_planning_record_v0.7.1.md).
+This historical v0.7 template is retained for compatibility. The current generic template is [Method Execution Planning Record Template v0.7.1](../../layer3_4/templates/method_execution_planning_record_v0.7.1.md).
 
 `MethodExecutionPlanningRecord v0.7` supersedes v0.5 and v0.6 planning language. It is an engineering-stage co-design record, not a runtime API and not a production-support claim.
 

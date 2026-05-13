@@ -18,29 +18,30 @@ Keep it short. Put detailed topic logic and evolving substrate design in the rel
 - The Layer 1 method registry provides the baseline evidence for what methods exist.
 - The current substrate phase is a bioagent-oriented tool substrate effort. It is not a continuation of broad Layer 1 table expansion.
 - Layer 1 registry inclusion does not by itself imply core candidacy, a stable execution surface, or rewrite priority.
-- Do not describe working buffers, pilots, or blueprint examples as frozen architecture unless a project document explicitly locks the decision.
+- Do not describe pilots, examples, or blueprint artifacts as frozen architecture unless a current project document explicitly locks the decision.
 
 ## Durable Sources Of Truth
 
 - Start with:
   - `README.md`
-  - `docs/10_scope.md`
-  - `docs/12_substrate_working_buffer.md`
-  - `docs/15_layer1_method_registry_and_substrate_transition.md`
-- Use `docs/15_layer1_method_registry_and_substrate_transition.md` as the current anchor for Layer 1 method-registry state and the minimum agreed substrate transition note.
-- Use `docs/12_substrate_working_buffer.md` for unresolved substrate questions and working hypotheses. It does not freeze architecture.
+  - `docs/README.md`
+  - `docs/overview.md`
+  - `docs/scope.md`
+  - `docs/layer1_2/layer1_method_registry_and_substrate_transition.md`
+- Use `docs/layer1_2/layer1_method_registry_and_substrate_transition.md` as the current anchor for Layer 1 method-registry state and the minimum agreed substrate transition note.
+- Record unresolved substrate questions in the narrowest relevant current project document or topic artifact. Do not recreate a central working buffer unless the project explicitly reopens that workflow.
 - For tasks that touch substrate design, load only the relevant sections of:
-  - `docs/30_env_strategy.md`
-  - `docs/35_agent_runtime_reference.md`
-  - `docs/40_interface_contract.md`
-  - `docs/50_rewrite_policy.md`
-  - `docs/60_validation.md`
+  - `docs/substrate/environment_strategy.md`
+  - `docs/references/agent_runtime_reference.md`
+  - `docs/substrate/interface_contract.md`
+  - `docs/substrate/rewrite_policy.md`
+  - `docs/substrate/validation.md`
 - Treat material under `contracts/`, `skills/`, `surface_registry/`, and `evals/` as blueprint artifacts unless a higher-authority document says otherwise.
 - If a decision is not written in the current project docs or the relevant current topic artifact, it is not frozen.
 
 ## Layer Discipline
 
-- Layer 1: agent-facing toolbox catalog.
+- Layer 1: analysis-problem and task-family routing.
 - Layer 2: task-family method knowledge pack and decision tree.
 - Layer 3: execution surface registry and callable contract.
 - Layer 4: backend adapter, wrapper, or rewrite implementation.
@@ -52,7 +53,7 @@ Keep it short. Put detailed topic logic and evolving substrate design in the rel
 - Do not collapse Layer 2 method-comparison material into Layer 3 execution surfaces.
 - Do not collapse Layer 3 surface contracts into Layer 4 adapter code.
 - Topic-specific Layer 2 freezes belong in the relevant topic artifact, not in this top-level file.
-- The following remain post-research decisions unless frozen elsewhere:
+- The following remain post-research decisions unless frozen in the relevant current project document or topic artifact:
   - execution-surface counts
   - adapter boundaries
   - per-tool rewrite granularity
@@ -65,6 +66,9 @@ Keep it short. Put detailed topic logic and evolving substrate design in the rel
 - Do not modify NAS topic-pilot files or other authoritative external artifacts unless the task explicitly calls for that mutation.
 - When work is topic-specific, update the relevant topic artifact before promoting anything into repo-wide instructions.
 - Do not backfill topic-specific Layer 2 detail into this file unless it changes repo-wide policy.
+- During the current scientific-planning and engineering-implementation phase, do not run strict language audits as a blocking review criterion.
+- Documentation review should prioritize scientific semantic consistency, field/schema alignment, valid paths, and conflicts between planning and runtime status.
+- Treat boundary phrases such as `planning-only`, `not implemented`, and `not production` as acceptable when they preserve factual status; raise them only when they create factual errors, semantic conflicts, or conflict with an explicit user request.
 
 ## Engineering Trial Vs Formal Development
 

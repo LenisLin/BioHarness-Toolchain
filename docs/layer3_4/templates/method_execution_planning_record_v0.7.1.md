@@ -2,7 +2,7 @@
 
 `MethodExecutionPlanningRecord v0.7.1` is a small patch over v0.7, not a conceptual redesign. It preserves the same Layer3/Layer4 architecture while tightening review, implementation-readiness, and runtime-readiness rules. It supersedes v0.5 and v0.6 planning language. It is an engineering-stage co-design record, not a runtime API and not a production-support claim.
 
-Canonical schema path: [contracts/method_execution_planning_record_v0.7.1.schema.json](../../contracts/method_execution_planning_record_v0.7.1.schema.json). The v0.7 schema path is retained only for compatibility.
+Canonical schema path: [contracts/method_execution_planning_record_v0.7.1.schema.json](../../../contracts/method_execution_planning_record_v0.7.1.schema.json). The v0.7 schema path is retained only for compatibility.
 
 Method-specific Layer3/4 audit outputs are intermediate engineering artifacts. They must be stored in the NAS results workspace, not under project docs. The project repository may contain only generic templates, schemas, design documentation, and explicitly synthetic or illustrative examples. Live method audit packs are NAS artifacts. Project docs describe the process, not the live intermediate outputs.
 

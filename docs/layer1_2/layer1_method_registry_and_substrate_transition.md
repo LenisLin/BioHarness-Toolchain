@@ -17,7 +17,7 @@ Use the following evidence order when sources conflict:
 1. `knowledge_registry/` for current agent-facing Layer 1/2 routing and method-selection presentation.
 2. Current NAS source/evidence artifacts and current script/test encoded behavior.
 3. Current Layer 1 method-registry contents.
-4. Repository-level framing documents such as `README.md` and `docs/00_overview.md`.
+4. Repository-level framing documents such as `README.md` and `docs/overview.md`.
 5. Older discussion text only as historical context.
 
 For the current Layer 1 registry baseline, the strongest evidence comes from:
@@ -43,7 +43,7 @@ Older working notes and retrieval-protocol documents were useful during earlier 
 
 ### Still open
 
-Layer 3/4 detailed architecture, core-library selection, rewrite scope, unified-interface details, and environment-strategy details are not frozen here and must remain open.
+Layer 3/4 execution-surface design, backend-binding evidence thresholds, method-specific adaptation levels, environment-profile assignments, and evaluation details are not frozen in this Layer 1 state document.
 
 ## Layer 1 Registry Baseline Status
 
@@ -53,7 +53,7 @@ Layer 3/4 detailed architecture, core-library selection, rewrite scope, unified-
 - The current broad Layer 1 method source registry still covers 15 analysis problems.
 - The current master registry is a first-layer overview registry, not a stable-core-only registry.
 - The registry row unit remains `Analysis Problem + Subtask + Method Name`.
-- Layer 1 registry inclusion records that a method belongs in the current broad evidence registry. It does not by itself mean stable-core status, framework-ready status, Layer 3 surface candidacy, or rewrite priority.
+- Layer 1 registry inclusion records that a method belongs in the current broad evidence registry. It does not by itself mean core/basic package status, framework-ready status, Layer 3 surface candidacy, or adaptation priority.
 
 Current evidence is internally consistent when separating the 20-topic agent-facing knowledge registry from the older 15-analysis-problem broad source registry:
 
@@ -107,8 +107,8 @@ The project is no longer framed as continued broad method-table expansion.
 
 The current high-level direction is to use the Layer 1 method registry as input for a bioagent-oriented tool substrate:
 
-- choose part of the ecosystem as core lower-layer libraries
-- selectively rewrite, wrap, unify interfaces for, or accelerate part of the surrounding tool surface
+- identify core/basic package anchors and surrounding method candidates
+- selectively connect, wrap, or rewrite parts of the surrounding tool surface where evidence supports that adaptation level
 - reduce agent burden from heterogeneous environment setup, fragmented execution knowledge, and long-context tool handling
 
 Layer 1 registry inclusion does not imply later core candidacy. Layer 2 method selection and Layer 3/4 engineering review use different decision layers from broad Layer 1 method inclusion.
@@ -121,23 +121,23 @@ Earlier discussion often tied later work closely to additional method surveying 
 
 The following remain intentionally undecided here:
 
-- the concrete core-library list
-- the rewrite shortlist
-- unified-interface details
-- acceleration strategy details
-- environment strategy details
+- method-specific adaptation levels
+- Layer 3 execution-surface grouping
+- Layer 4 backend binding scope
+- environment-profile assignments
+- validation or evaluation requirements for promoted methods
 - the exact mapping from Layer 1 registry entries to later implementation units
 
 ## Out-Of-Scope / Still Open
 
 This document does not do any of the following:
 
-- freeze the Layer 3/4 architecture
-- freeze the core-library list
-- freeze the rewrite list
-- freeze interface-contract details
-- freeze environment-policy details
-- expand `docs/20_tool_taxonomy.md`, `docs/30_env_strategy.md`, `docs/40_interface_contract.md`, `docs/50_rewrite_policy.md`, or `docs/60_validation.md`
+- revise the current substrate architecture
+- assign method-specific adaptation levels
+- freeze Layer 3/4 execution-surface counts
+- freeze Layer 4 backend adapter boundaries
+- freeze environment-profile assignments
+- revise `docs/layer1_2/tool_taxonomy.md`, `docs/substrate/environment_strategy.md`, `docs/substrate/adaptation_policy.md`, or `docs/substrate/evaluation.md`
 - change the Layer 1 registry CSV schema
 
 ## Migration Note

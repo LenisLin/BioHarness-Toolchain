@@ -2,9 +2,7 @@
 
 ## Status
 
-Blueprint / protocol draft. `MethodExecutionPlanningRecord v0.7.1` is the current generic planning protocol for Layer 3/4 method engineering. v0.7.1 is a small patch over v0.7, not a conceptual redesign. It supersedes v0.5 and v0.6 planning language, but it does not claim that any production Layer 3 surface, Layer 4 adapter, environment capsule, wrapper, rewrite, runtime dispatcher, or validation runner has been implemented.
-
-Earlier BANKSY v0.6.1 artifacts are now treated as a failed recovery / stress-test example for the protocol. BANKSY v0.7.0 is accepted as a template trial, not as implementation-ready support. Fresh method-specific artifacts must be generated from the current template and stored in NAS, not under project `docs/`.
+Blueprint / protocol draft. `MethodExecutionPlanningRecord v0.7.1` is the current generic planning protocol for Layer 3/4 method engineering. v0.7.1 is a small patch over v0.7, not a conceptual redesign. It supersedes v0.5 and v0.6 planning language. Current spatial domain pilot state is summarized in [Layer 3/4 planning workspace](README.md).
 
 ## Purpose
 
@@ -45,12 +43,12 @@ storage_policy:
 
 The fillable template is [Method Execution Planning Record Template v0.7.1](templates/method_execution_planning_record_v0.7.1.md). The compatibility path [method_execution_planning_record_template.md](templates/method_execution_planning_record_template.md) points to the same current template.
 
-The canonical current JSON schema path is [contracts/method_execution_planning_record_v0.7.1.schema.json](../contracts/method_execution_planning_record_v0.7.1.schema.json). The older [contracts/method_execution_planning_record_v0.7.schema.json](../contracts/method_execution_planning_record_v0.7.schema.json) path is retained for compatibility.
+The canonical current JSON schema path is [contracts/method_execution_planning_record_v0.7.1.schema.json](../../contracts/method_execution_planning_record_v0.7.1.schema.json). The older [contracts/method_execution_planning_record_v0.7.schema.json](../../contracts/method_execution_planning_record_v0.7.schema.json) path is retained for compatibility.
 
 Separate v0.7.1-compatible downstream schemas are available for Layer 3 and Layer 4 drafts:
 
-- [contracts/execution_surface_spec_v0.7.1.schema.json](../contracts/execution_surface_spec_v0.7.1.schema.json)
-- [contracts/backend_adapter_spec_v0.7.1.schema.json](../contracts/backend_adapter_spec_v0.7.1.schema.json)
+- [contracts/execution_surface_spec_v0.7.1.schema.json](../../contracts/execution_surface_spec_v0.7.1.schema.json)
+- [contracts/backend_adapter_spec_v0.7.1.schema.json](../../contracts/backend_adapter_spec_v0.7.1.schema.json)
 
 Top-level record shape:
 
@@ -272,7 +270,7 @@ This discussion will define validation plans within stated fixture, seed, versio
 
 ### Phase 6: 8-Method Planning Pilot Walkthrough
 
-The pilot walkthrough applies the preceding planning flow across the sampled methods. It should check method work packages, review gates, record-filling rules, allowed `requires_followup` states, implementation-readiness blockers, and existing BANKSY/SpaGCN status boundaries.
+The pilot walkthrough applies the preceding planning flow across the sampled methods. It should check method work packages, review gates, record-filling rules, allowed `requires_followup` states, implementation-readiness blockers, and the current pilot-state context summarized in [Layer 3/4 planning workspace](README.md).
 
 The current pilot target is planning and documentation readiness. It does not require package imports, minimal fixture runs, output-schema observation from runtime, runtime or memory measurement, provenance emission from runtime, or production support.
 
@@ -394,7 +392,3 @@ The acceptance gate derives three statuses:
 - `production_readiness_status` checks whether runtime support can be claimed.
 
 A method can pass template acceptance while failing implementation readiness. Missing environment check, fixture, runtime measurement, output schema freeze, or symbol-level bindings should block implementation readiness but not necessarily template acceptance. Production readiness must remain `fail` unless actual runtime implementation, validation, and provenance are complete. `ready_for_review` is not a manual label; it requires `template_acceptance_status: pass` or `overall_status: partial_with_known_blockers` with explicit blockers. Invalid YAML, missing required Layer4 sections, broken critical links, unnormalized coordinate/multi-sample/domain-count fields, or production-support claims must block review readiness.
-
-## Pilot Interpretation
-
-BANKSY v0.7.0 is accepted as a Layer3/4 template trial but is not MVP implementation-ready. BANKSY v0.6.1 remains historical stress-test evidence for the protocol only, not a source of current final artifacts and not a production support claim. SpaGCN is the next intended Layer3/4 co-design target after this planning documentation alignment.

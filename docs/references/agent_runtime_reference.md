@@ -8,8 +8,8 @@ Record a working blueprint for how the April 15, 2026 agent-runtime guidance may
 
 This document is a working blueprint and not a current authority document.
 
-- It does not override [docs/15_layer1_method_registry_and_substrate_transition.md](15_layer1_method_registry_and_substrate_transition.md).
-- It does not override [docs/20_tool_taxonomy.md](20_tool_taxonomy.md) or [docs/90_roadmap.md](90_roadmap.md).
+- It does not override [docs/layer1_2/layer1_method_registry_and_substrate_transition.md](../layer1_2/layer1_method_registry_and_substrate_transition.md).
+- It does not override [docs/layer1_2/tool_taxonomy.md](../layer1_2/tool_taxonomy.md) or [docs/layer1_2/layer1_2_to_layer3_4_handoff.md](../layer1_2/layer1_2_to_layer3_4_handoff.md).
 - It does not override the Layer 2 freeze stored as an external NAS artifact at `/mnt/NAS_21T/ProjectData/BioHarness/results/layer2/spatial_domain_identification/2026-04-16_domain_identification_layer2_pilot.md`.
 - It records candidate mapping ideas and blueprint assets that may support later substrate design work if they are explicitly accepted.
 
@@ -70,11 +70,11 @@ Long-running workflows should resume from `RunRecord` state instead of from unbo
 
 The current repository blueprint is intentionally static and planning-oriented:
 
-- [skills](../skills) stores task-level instructions and selection rules
-- [contracts](../contracts) stores public contract schemas and example instances
-- [surface_registry](../surface_registry) stores execution manifests
-- [evals](../evals) stores golden scenarios for regression-style validation
-- [docs/25_harness_architecture.md](25_harness_architecture.md) and [docs/45_task_adapters.md](45_task_adapters.md) describe the planned harness and adapter surface
+- [skills](../../skills) stores task-level instructions and selection rules
+- [contracts](../../contracts) stores public contract schemas and example instances
+- [surface_registry](../../surface_registry) stores execution manifests
+- [evals](../../evals) stores golden scenarios for regression-style validation
+- [docs/substrate/harness_architecture.md](../substrate/harness_architecture.md) and [docs/substrate/task_adapters.md](../substrate/task_adapters.md) describe the planned harness and adapter surface
 
 Only after these static artifacts settle should BioHarness decide whether a runtime package belongs under `src/bioharness_toolchain/runtime`.
 

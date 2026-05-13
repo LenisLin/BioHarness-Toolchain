@@ -243,7 +243,7 @@ def test_authoritative_rows_match_final_merge_decisions(tmp_path):
 
 
 def test_baseline_authority_doc_reflects_current_layer1_state():
-    baseline = Path("docs/15_layer1_method_registry_and_substrate_transition.md").read_text()
+    baseline = Path("docs/layer1_2/layer1_method_registry_and_substrate_transition.md").read_text()
 
     assert "15 analysis problems" in baseline
     assert "140 data rows" in baseline

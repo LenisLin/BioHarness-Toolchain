@@ -6,47 +6,22 @@ Explain how Layer 3 and Layer 4 bridge method selection to reliable execution.
 
 ## Status
 
-This document is a working blueprint. Examples are illustrative and do not freeze a production execution surface, backend adapter, default method, or environment capsule.
+This document is a working blueprint. Examples are illustrative; implementation-backed status belongs in explicit runtime artifacts or accepted implementation records.
 
-Layer 3 and Layer 4 remain separate presentation and runtime layers. During method onboarding, they may be co-designed through the same `MethodExecutionPlanningRecord` as described in [Layer 3/4 Co-design](82_layer3_4_codesign.md).
+Layer 3 and Layer 4 remain separate presentation and runtime layers. During method onboarding, they may be co-designed through the same `MethodExecutionPlanningRecord` as described in [Layer 3/4 Co-design](codesign.md).
 
 ## Spatial Domain Identification Scientific Goal
 
 For the first Layer 3/4 scientific planning case, the goal is to build a traceable planning path for identifying spatially coherent tissue regions or structural domains, from method-repository evidence through Layer 3/4 execution-substrate design.
 
-This goal is planning-scoped. It does not claim that all spatial domain method repositories have completed planning evidence reading, that environment execution checks have been completed, that wrappers or adapters have been implemented, or that runtime outputs establish biological correctness.
+The current planning case is `spatial_domain_identification`. It uses:
 
-The first small-scope planning pilot is defined as:
-
-- task case: `spatial_domain_identification`
 - candidate pool: the NAS `spatial_domain_identification` 27-tool freeze
 - sampling design: pure random sample of 8 methods
 - sampling seed: `20260508`
 - record format: one `MethodExecutionPlanningRecord v0.7.1` per sampled method
-- current deliverable: documentation and planning readiness only
 
-The pilot is organized as a six-phase planning sequence:
-
-1. Repository / Documentation Evidence Reading
-2. Environment Configuration Abstraction
-3. Layer3 Execution Surface Unification
-4. Layer4 Binding / Wrapper / Rewrite Decision
-5. Bounded-Equivalence Validation Plan
-6. 8-Method Planning Pilot Walkthrough
-
-The current documentation pass elaborates Phase 1 and Phase 2. Phases 3-5 remain the next discussion sequence. Phase 6 is the pilot walkthrough that applies the preceding planning flow across the 8 sampled methods.
-
-Phase 1 reads each method repository and author-facing documentation to extract evidence that can support execution design. It is not a paper-quality review. Its core output is a `Repository Evidence Index` covering repository URL, version or commit, license, install-file locations, README/tutorial/notebook locations, package structure, main entrypoints, input objects or files, spatial-coordinate conventions, histology-image requirements, multi-sample or batch support, output-label location, visualization or export paths, example datasets, algorithm-core boundary, and documentation evidence level.
-
-Phase 2 turns install, dependency, runtime, and automation evidence from the `Repository Evidence Index` into environment planning fields, including Python or R versions, CUDA/GPU, torch or tensorflow, AnnData/Scanpy, numpy/scipy, R packages, system libraries, optional dependencies, conflict candidates, shared-capsule candidates, dedicated-capsule risk, and future minimal check targets. This phase forms an environment plan; it does not claim that a capsule is available.
-
-Phase 3 defines a canonical `spatial_domain_identification` execution surface and maps methods to the same scientific action. It covers semantic inputs, semantic parameters, outputs, artifacts, failure and provenance policy, AnnData versus separated matrix/coordinate/image inputs, coordinate source modes, target domain count or resolution, image use, batch or multi-sample policy, clustering backend, agent-visible parameters, and adapter-fixed parameters.
-
-Phase 4 binds each functional coverage point to concrete backend behavior or wrapper responsibility: `input_check`, `method_preprocessing`, `core_structure_building`, `model_fit_or_inference`, `output_assignment`, `artifact_export`, `final_validation`, and `visualization`. Each binding records `backend_bound`, `wrapper_added`, `not_applicable`, or `requires_followup`, and records whether the algorithm core is touched. Algorithm-core changes default to hold or manual review.
-
-Phase 5 defines bounded-equivalence validation plans within stated fixture, seed, version, metric, and tolerance boundaries. Wrapper checks cover schema, label alignment, artifacts, and provenance. Rewrite checks compare original and BioHarness-compatible paths where feasible. Stochastic, deep, or clustering methods should account for label permutation, ARI/NMI/AMI, domain count, no empty domain, and spatial sanity. Visual plausibility is sanity only, not biological correctness.
-
-Phase 6 walks the 8 sampled methods through the preceding planning flow. It checks method work packages, review gates, record-filling rules, allowed `requires_followup` states, implementation-readiness blockers, and the existing BANKSY/SpaGCN status boundaries.
+The full current workflow, six-phase planning sequence, and pilot state are summarized in [Layer 3/4 planning workspace](README.md). This design document focuses on the architectural relationship between the Layer 3 execution surface and the Layer 4 backend binding.
 
 The canonical `spatial_domain_identification` execution surface may be abstracted before an environment exists for every method. Concrete method-to-surface binding is a later step: before a method-specific Layer 4 binding, wrapper, or rewrite moves toward implementation readiness, it should have at least a minimal environment configuration or future check path.
 
@@ -118,7 +93,7 @@ failure_modes:
   - OutputContractViolation
 ```
 
-This example does not freeze SpaGCN as the current default.
+This example is illustrative.
 
 ## Layer 4: Backend Adapter / Wrapper / Rewrite
 

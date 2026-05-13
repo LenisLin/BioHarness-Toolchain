@@ -10,14 +10,7 @@ It defines the boundary between Layer 1 analysis-problem routing, Layer 2 method
 
 This document is authoritative for reusable `Layer 2` structure and process.
 
-It does not freeze:
-
-- topic-specific branch logic
-- topic-specific benchmark whitelists
-- per-tool execution details
-- `Layer 3` execution-surface design
-
-Those remain in topic artifacts or later-phase documents.
+Topic-specific branch logic, benchmark or review whitelists, per-tool execution details, and `Layer 3` execution-surface design remain in topic artifacts or later-phase documents.
 
 ## Layer 1 / Layer 2 Boundary
 
@@ -118,16 +111,16 @@ Working/evidence materials may also track construction and Layer 3 review signal
 - `validation_anchor`
 - `adapter_candidate_status`
 
-`adapter_candidate_status` is a Layer 3 promotion signal, not an implementation claim. Controlled values:
+`adapter_candidate_status` is a Layer 3/4 transition signal, not an implementation claim. In current substrate language, it should be read as a preliminary adaptation-candidate signal. Controlled values:
 
-- `core_anchor`
-- `thin_adapter`
-- `strong_wrapper`
-- `rewrite_candidate`
-- `legacy_capsule`
-- `hold`
+- `core_basic_package`
+- `adapter`
+- `wrapper`
+- `compatibility_rewrite`
+- `algorithmic_rewrite`
+- `exclude`
 
-This signal is preliminary. If a method is promoted after Layer 2 selection, a Layer 3/4 `MethodExecutionPlanningRecord` should refine it into separate Layer 3 surface planning, Layer 4 backend binding, environment assignment, validation requirements, and a documented rewrite decision.
+This signal is preliminary. It does not establish runtime support or implementation priority. If a method is promoted after Layer 2 selection, a Layer 3/4 `MethodExecutionPlanningRecord` should refine it into separate Layer 3 surface planning, Layer 4 backend binding, environment assignment, validation requirements, and a documented adaptation decision. `exclude` means exclusion from the active method base for the current analysis problem; it is not a claim that the method is scientifically invalid.
 
 ## Standard Topic Artifacts
 
@@ -135,18 +128,7 @@ Layer 2 has two artifact classes.
 
 For Layer 1/2 knowledge-registry rendering, enumerate topics from active Layer 1 registry `Analysis Problem` values, then resolve each problem to its current Layer 2 topic package using the active confirmation or reconciliation status mapping. The Layer 2 workspace can contain dated pilot folders alongside current packages; dated pilots keep their own date-specific scope, and the active mapping provides the current package for each `Analysis Problem`. This source-selection rule is Layer 1/2 only.
 
-Working/evidence artifacts support construction, review, and consistency checks. They remain outside the knowledge-registry presentation layer, normally under the non-registry Layer 2 results workspace.
-
-Before a Layer 2 topic Markdown file is generated in `knowledge_registry/layer2`, the corresponding working/evidence materials must include:
-
-- `README.md`
-- `topic_scope.md`
-- `field_registry.json`
-- `method_table.csv`
-- `method_table.md`
-- `method_table.json`
-- `review_decision_tree.md`
-- `closure.md`
+Working/evidence artifacts support construction, review, and consistency checks. They remain outside the knowledge-registry presentation layer, normally under the non-registry Layer 2 results workspace. The current complete topic package and Layer 3/4 handoff gate are defined in [Layer 1/2 to Layer 3/4 handoff](layer1_2_to_layer3_4_handoff.md).
 
 Knowledge-registry artifacts are final agent-facing method-selection files under `knowledge_registry/layer2`. Each completed Analysis Problem should have one Markdown file containing:
 
@@ -235,12 +217,12 @@ The expected `Layer 2` workflow for an Analysis Problem is:
 5. produce the full method table `.csv`, `.md`, and `.json`
 6. run a benchmark/review pass when suitable literature exists, otherwise run a logic review
 7. derive the review decision tree
-8. write topic closure with representative Layer 3/4 audit batch
+8. write topic closure with representative Layer 3/4 planning handoff notes
 9. generate one `knowledge_registry/layer2` topic Markdown with a problem boundary, method feature table, and embedded decision tree
 
-A topic should not be treated as ready for knowledge-registry rendering unless the complete working/evidence package exists. Representative `Layer 3/4` audit handoff should come from the topic closure package and should not be treated as runtime support.
+The complete topic package should exist before knowledge-registry rendering. Representative `Layer 3/4` audit handoff should come from the topic closure package and remain a planning input.
 
-Layer 3 entry review should not become a second independent repository audit. Review and audit concerns should already be handled inside the benchmark/review or logic-review material. For promoted methods, Layer 3 entry should normally start the Layer 3/4 co-design workflow described in [Layer 3/4 Co-design](82_layer3_4_codesign.md), while keeping final Layer 3 and Layer 4 artifacts separate.
+Layer 3 entry review should not become a second independent repository audit. Review and audit concerns should already be handled inside the benchmark/review or logic-review material. For promoted methods, Layer 3 entry should normally start the Layer 3/4 co-design workflow described in [Layer 3/4 Co-design](../layer3_4/codesign.md), while keeping final Layer 3 and Layer 4 artifacts separate.
 
 ## Promotion Rule
 
@@ -261,5 +243,5 @@ This document does not:
 - define benchmark whitelist contents
 - define runtime implementations
 - define execution-surface counts
-- define wrapper or adapter boundaries
+- assign method-specific adaptation levels
 - define final callable signatures

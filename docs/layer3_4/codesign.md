@@ -6,7 +6,7 @@ Clarify how BioHarness keeps Layer 3 and Layer 4 architecturally distinct while 
 
 ## Status
 
-This document is a blueprint. Draft method execution planning records may exist for pilot work, but they do not claim that any production Layer 3 surface, Layer 4 adapter, environment capsule, runtime validator, or rewrite implementation has been implemented.
+This document is a blueprint for the Layer 3/4 co-design workflow. Current pilot state is summarized in [Layer 3/4 planning workspace](README.md).
 
 ## Core Principle
 
@@ -23,7 +23,7 @@ Layer 3 and Layer 4 remain separate presentation/runtime layers, but are derived
 
 `MethodExecutionPlanningRecord v0.7.1` is the current recommended co-design work record for promoted methods. It is a small patch over v0.7, not a conceptual redesign. It is a planning artifact, not a runtime API. It gathers the Layer 2 handoff, canonical surface reference, hard constraints, evidence registry, code mind map, Layer 3 surface draft, Layer 4 adapter draft, independent environment plan, rewrite decision, validation/runtime plan, static/runtime acceptance gates, risk register, decision log, and split acceptance status in one auditable place.
 
-The full protocol is [Layer 3/4 Method Execution Planning Protocol v0.7.1](83_layer3_4_method_execution_planning_protocol.md). A fillable YAML template is [Method Execution Planning Record Template v0.7.1](templates/method_execution_planning_record_v0.7.1.md). The older compatibility template path now points to v0.7.1.
+The full protocol is [Layer 3/4 Method Execution Planning Protocol v0.7.1](method_execution_planning_protocol.md). A fillable YAML template is [Method Execution Planning Record Template v0.7.1](templates/method_execution_planning_record_v0.7.1.md). The older compatibility template path now points to v0.7.1.
 
 `MethodEngineeringAudit` remains useful as a historical or lightweight audit concept. It can capture quick repository/code inspection notes, but the v0.7.1 record is the more complete engineering planning template for current Layer 3/4 method work.
 
@@ -136,22 +136,11 @@ The top-level `acceptance_gate` records `template_acceptance_status`, `implement
 
 ## Repository Placement
 
-- The current protocol lives in [docs/83_layer3_4_method_execution_planning_protocol.md](83_layer3_4_method_execution_planning_protocol.md).
-- The current planning template lives in [docs/templates/method_execution_planning_record_v0.7.1.md](templates/method_execution_planning_record_v0.7.1.md).
-- The v0.7.1 static/implementation/production checklist lives in [docs/templates/layer3_4_v0.7.1_acceptance_checklist.md](templates/layer3_4_v0.7.1_acceptance_checklist.md).
-- Historical or lightweight audit note templates live under [docs/templates](templates).
-- Contract schema blueprints live under [contracts](../contracts).
-- Stable or promoted Layer 3 surface manifests belong under [surface_registry](../surface_registry).
+- The current protocol lives in [method_execution_planning_protocol.md](method_execution_planning_protocol.md).
+- The current planning template lives in [templates/method_execution_planning_record_v0.7.1.md](templates/method_execution_planning_record_v0.7.1.md).
+- The v0.7.1 static/implementation/production checklist lives in [templates/layer3_4_v0.7.1_acceptance_checklist.md](templates/layer3_4_v0.7.1_acceptance_checklist.md).
+- Historical or lightweight audit note templates live under [templates](templates).
+- Contract schema blueprints live under [contracts](../../contracts).
+- Stable or promoted Layer 3 surface manifests belong under [surface_registry](../../surface_registry).
 - Layer 4 adapter blueprints currently belong in `BackendAdapterSpec` schemas/examples or a future implementation-facing registry when a reviewable implementation-facing draft is needed.
-- Method-specific intermediate co-design packs, including audits, review packs, draft surfaces, adapter drafts, and environment notes, must live in the external NAS results workspace unless a higher-authority project document promotes them into repo state. Live method audit packs are NAS artifacts. Project docs describe the process, not the live intermediate outputs.
-
-The presence of a draft planning record, audit, surface, adapter spec, or rewrite decision is not an implementation claim.
-
-Current pilot reference:
-
-- BANKSY v0.7.0 accepted template-trial target: `/mnt/NAS_21T/ProjectData/BioHarness/results/layer3_4/spatial_domain_identification/BANKSY/v0.7.0/`
-- BANKSY v0.6.1 recovery package: historical failed/stress-test material only.
-- BANKSY source retrieval outputs: `/mnt/NAS_21T/ProjectData/BioHarness/results/layer3_4/spatial_domain_identification/banksy/`
-- Next intended co-design target after the v0.7.1 patch: SpaGCN.
-
-These pilot artifacts are evidence for co-design validation only. They do not freeze a production Layer 3 surface, Layer 4 adapter, environment capsule, runtime validator, or runtime-cost claim. BANKSY is not MVP implementation-ready, and SpaGCN is not complete.
+- Method-specific intermediate co-design packs, including audits, review packs, draft surfaces, adapter drafts, and environment notes, normally live in the external NAS results workspace unless a project document promotes them into repo state.

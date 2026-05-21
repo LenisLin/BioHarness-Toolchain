@@ -24,12 +24,14 @@ This directory is the main documentation entry point for BioHarness-Toolchain. S
 
 ## Layer 3/4
 
-- [Layer 3/4 workspace](layer3_4/README.md): Current Layer 3/4 planning workspace and reading order.
-- [Layer 3 and Layer 4 design](layer3_4/layer3_layer4_design.md): Relationship between execution surfaces and backend bindings.
-- [Layer 3/4 co-design](layer3_4/codesign.md): Workflow for deriving linked Layer 3 and Layer 4 artifacts.
-- [Method execution planning protocol](layer3_4/method_execution_planning_protocol.md): `MethodExecutionPlanningRecord v0.7.1` protocol.
-- [Spatial domain entry example](layer3_4/spatial_domain_entry_example.md): Lightweight spatial domain Layer 3 entry example.
-- [Layer 3/4 templates](layer3_4/templates/): Planning templates and acceptance checklist.
+- [Layer 3/4 execution scheme](layer3_4/README.md): Current Layer 3/4 reading order and status boundary.
+- [Parent functions](layer3_4/parent_functions.md): How promoted Layer 1 analysis problems become strict Layer 3 parent functions.
+- [Environment](layer3_4/environment.md): Method environment abstraction, capsule integration, and probe/readiness boundaries.
+- [Layer 4 support](layer3_4/layer4_support.md): Core package, adapter, wrapper, rewrite, capsule, and hold support strategy.
+- [Evaluation](layer3_4/evaluation.md): Bounded native-behavior comparison and readiness evidence.
+- [Storage and runtime](layer3_4/storage_and_runtime.md): NAS, runtime, artifact, evidence, and storage-boundary conventions.
+- [Stage integration](layer3_4/stage_integration/): Post-code-reading same-feature workflow for package audit, targeted supplemental reading, parent-function extraction, Gate 1 alignment, three downstream planning files, Gate 2 downstream planning review, Gate 2 human review table, and later execution/build records.
+- [Layer 3/4 templates](layer3_4/templates/): Current compact templates and acceptance checklist.
 
 ## References
 

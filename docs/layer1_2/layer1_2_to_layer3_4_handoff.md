@@ -4,7 +4,7 @@
 
 Describe how Layer 1/2 knowledge artifacts provide the evidence package for Layer 3/4 execution planning.
 
-Layer 1 routes a task to an `Analysis Problem`. Layer 2 organizes method-selection evidence for that problem. The handoff step carries the selected method context, constraints, and execution-relevant signals into a `MethodExecutionPlanningRecord` for Layer 3/4 planning.
+Layer 1 routes a task to an `Analysis Problem`. Layer 2 organizes method-selection evidence for that problem. The handoff step carries the selected method context, constraints, and execution-relevant signals into Layer 3/4 execution-scheme planning and the relevant downstream planning records.
 
 ## Handoff Position
 
@@ -45,7 +45,7 @@ Before an Analysis Problem moves into `knowledge_registry/layer2` method-selecti
 
 The complete topic package precedes knowledge-registry rendering. The Layer 2 output is one agent-facing Markdown file per completed Analysis Problem. That file should contain a problem boundary, a method feature table, and an embedded decision tree.
 
-Crossing into Layer 3 means the topic is eligible for execution-surface planning, environment-profile consideration, Layer 3/4 contract drafting, adaptation review, and validation planning. It does not by itself establish runtime support, adapter availability, or production readiness. Once promoted, a method can enter a `MethodExecutionPlanningRecord` that produces separate Layer 3 and Layer 4 drafts from the same repository and code inspection.
+Crossing into Layer 3 means the topic is eligible for execution-surface planning, environment-profile consideration, Layer 3/4 contract drafting, adaptation review, and validation planning. It does not by itself establish runtime support, adapter availability, or production readiness. Once promoted, a method can enter Layer 3/4 execution-scheme planning that creates or updates separate downstream planning records for parent-function fit, Layer4 bridge planning, environment integration planning, and functional testing planning.
 
 ## Handoff Contents
 
@@ -71,20 +71,20 @@ Execution-relevant hard constraints should be carried forward as separate planni
 - multi-sample policy
 - minimum dataset assumptions
 
-## MethodExecutionPlanningRecord Field Range
+## Layer 3/4 Planning Range
 
-Layer 1/2 handoff contributes the selected-method context and hard constraints to `MethodExecutionPlanningRecord v0.7.1`. It should inform:
+Layer 1/2 handoff contributes selected-method context and hard constraints to Layer 3/4 execution-scheme planning. It should inform:
 
-- `layer2_to_layer3_handoff`
-- `hard_constraints_for_layer3`
-- `canonical_surface_reference`
-- `environment_plan`
-- `rewrite_decision`
-- `validation_runtime_plan`
-- `risk_register`
-- `decision_log`
+- parent-function target
+- strict input-contract constraints
+- strict output-contract constraints
+- environment planning inputs
+- Layer 4 support signals
+- bounded native-behavior evaluation requirements
+- downstream planning record fields
+- open planning questions and repair targets
 
-Layer 3/4 planning then resolves repository evidence, code evidence, execution-surface mapping, backend binding, environment planning, bounded-equivalence validation, and readiness gates inside the planning record. Where the protocol uses `rewrite_decision`, that field should be interpreted within the current adaptation-policy vocabulary.
+Layer 3/4 planning then resolves repository evidence, code evidence, parent-function fit, backend support strategy, environment planning, bounded evaluation, storage boundaries, review stages, and Gate 2 named-next-step decisions. Adaptation decisions should use the current adaptation-policy vocabulary: `core_anchor`, `thin_adapter`, `strong_wrapper`, `compatibility_rewrite`, `algorithmic_rewrite`, `legacy_capsule`, or `hold`.
 
 ## Evidence Translation
 
@@ -102,8 +102,8 @@ This translation keeps method-selection reasoning traceable while giving executi
 
 ## Deferred Evidence Questions
 
-The exact amount of repository, documentation, and runnable-code evidence required before a method becomes an implementation candidate remains a post-research decision. Until that threshold is frozen in a topic artifact or current project document, Layer 3/4 handoff should distinguish method-selection evidence from implementation readiness.
+The exact amount of repository, documentation, and runnable-code evidence required before a method becomes an implementation candidate remains a post-research decision. Until that threshold is frozen in a topic artifact or current project document, Layer 3/4 handoff should distinguish method-selection evidence from entry into implementation/build as a Gate 2-reviewed named next step.
 
 ## Current Spatial Domain Use
 
-For `spatial_domain_identification`, the current handoff path uses the NAS topic evidence and the repo Layer 1/2 registry context to support a small Layer 3/4 planning pilot. The pilot uses the `MethodExecutionPlanningRecord v0.7.1` protocol described in [Method execution planning protocol](../layer3_4/method_execution_planning_protocol.md) and the current Layer 3/4 workspace summary in [Layer 3/4 planning workspace](../layer3_4/README.md).
+For `spatial_domain_identification`, the current handoff path uses the NAS topic evidence and the repo Layer 1/2 registry context to support Layer 3/4 execution-scheme planning. The current Layer 3/4 entry points are [Layer 3/4 execution scheme](../layer3_4/README.md), [Stage integration](../layer3_4/stage_integration/README.md), and [Gate 2 downstream planning review](../layer3_4/stage_integration/downstream_planning_review.md).

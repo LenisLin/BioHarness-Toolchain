@@ -12,7 +12,7 @@ The first vertical remains spatial transcriptomics downstream analysis. Work out
 
 ## Layer Responsibilities
 
-Layer 1 owns analysis-problem and task-family routing. It helps the agent identify the kind of downstream analysis being requested. Layer 1 registry inclusion does not imply core candidacy, execution readiness, stable surface status, or rewrite priority.
+Layer 1 owns analysis-problem and task-family routing. It helps the agent identify the kind of downstream analysis being requested. Layer 1 registry inclusion does not imply core candidacy, executable status, stable surface status, or rewrite priority.
 
 Layer 2 owns concrete method knowledge for a task family: method comparison, selection rules, assumptions, and topic-specific decision trees. Layer 2 does not define callable runtime interfaces, backend bindings, or final execution defaults.
 
@@ -40,7 +40,7 @@ Layer 4 owns concrete backend adapters, wrappers, compatibility rewrites, or alg
 - Replacing workflow engines such as Nextflow or Snakemake.
 - Treating MCP-style tool schemas as execution guarantees.
 - Claiming biological correctness from runtime success alone.
-- Treating Layer 1 registry inclusion as implementation readiness.
+- Treating Layer 1 registry inclusion as implementation-candidate status.
 - Freezing topic-specific Layer 2 decisions into Layer 3 execution defaults before the documented gate is complete.
 - Maintaining every upstream package option as an agent-facing parameter.
 

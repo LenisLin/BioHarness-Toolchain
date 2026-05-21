@@ -23,7 +23,7 @@ BioHarness separates four concerns that are often mixed together during ad hoc t
 | Layer 3 | Define the stable execution surface after method selection. | `ExecutionSurfaceSpec` or equivalent surface manifest. | Execution planning, not backend internals. |
 | Layer 4 | Bind the surface to concrete backend code, wrappers, capsules, or rewrites. | `BackendAdapterSpec`, adapter, wrapper, rewrite, or implementation record. | Concrete implementation layer. |
 
-Layer 1 and Layer 2 are knowledge layers. They organize what kind of analysis is being requested and which method family or method is scientifically appropriate. They do not define commands, callable signatures, environment bindings, backend adapters, or implementation readiness.
+Layer 1 and Layer 2 are knowledge layers. They organize what kind of analysis is being requested and which method family or method is scientifically appropriate. They do not define commands, callable signatures, environment bindings, backend adapters, or entry into implementation.
 
 Layer 3 is the first machine-readable execution-planning layer. It should express the stable semantic action available after method selection: expected inputs, bounded parameters, expected outputs, validation expectations, provenance expectations, and typed failure behavior.
 
@@ -35,7 +35,7 @@ Layer 4 is the implementation-facing layer. It records how a selected surface is
 
 Layer 1 routes an incoming request to an `Analysis Problem` or task family. Its purpose is to keep the first routing choice compact and scientifically meaningful.
 
-Layer 1 registry inclusion records that a method or task family exists in the current evidence base. It does not imply core candidacy, execution readiness, stable-surface status, or rewrite priority.
+Layer 1 registry inclusion records that a method or task family exists in the current evidence base. It does not imply core candidacy, executable status, stable-surface status, or rewrite priority.
 
 ### Layer 2
 

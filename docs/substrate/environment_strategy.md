@@ -6,7 +6,7 @@ This document defines the environment strategy for the BioHarness compute substr
 
 The purpose is to make scientific-tool execution depend on preassembled and reviewable runtime environments rather than on ad hoc package installation, version repair, or dependency inference by an agent during task execution. In the intended substrate, the agent or harness selects a bounded execution surface and an associated environment profile. The compute side receives that selection and runs it inside an environment that is expected to carry the required dependency stack, resource assumptions, artifact policy, logging behavior, and failure-reporting path.
 
-This document describes the intended design direction. It does not replace method-specific engineering records, lockfiles, Dockerfiles, environment probes, fixture runs, or validation reports.
+This document describes the intended design direction. It does not replace method-specific engineering records, lockfiles, Dockerfiles, Install-Load evidence, fixture runs, or validation reports.
 
 ## Environment Strategy For Compute
 
@@ -22,7 +22,7 @@ Environment work should start from the individual method repository rather than 
 
 This method-first pass preserves the original execution assumptions before BioHarness attempts to consolidate them. It should identify the main runtime shape, such as Python, R, mixed R/Python, script-based execution, notebook-based execution, container-only execution, CPU execution, GPU execution, or an unclear route. For spatial transcriptomics, this pass will often separate broad environment families such as scverse-style Python workflows, Seurat-oriented R workflows, Bioconductor-oriented workflows, image-heavy workflows, deep-learning workflows, and reporting or artifact-generation workflows. It should also identify whether optional paths are part of the core workflow or only support plotting, clustering, reporting, image utilities, bridges between languages, or acceleration.
 
-The result of this phase is not a BioHarness runtime claim. It is an environment assembly view for the method: a compact description of what the upstream project appears to require and which parts need later confirmation through environment construction, import probes, fixture runs, or implementation review.
+The result of this phase is not a BioHarness runtime claim. It is an environment assembly view for the method: a compact description of what the upstream project appears to require and which parts need later confirmation through environment construction, import/load checks, fixture runs, or implementation review.
 
 ## Minimum-Common-Denominator Consolidation
 
@@ -31,6 +31,8 @@ After method-specific assembly, BioHarness should compare methods within the sam
 The runtime families identified during method-first assembly become the input to this comparison. Some methods may fit a shared environment after dependency comparison. Others may require a dedicated environment because of old package pins, CUDA constraints, incompatible language bridges, system libraries, or backend-specific runtime assumptions.
 
 The consolidation step should prefer the smallest environment that supports the intended task path. Optional paths should be evaluated separately from the core path. A method that uses an optional R bridge, GPU extra, image dependency, or visualization backend should not force that dependency into a shared environment unless it is part of the intended execution surface.
+
+For a specific analysis problem, a planning package may choose a consolidated-first Install-Load policy. This is not a global one-environment architecture. Fallback Runtime Profiles should be evidence-driven after Install-Load review or impossible documented constraints.
 
 ## Profile And Capsule Design
 

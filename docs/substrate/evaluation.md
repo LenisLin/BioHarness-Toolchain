@@ -40,7 +40,7 @@ Layer 1 to Layer 2 handoff validation should preserve the scientific object, tar
 
 Layer 2 to Layer 3/4 handoff validation should preserve the selected analysis problem, Layer 2 route, decision-tree branch, candidate method or method family, selection caveats, hard constraints, and unresolved review items needed for execution-surface planning.
 
-Handoff validation should use representative prompt, policy, template, or future-skill scenarios. The next stage should receive the context it needs without adding unsupported claims about execution readiness, environment availability, adapter availability, or production support.
+Handoff validation should use representative prompt, policy, template, or future-skill scenarios. The next stage should receive the context it needs without adding unsupported claims about executable support, environment availability, adapter availability, or production support.
 
 ## Layer 3 Execution-Surface Validation
 

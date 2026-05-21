@@ -120,7 +120,11 @@ Working/evidence materials may also track construction and Layer 3 review signal
 - `algorithmic_rewrite`
 - `exclude`
 
-This signal is preliminary. It does not establish runtime support or implementation priority. If a method is promoted after Layer 2 selection, a Layer 3/4 `MethodExecutionPlanningRecord` should refine it into separate Layer 3 surface planning, Layer 4 backend binding, environment assignment, validation requirements, and a documented adaptation decision. `exclude` means exclusion from the active method base for the current analysis problem; it is not a claim that the method is scientifically invalid.
+This signal is a preliminary Layer 2-to-Layer 3/4 transition signal. It records a proposed handling category for later planning only. It does not establish runtime support, a Gate 2-reviewed next step, or implementation priority.
+
+If a method remains in scope after Layer 2 selection, Layer 3/4 execution-scheme planning should create or update the relevant downstream planning records for parent-function fit, Layer4 bridge planning, environment integration planning, and functional testing planning. Gate 2 human review then reviews the current in-scope filled planning records and assigns review results, named next steps, and planned next-step record paths.
+
+`exclude` means exclusion from the active method base for the current analysis problem or current planning pass. It is not a claim that the method is scientifically invalid in general.
 
 ## Standard Topic Artifacts
 
@@ -222,7 +226,7 @@ The expected `Layer 2` workflow for an Analysis Problem is:
 
 The complete topic package should exist before knowledge-registry rendering. Representative `Layer 3/4` audit handoff should come from the topic closure package and remain a planning input.
 
-Layer 3 entry review should not become a second independent repository audit. Review and audit concerns should already be handled inside the benchmark/review or logic-review material. For promoted methods, Layer 3 entry should normally start the Layer 3/4 co-design workflow described in [Layer 3/4 Co-design](../layer3_4/codesign.md), while keeping final Layer 3 and Layer 4 artifacts separate.
+Layer 3 entry review should not become a second independent repository audit. Review and audit concerns should already be handled inside the benchmark/review or logic-review material. For promoted methods, Layer 3 entry should normally start the Layer 3/4 execution-scheme workflow described in [Layer 3/4 execution scheme](../layer3_4/README.md), while keeping final Layer 3 and Layer 4 responsibilities separate.
 
 ## Promotion Rule
 

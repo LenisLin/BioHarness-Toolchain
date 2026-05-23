@@ -40,10 +40,10 @@ Current stage integration uses a three-layer storage model for environment plann
 ```text
 /mnt/NAS_21T/ProjectData/BioHarness/results/layer3_4/runtime_environment_selection.tsv
 /mnt/NAS_21T/ProjectData/BioHarness/results/layer3_4/<analysis_problem>/stage_integration/
-/mnt/NAS_21T/ProjectData/BioHarness/results/layer3_4/<analysis_problem>/runtime_artifacts/environment_builds/<environment_branch>/
+/mnt/NAS_21T/ProjectData/BioHarness/results/layer3_4/<analysis_problem>/runtime_artifacts/environment_builds/<environment_build_output_key>/
 ```
 
-`runtime_environment_selection.tsv` is a lightweight engineering selection index, not a build manifest. It should contain these columns:
+`runtime_environment_selection.tsv` is a lightweight engineering selection index, not a build manifest. It is updated only from successful reviewed environment build outputs. Failed branches are evidence only and are excluded from downstream-selectable rows. It should contain these columns:
 
 ```text
 analysis_problem
@@ -54,11 +54,13 @@ harness_environment_yaml
 compatibility_note
 ```
 
-It does not record status, build history, event logs, or rollback history.
+It does not record status, build history, event logs, rollback events, or rollback history.
 
-`<environment_branch>/` uses the path-safe human-readable branch key for the analysis problem, such as `SDI_base`.
+Row replacement or removal for existing `environment_branch` values must follow the Reviewed Output State Policy in the filled environment integration planning record or reviewed addendum.
 
-The environment branch output directory contains:
+For successful environment outputs, prefer using the reviewed `environment_branch` value as `<environment_build_output_key>`, such as `SDI_base` or `SDI_BANKSY`. The same key should appear in `harness_environment.yaml.environment_branch`, the conda prefix path, and `runtime_environment_selection.tsv`.
+
+The environment build output directory contains:
 
 ```text
 harness_environment.yaml
@@ -76,7 +78,7 @@ Environment planning packages should use semantic names rather than numbered rea
 environment_integration_planning_<date>/
 ```
 
-Such packages may contain Text Anchors, environment branches, selected dependency boundaries, Conda Build Specs, step-by-step Environment Build Plans, rollback/split responses, and pointers to reviewed environment build outputs. They are planning or reviewed build records, not runtime support claims.
+Such packages may contain Text Anchors, environment build targets, selected dependency boundaries, Conda Build Specs, step-by-step Environment Build Plans, rollback/split responses, and pointers to reviewed environment build outputs. They are planning or reviewed build records, not runtime support claims.
 
 ## Runtime Layout
 

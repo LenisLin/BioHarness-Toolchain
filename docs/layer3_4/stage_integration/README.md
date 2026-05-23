@@ -24,7 +24,9 @@ Feature-level stage integration consumes the evidence packages
        -> method-to-parent Layer4 bridge planning
        -> environment integration planning
             -> Environment Text Compatibility Triage
-            -> environment branch planning
+            -> Method Dependency Groups
+            -> Environment Assembly Order and Split Triggers
+            -> analysis-problem-level environment build planning by default
             -> Environment Build Plan
        -> functional testing planning
   -> Gate 2 downstream planning review
@@ -50,7 +52,9 @@ Gate 2 human review output records which current in-scope planning items enter p
 
 Environment and validation locator gaps should be closed before downstream execution planning. Parent-function and Layer4 code-centric questions may still trigger targeted supplemental reading after audit when they are tied to a specific stage or bridge planning record. Runtime, download, environment build/check, and author-case actions remain outside repository reading and use the next steps assigned by Gate 2 downstream planning review.
 
-Environment integration planning occurs during downstream execution planning before Gate 2. It includes Environment Text Compatibility Triage, environment branch planning, selected dependency boundaries, and an Environment Build Plan. Gate 2 reviews filled environment integration planning records and records the review result plus assigned step through the Gate 2 human review table. Environment build execution occurs when a reviewed environment integration planning item has `approved_for_next_step` and Gate 2 assigns `environment_build_execution`. The reviewed build output directory must contain the core outputs `harness_environment.yaml`, `environment_build.yaml`, and `environment_build.jsonl`.
+Gate 1 execution surfaces are the human-reviewed analysis-problem-scale surface set; downstream planning integrates that result.
+
+Environment integration planning occurs during downstream execution planning before Gate 2. It includes Environment Text Compatibility Triage, Method Dependency Groups, selected dependency boundaries, Environment Assembly Order, Split Triggers, and one analysis-problem-level Environment Build Plan by default. Gate 2 reviews filled environment integration planning records and records the review result plus assigned step through the Gate 2 human review table. Environment build execution occurs when a reviewed environment integration planning item has `approved_for_next_step` and Gate 2 assigns `environment_build_execution`. The reviewed build output directory must contain the core outputs `harness_environment.yaml`, `environment_build.yaml`, and `environment_build.jsonl`.
 
 `harness_environment.yaml` is the reviewed environment binding record, `environment_build.yaml` is the pure conda YAML for reproducibility, and `environment_build.jsonl` records actual environment build events in reviewed plan step order.
 

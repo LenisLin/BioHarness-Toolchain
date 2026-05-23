@@ -7,7 +7,7 @@ Layer 3/4 is not a continuation of Layer 2 method comparison. It is the executio
 ## Reading Order
 
 1. [Parent functions](parent_functions.md): rules for extracting stage-level Layer 3 parent functions within a feature after same-feature evidence alignment.
-2. [Environment](environment.md): environment branch planning, reviewed environment build output, and runtime boundary.
+2. [Environment](environment.md): environment build planning, reviewed environment build output, and runtime boundary.
 3. [Layer 4 support](layer4_support.md): how adapters, wrappers, compatibility rewrites, algorithmic rewrites, or hold routes support Layer 3 planning.
 4. [Evaluation](evaluation.md): bounded comparison against native method behavior and readiness evidence.
 5. [Storage and runtime](storage_and_runtime.md): NAS, conda/runtime, artifact, evidence, and storage-boundary conventions.
@@ -15,6 +15,8 @@ Layer 3/4 is not a continuation of Layer 2 method comparison. It is the executio
 7. [Repository reading package](repository_reading/): reusable workflow, reader prompts, review templates, localization rules, and NAS pointer conventions for method repository evidence assembly.
 8. [Stage integration](stage_integration/): post-code-reading same-feature workflow for package audit, targeted supplemental reading, parent-function extraction, Gate 1 alignment, three downstream planning files, Gate 2 downstream planning review, Gate 2 human review table, environment build execution, Layer3/Layer4 build output, author-case execution, and bridge replay evidence.
 9. [Templates](templates/): compact templates and checklists for parent-function candidates, downstream planning records, Gate 2 review, and acceptance checks.
+
+Use `templates/workflow_invocation_prompt_template.md` when preparing a new Codex-window prompt for a specific Layer3/4 workflow phase and Analysis Problem.
 
 ## Status Boundary
 

@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Layer 3/4 environment design turns method-specific author-visible environment evidence into Text Anchors, environment branches, Environment Build Plans, and reviewed environment build output.
+Layer 3/4 environment design turns author-visible environment evidence into Text Anchors, Method Dependency Groups, an analysis-problem-level Environment Build Plan by default, and reviewed environment build output.
 
 Environment planning is part of the execution scheme. It does not by itself establish runtime support.
 
@@ -23,25 +23,31 @@ For each method support design, record the author-visible runtime shape:
 
 The result is environment planning evidence, not an executable environment claim.
 
-## Environment Branches
+## Environment Build Planning
 
-Environment branches are path-safe human-readable host conda environment keys for one analysis problem. They organize selected dependency boundaries and compatible methods before Gate 2 review.
+Pre-Gate2 environment planning records Text Anchors, selected core and optional dependency boundaries, Method Dependency Groups, analysis-problem-level assembly order, planned checks, failure responses, split triggers, and required outputs.
 
-Use `<analysis_problem_code>_<branch_label>` for the branch key where practical. For example, `SDI_base` can identify the base branch for spatial domain identification. Natural-language role descriptions belong in branch role or compatibility notes, not in the path key.
+Environment build planning is analysis-problem-level by default. Method-specific dependency evidence is organized into Method Dependency Groups so each method's dependency sources, selected core path, optional path, and risk evidence remain reviewable without becoming one output target per method.
 
-Environment branch planning should identify:
+Environment build planning may name a path-safe Environment Build Target for reviewed execution/output organization. Use `<analysis_problem_code>_<build_target_label>` where practical. For example, `SDI_environment_build_plan` can identify the current spatial-domain-identification initial build target. Natural-language role descriptions belong in build-target role or compatibility notes, not in the path key.
+
+An Environment Build Target is the reviewed execution/output target for an Environment Build Plan. It is not a default per-method object, and it is not created merely because a method has dependency evidence.
+
+Environment build planning should identify:
 
 - Text Anchors and source/config locators;
 - selected core dependency boundaries;
 - gated optional dependency boundaries;
-- Layer3 interface targets that the branch is intended to serve;
+- Layer3 interface targets that the build target is intended to serve;
+- assembly order and planned build/load checks;
+- failure response and Split Triggers;
 - the reviewed output path for later environment build execution.
 
-Static dependency risk alone does not justify a final hold or branch split. A stronger split or hold decision requires reviewed build output, impossible dependency constraints, or another explicit implementation-backed reason.
+Split Triggers record text-evidence risks such as version, language, GPU/CUDA, or R-bridge conflicts during planning. Actual split decisions require reviewed implementation/environment build evidence, impossible documented constraints, or later review. Static dependency risk alone does not justify a final hold, branch split, output path, or per-method environment target.
 
 ## Environment Build Plan
 
-An Environment Build Plan is the Gate-2-reviewable plan for host conda environment assembly, update, and planned load checks.
+An Environment Build Plan is the Gate-2-reviewable plan for host conda environment assembly, update, and planned load checks for the reviewed Environment Build Target.
 
 It should define the Conda Build Spec, step-by-step build instructions, rollback and split response, and required environment build outputs:
 
@@ -59,7 +65,7 @@ The current stage integration workflow supports host conda environment build/upd
 
 Reviewed environment build output is produced only after Gate 2 approves a filled environment integration planning record and assigns `environment_build_execution`.
 
-`harness_environment.yaml` is the reviewed environment binding record for downstream engineering workflows. Later Layer3/Layer4 build, author-case execution, bridge replay, and validation planning may reference the reviewed environment binding record (`harness_environment.yaml`) or the reviewed environment build output path instead of unreviewed environment records.
+`harness_environment.yaml` is the reviewed environment binding record for downstream engineering workflows. The `environment_branch` field name is kept inside this future file as a reviewed binding key produced after environment build execution; it is not a pre-Gate2 text-derived branch. Later Layer3/Layer4 build, author-case execution, bridge replay, and validation planning may reference the reviewed environment binding record (`harness_environment.yaml`) or the reviewed environment build output path instead of unreviewed environment records.
 
 Formal harness presentation is resolved later and should not rely on agent-side YAML inference.
 

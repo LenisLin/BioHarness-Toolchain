@@ -14,8 +14,8 @@ Gate 2 downstream planning review for functional testing planning checks whether
 
 - Parent-function / execution-surface candidates.
 - Method-to-parent Layer4 bridge hypotheses.
-- Environment integration planning outputs.
-- Reviewed environment binding record (`harness_environment.yaml`) or required reviewed environment build output path when already available from an earlier reviewed pass.
+- Environment integration planning outputs, including the analysis-problem-level planned Environment Build Target.
+- Reviewed environment binding record (`harness_environment.yaml`) or required reviewed environment build output path when already available from an earlier reviewed pass. Pre-Gate2 functional planning should reference the planned analysis-problem-level environment build target from environment integration planning.
 - Docs/Workflow reader outputs listing original repository cases/tutorials/vignettes/examples.
 - Author Case Asset Locator Table from Output/Validation Reader.
 - Output/Validation runtime-observation needs.
@@ -72,6 +72,10 @@ Execution target planning records the planned author-case/native workflow or bri
 
 Functional testing planning items should identify the method, author case or tutorial target, covered parent function(s), reviewed environment binding record (`harness_environment.yaml`) or required reviewed environment build output path, required Layer3/Layer4 build output when BioHarness bridge replay is planned, expected output for contract check, open planning question if any, evidence output path, and evidence boundary.
 
+The required environment output should identify the planned environment build target for the analysis problem, or the reviewed environment build output path when it already exists.
+
+Pre-Gate2 functional testing planning must not infer method-specific environment bindings, `environment_branch` values, or method-specific `harness_environment.yaml` paths from text evidence. Method-specific environment bindings can be referenced only after reviewed environment build output exists or later review creates a separate target.
+
 `Required Layer3/Layer4 Build Output` should point to `build_output_result.yaml` and, when relevant, `build_audit.yaml` from `layer3_layer4_build.md`. Bridge replay should not start from bridge planning alone.
 
 ## Validation Planning Seed
@@ -90,6 +94,8 @@ Functional testing planning items should identify the method, author case or tut
 `Consistency Review Roles` should use stable role names such as `agent`, `primary_human`, and `secondary_human`.
 
 This table is a pre-Gate2 planning record. It does not record observed outputs, runtime metrics, consistency judgments, BioHarness validation evidence, runtime support, production readiness, or final support status.
+
+Pre-Gate2 rows should not infer method-specific environment branches from text evidence.
 
 ## Blocked Case Handling
 
@@ -116,7 +122,7 @@ After integration-readiness audit closure, functional testing planning should no
 
 Targeted supplemental reading during functional testing planning is allowed only when it starts from an existing locator and answers a stage-specific, bridge-specific, or expected-behavior question needed to select or interpret an author case. If the missing information is a basic asset locator, route it back to audit closure rather than treating it as downstream functional-test planning.
 
-If a case is blocked by missing environment support, record the required reviewed environment binding record (`harness_environment.yaml`) or required reviewed environment build output path and point to the relevant environment integration planning item, or request targeted environment planning repair. Environment build execution is entered through the Gate 2 human review table for the environment integration planning item.
+If a case is blocked by missing environment support, record the required reviewed environment binding record (`harness_environment.yaml`) or the planned/reviewed analysis-problem-level environment build output path and point to the relevant environment integration planning item, or request targeted environment planning repair. Environment build execution is entered through the Gate 2 human review table for the environment integration planning item.
 
 When the reviewed environment binding/build output is missing, functional testing planning records the blocker only. It must not execute conda, author cases, or method workflows.
 

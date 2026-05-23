@@ -26,23 +26,40 @@
 - [ ] Execution/build records are separate evidence records.
 - [ ] Environment integration planning manifests do not claim installation, solve, import/load, or runtime execution.
 - [ ] Environment text triage is inside environment integration planning, not a new Gate.
-- [ ] Environment branch keys are path-safe and human-readable.
-- [ ] `environment_branch` uses a path-safe human-readable key such as `<analysis_problem_code>_<branch_label>`.
-- [ ] Analysis-specific base is recorded without hardcoding one domain's base globally.
-- [ ] Native / Source Evidence Routing Table uses only `include`, `exclude`, `defer`, `compare_only`, or `out_of_scope` for `Action For This Branch`.
-- [ ] Exclude-from-branch is not method exclusion from BioHarness.
+- [ ] Pre-Gate2 default environment planning is analysis-problem-level, not one build target per method.
+- [ ] Pre-build environment planning records reviewed Layer3 parent-function / method-route binding scope, not final callable paths.
+- [ ] Final Layer3 callable paths are produced later by `layer3_layer4_build` in `build_output_result.yaml`.
+- [ ] Method Dependency Groups organize method evidence and are not treated as Environment Build Targets.
+- [ ] Method Dependency Groups do not receive `harness_environment.yaml` output paths before reviewed build evidence or later review creates a separate target.
+- [ ] Environment build target keys are path-safe and human-readable.
+- [ ] Pre-Gate2 environment build targets are not described as reviewed until Gate 2 approves the planning item.
+- [ ] `environment_branch` records the reviewed path-safe environment binding key after build execution.
+- [ ] Environment branch names describe compatible method scope using `<analysis_problem_code>_base`, `<analysis_problem_code>_<METHOD>`, or a reviewed method-set key.
+- [ ] Analysis-specific build target naming is recorded without hardcoding one domain's base globally.
+- [ ] Method Dependency Group and assembly-order rows preserve include, defer, compare-only, handled-elsewhere, optional, and out-of-scope boundaries without treating them as BioHarness method exclusion.
 - [ ] Evidence pointers include the reader artifact and source config locator when available.
 - [ ] GPU, CUDA, and hardware constraints are separated as environment build uncertainty.
 - [ ] No install, solve, import/load, build execution, or runtime support claim is made from text triage.
+- [ ] Text evidence does not determine environment branch splits.
+- [ ] Split triggers do not create output paths before reviewed build evidence or later review.
+- [ ] Environment build planning records assembly order and split response.
+- [ ] Environment build plans include load-check attribution units before execution.
+- [ ] Package-level isolation checks are required when a check unit fails.
+- [ ] Branch split requires reviewed build evidence, impossible documented constraints, or re-review.
 - [ ] Environment execution uses the Gate 2-reviewed filled environment integration planning record.
 - [ ] Environment execution uses the assigned step, output path, and Gate 2 human review table.
+- [ ] Environment build execution has a reviewed Output State Policy before existing outputs/prefixes are deleted, overwritten, archived, or appended.
 - [ ] Environment integration planning includes an Environment Build Plan.
 - [ ] Environment build output directory contains `harness_environment.yaml`, `environment_build.yaml`, and `environment_build.jsonl`.
 - [ ] `harness_environment.yaml` is a reviewed environment binding record, not final agent-facing UI.
-- [ ] `harness_environment.yaml` uses minimal fields and BioHarness Layer3 interface paths.
+- [ ] `harness_environment.yaml` uses minimal fields and BioHarness Layer3 binding scope/interface language.
+- [ ] If `harness_environment.yaml` retains `layer3_interface_paths`, the field is not used for native repo paths, source config locators, tutorials, reader artifacts, or pre-build final `callable_path` claims.
 - [ ] `environment_build.yaml` is pure conda YAML without default `prefix:`.
 - [ ] `environment_build.jsonl` records engineering build events only.
 - [ ] `runtime_environment_selection.tsv` has `analysis_problem`, `environment_branch`, `compatible_methods`, `conda_prefix`, `harness_environment_yaml`, and `compatibility_note`.
+- [ ] Successful environment branches are reflected in `runtime_environment_selection.tsv`.
+- [ ] Successful environment outputs use the same branch key in output path, conda prefix, `harness_environment.yaml`, and `runtime_environment_selection.tsv`.
+- [ ] Invocation prompts remain thin and do not define phase execution policy.
 - [ ] Formal harness presentation is later than engineering implementation/review workflows.
 - [ ] Environment planning files do not record actual conda execution results.
 - [ ] Environment execution files do not run method workflows or claim parent-function support.
@@ -72,7 +89,7 @@
 - [ ] Critical backend entrypoints are identified.
 - [ ] Critical parameter mappings are identified.
 - [ ] Critical output mappings are identified.
-- [ ] Required environment branches, Conda Build Specs, step-by-step Environment Build Plans, rollback/split responses, and reviewed build output paths are specified before environment build execution.
+- [ ] The required initial Environment Build Target, Conda Build Spec, step-by-step Environment Build Plan, rollback/split responses, and reviewed build output path are specified before environment build execution; additional split targets are specified only after reviewed build evidence or later review creates them.
 - [ ] Author-case functional testing plan exists, or blocked/deferred author cases are recorded with evidence.
 - [ ] Synthetic or minimal BioHarness-created fixtures are not used as substitutes for blocked author cases in the current functional-testing stage.
 - [ ] Output-contract observation plan exists.

@@ -6,7 +6,7 @@ The Environment Config Reader locates repository-visible dependency and configur
 
 It builds a configuration inventory, records author-stated language, package, platform, GPU, R bridge, and system-library version constraints, and records visible optional runtime paths.
 
-This reader does not judge installability, define environment branches, approve environment build execution, create reviewed environment build outputs, create Gate 2-reviewed environment integration planning records, produce runtime evidence, or claim production readiness from static configuration evidence.
+This reader does not judge installability, define environment build targets, approve environment build execution, create reviewed environment build outputs, create Gate 2-reviewed environment integration planning records, produce runtime evidence, or claim production readiness from static configuration evidence.
 
 ## Subagent Prompt
 

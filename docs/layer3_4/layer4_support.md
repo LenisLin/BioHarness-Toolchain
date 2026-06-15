@@ -40,6 +40,28 @@ Layer 3 defines the standard semantic contract. Layer 4 defines how a concrete b
 
 Backend-specific objects, slots, package functions, scripts, tensors, file layouts, and parameter names belong in Layer 4. Their presence is expected and should not widen the parent-function interface.
 
+Backend-specific runtime boundaries also belong in Layer 4. A Layer4 binding should record the package family, language bridge, import order, native-library policy, and backend smoke path required by the reviewed route. These details remain implementation-facing and should not widen the Layer 3 public interface.
+
+Layer 4 support is forward-producing support. An adapter, wrapper, compatibility rewrite, or algorithmic rewrite must satisfy the Layer 3 parent-function contract by producing the current surface's strict output from the reviewed input contract and allowed prior-surface state.
+
+A same-surface target output, or a method-native equivalent of that target output, cannot be required as pre-existing input evidence for successful support of that same surface.
+
+An `adapter` is appropriate when a reviewed native action already performs the parent-function action. Layer4 work aligns the public execution-surface interface to that native action through object conversion, field mapping, parameter mapping, output normalization, or file materialization. The adapter preserves the source-reviewed native action and produces the current surface output through the reviewed input contract and allowed prior-surface state.
+
+A `wrapper` is appropriate when the parent-function action is produced by composing one or more reviewed native calls. The wrapper implements the source-observed call flow needed for the current surface, including native signatures, call order, return objects, consumer patterns, mutations, private state, and artifacts. The wrapper uses Layer4 binding glue to connect the reviewed native calls to the public execution-surface contract.
+
+A `compatibility_rewrite` is appropriate when bounded implementation work supports import paths, API drift, dependency compatibility, object conversion, package layout, or integration glue while preserving the reviewed native scientific path.
+
+An `algorithmic_rewrite` is appropriate when implementation work includes reviewed changes to scientific-output-determining logic. It carries explicit reviewed scope, comparison target, and validation plan before implementation.
+
+A route that only reads a target output that was already produced outside the current surface is post-hoc extraction, not successful Layer 4 support for that surface.
+
+Layer4 support is established only when the implemented route creates the current parent-function strict output through the reviewed native composition or reviewed rewrite path, with signature binding, private state policy, strict output mapping, and result selection policy recorded where applicable.
+
+For adapter and wrapper routes, implementation evidence should show how the binding follows the source-reviewed native action or source-observed native call flow. Binding glue may normalize objects, unpack native return containers, map fields, materialize files, and carry private state across surfaces when those steps connect the reviewed native path to the Layer3 contract.
+
+Backend-private state may remain Layer4-private, but required private state must have a reviewed source or prior-surface handoff. Placeholder state, empty native objects, or weakened fallback substitutes are not successful Layer4 support when they alter scientific-output-determining behavior.
+
 Layer4 support planning should distinguish three cases:
 
 - native input/output shape differs from the standard contract but can be mapped without changing the scientific meaning;
@@ -71,10 +93,16 @@ For downstream planning review, every required parent-function stage in a select
 
 A method does not need to support every confirmed parent function. Unsupported stages should be explicitly marked as not applicable, internal, deferred, held, or excluded with rationale. Required stages for a selected method path must not be silently omitted.
 
-No required stage should be silently omitted. Critical unresolved backend entrypoints, output mappings, or parameter mappings should trigger planning repair or block entry into the corresponding Layer4 build named next step.
+Every required stage receives an explicit handling route. Before Gate 2 approval, unresolved backend entrypoints, output mappings, parameter mappings, or source behavior trigger targeted planning repair or return to the relevant review step.
+
+After Gate 2 approval, source-understanding gaps inside the reviewed route are build work. The build executor continues localized source reading, confirms native signatures, source-observed call flow, return objects, consumer patterns, private state, and artifacts, then adjusts the adapter, wrapper, or reviewed rewrite implementation inside the reviewed route. A row completes when the implemented route produces the current surface output with recorded signature binding, private state policy, strict output mapping, state handoff, and result selection policy where applicable.
 
 ## Rewrite Boundary
 
 Interface standardization is expected. It may include input conversion, parameter normalization, output mapping, logging, artifact handling, provenance capture, and typed failure translation.
 
 Compatibility rewrites target non-core execution or integration code. Algorithmic rewrites touch scientific-output-determining logic and require explicit scope, comparison targets, validation plans, and review before implementation.
+
+Small compatibility changes for API drift, import paths, dependency aliases, package layout, object conversion, file/cache layout, and integration glue are compatibility rewrites when the reviewed native scientific path is unchanged.
+
+If the change affects graph construction, image feature construction, model fitting, loss functions, inference, clustering, post-processing, stochastic behavior, or numerical CPU/GPU behavior, route it for stronger review as a possible algorithmic rewrite.

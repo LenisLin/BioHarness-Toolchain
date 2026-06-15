@@ -31,11 +31,61 @@ Use one row per `method x parent-function` mapping where possible. The table may
 
 If bridge planning shows that a promoted execution-surface boundary is unstable or backend-shaped, the Gate 2 review status for the affected planning record should be `return_to_gate1` rather than silently redefining the parent function.
 
+## Build-Ready Implementation Contract Table
+
+For rows intended for `layer3_layer4_build`, bridge planning should record the implementation contract needed by the build executor.
+
+Bridge planning should preserve source/control cues needed for build-time Layer3-M config generation. It does not freeze concrete Layer3-M variable names, default values, or binding targets.
+
+| Method | Parent Function | Gate 1 Alignment Route | Native Call Sequence | Native Call Sites | Source Locators | Signature Binding | Canonical Input Or Prior-State Source | Private State Policy | Strict Output Mapping | Artifact Policy | Result Selection Policy | Method-Chain State Handoff | Compatibility Rewrite Handoff Candidate | Gate 2 Readiness |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+
+Wrapper rows require a concrete native call sequence and call sites. Rows that select among native result rows, labels, clusters, embeddings, or fitted outputs require a result selection policy. Structure-producing rows require a private state policy and strict output mapping.
+
+The build-ready implementation contract identifies enough native call sites and source locators for the later build executor to open the original implementation, confirm signatures, inspect return values and mutations, and bind private state/output behavior.
+
+`Source Locators` must identify a concrete source evidence root or an explicitly named source-root field, plus repo-relative file paths and function, class, script section, or call-site anchors when available. If a filled planning artifact uses shorthand paths, it must define the base root in the same artifact. Source locators must not depend on the executor's current working directory, prompt location, or implicit path inference.
+
+Workflow-like source files, scripts, or notebook-exported files may be source locators when they contain reviewed native call sites. Recording such files as source locators authorizes source reading and wrapper composition of reviewed native functions, classes, or call-site logic; it does not authorize running data-bound author workflows during Layer3/Layer4 build.
+
+A wrapper row names the native calls that perform the current parent-function action, along with the prior-surface state consumed and the strict output produced.
+
+For methods with multi-surface execution, bridge planning records native action ownership across the method chain. A scientific-output-determining native action should have one owner surface in the reviewed chain. Later surfaces may consume the owner surface's private state or public strict output, but should not re-execute the same output-determining native action unless the planning record explicitly documents that the repeated call is non-output-determining, idempotent, and required by the native API boundary.
+
+If the same fitting, training, MCMC, clustering, postprocessing, label-assignment, or other output-determining native action appears necessary in more than one surface, the row should return to planning repair rather than entering `layer3_layer4_build` as ready.
+
+A structure-producing row records private state policy and strict output mapping. A result-producing row records result selection policy. A method with multi-surface execution records method-chain state handoff across rows.
+
+Private state policy must identify the reviewed source or prior-surface handoff for private state required to produce the strict output. If bridge planning cannot identify a reviewed source for private or prior state that appears scientific-output-determining, the row should return to the relevant review/planning repair path rather than entering `layer3_layer4_build` as ready.
+
+When a method requires an optional spatial image payload for scientific-output-determining behavior, the build-ready implementation contract records the ST image alignment contract. Valid image sources are canonical image-aware AnnData fields, external morphology image records with reviewed provenance, or reviewed prior-surface state.
+
+For image-aware routes, the ST image alignment contract records:
+
+- `platform_family`: `Visium | Xenium | other | unknown`;
+- `spatial_coordinate_semantics`: spot, cell, bin, array, physical, image-pixel, or unknown;
+- `coordinate_source`: AnnData field or reviewed prior state;
+- `image_source`: AnnData spatial image, external morphology image, or reviewed prior state;
+- `image_key_or_resolution`: `fullres | hires | lowres | morphology_pyramid_level | other`;
+- `image_shape`;
+- `coordinate_to_image_transform_evidence`;
+- `patch_or_image_state_handoff`.
+
+For Visium image-aware routes, if the route uses `hires` or `lowres` images and the coordinates are in the full-resolution pixel frame, Layer 4 must scale coordinates with the matching `tissue_hires_scalef` or `tissue_lowres_scalef`. `array_row` and `array_col` must not be used as image crop coordinates unless reviewed mapping evidence exists.
+
+For Xenium image-aware routes, the contract must not assume Visium scalefactor semantics. When morphology image patches are output-determining, the contract requires Xenium morphology image coordinate or physical-to-pixel transform evidence.
+
+For other platforms, the contract records coordinate semantics. Missing H&E or morphology alignment evidence is not by itself a blocker unless the reviewed route selects an image payload as scientific-output-determining behavior.
+
+A compatibility rewrite handoff candidate states the non-core compatibility issue handed to build, such as import path drift, API drift, dependency compatibility, object conversion, package layout, or integration glue. Source changes that affect scientific-output-determining logic are represented through reviewed `algorithmic_rewrite` scope.
+
 ## Bridge Planning Output
 
 This file produces pre-Gate2 `layer4_bridge_planning` evidence. It identifies the required mapping work, route issues, blockers, and validation needs for each reviewed `method x parent-function` route.
 
-Bridge planning does not produce Layer3 / Layer4 build output. If Gate 2 assigns `layer3_layer4_build` to a reviewed bridge planning item, the post-Gate2 build workflow in `layer3_layer4_build.md` produces `build_output_result.yaml` and `build_audit.yaml`.
+Bridge planning records reviewed instance facts for later build: method x surface route, native call evidence, source locators, source/control cues for build-time Layer3-M config generation, required mapping work, private-state policy, strict output mapping, artifact policy, result selection policy, method-chain handoff, compatibility rewrite handoff candidates, reviewed output roots, and build-required or held status. It does not define Layer3/Layer4 build completion, verifier cadence, publication gating, completion matrix schema, per-row YAML schema, or downstream selectability rules; those are defined by `layer3_layer4_build.md` and the completion verifier prompt.
+
+Bridge planning does not produce Layer3 / Layer4 build output. If Gate 2 assigns `layer3_layer4_build` to a reviewed bridge planning item, the post-Gate2 build workflow in `layer3_layer4_build.md` produces root `layer3_layer4_build_completion_matrix.tsv`, per-row `build_output_result.yaml`, per-row `build_audit.yaml`, callable import evidence, route-level backend load evidence, and verifier-confirmed action-path closure evidence under the current `layer3_layer4_build.md` workflow.
 
 Bridge planning should make clear whether the later build needs object conversion, parameter mapping, output extraction, artifact handling, filesystem policy, environment binding, failure translation, validation hooks, or provenance hooks.
 
@@ -66,6 +116,8 @@ A semantic output mismatch should not be converted into an adapter, wrapper, or 
 If bridge planning depends on unresolved source behavior, record a supplemental reading request through `supplemental_reading.md` before forming a stronger support hypothesis.
 
 Do not use unresolved source behavior to justify a stronger adapter, wrapper, rewrite, or hold route.
+
+After Gate 2 approval, source reading continues inside `layer3_layer4_build` for implementation details inside the reviewed route. Bridge planning leaves enough call-site and source-locator evidence for build execution to continue from the reviewed method path.
 
 Environment constraints are context for bridge planning. They are not support proof and do not by themselves establish that a method can execute through the proposed bridge.
 

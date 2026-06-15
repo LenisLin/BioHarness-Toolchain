@@ -62,6 +62,8 @@ Before creating or updating the conda prefix, execution must record the chosen P
 - PyG version or PyG install route;
 - PyG extension package install route and variant when extension packages such as `torch_scatter`, `torch_sparse`, `torch_cluster`, `torch_spline_conv`, or `pyg_lib` are required.
 
+For selected PyTorch/PyG methods whose reviewed path includes training, fitting, or embedding learning, execution builds and checks the reviewed CUDA PyTorch/PyG target when host GPU evidence is available. The evidence records the observed GPU, driver/CUDA runtime family, PyTorch CUDA build, PyG extension package variants, and `torch.cuda.is_available()`.
+
 If a valid official PyTorch/PyG bundle cannot be selected before prefix creation, execution must stop before creating or updating any base or branch conda prefix. It must not create base or branch evidence from a mismatched PyTorch/PyG environment, and it must not use later single-method branch creation to bypass an invalid base ABI bundle.
 
 After installing the selected PyTorch/PyG ABI bundle, execution must run and record an ABI bundle load check before installing or updating other high-risk dependency families. When later conda, mamba, or pip operations install R stacks, native libraries, image libraries, TensorFlow-family packages, compiled extensions, or other large dependency families into the same prefix, execution must re-run and record the PyTorch/PyG ABI bundle load check after that update.
@@ -85,22 +87,30 @@ Before creating or updating the conda prefix, execution must record the chosen R
 
 If a valid `R >=3.6` runtime cannot be selected before prefix creation for an R-dependent branch, execution must stop before creating or updating that branch prefix. It must not create base or branch evidence that claims compatibility with R-dependent methods from an `R <3.6` environment.
 
+### Seurat API Compatibility Check
+
+For Seurat-backed methods, execution records the resolved Seurat and SeuratObject versions and runs the reviewed API-family check for the selected method path.
+
+The check covers the selected V4-style `slot` path, V5-style `layer` path, or reviewed method compatibility helper.
+
 ### Clean Base Assembly And Failure Escalation
 
-Environment build execution must treat base environment assembly as the first reviewed target when the Environment Build Plan defines a base branch. A first solve, install, import, or load failure is not by itself evidence that methods are incompatible in the base environment.
+Environment build execution is repair-first. It must treat base environment assembly as the first reviewed target when the Environment Build Plan defines a base branch. A first solve, install, import, library-load, bridge-load, or compiled-component failure is not a terminal result and is not by itself evidence that methods are incompatible.
 
-When a failed or partial prefix is covered by the Reviewed Output State Policy for delete, overwrite, or rebuild, execution must not continue iterative package experiments inside that failed prefix. It must create the next attempt from a clean prefix and record the covered cleanup or rebuild behavior in `environment_build.jsonl`.
+When a failed or partial prefix is covered by the Reviewed Output State Policy for delete, overwrite, or rebuild, execution must not continue iterative package experiments inside that failed prefix. It must create the next attempt from a clean prefix and record only the evidence needed to support the next repair, branch, rewrite-handoff, or held-out decision.
 
-Before creating branch evidence from a failed base attempt, execution must first run package-level or dependency-family-level attempts inside the reviewed dependency boundary. These attempts may include relaxing an incorrect hard pin into a reviewed lower bound or reviewed range, changing install order, using a reviewed flexible resolution policy, explicitly resolving a native or system library dependency exposed by the solver, and rerunning package-level isolation checks.
+Before writing held-out evidence or final branch evidence from a failed base attempt, execution must first attempt repair inside the reviewed dependency boundary. Repair attempts may include package-manager route changes, install-order changes, relaxing an incorrect hard pin into a reviewed lower bound or range, ABI bundle reselection, explicitly resolving native/system libraries exposed by the solver, package-level isolation, or dependency-family repair.
 
 The escalation order for covered failures is:
 
-1. package-level or dependency-family attempt inside the reviewed dependency boundary;
-2. reviewed branch creation only after evidence shows the base cannot support the relevant compatible method scope;
-3. compatibility rewrite handoff candidate when the remaining failure is an API, import path, package layout, object conversion, or glue-code compatibility issue;
-4. failed or held-out evidence when success would require an unreviewed dependency, source reference, method scope, optional path, data download, downstream execution, code rewrite, algorithmic rewrite, or Layer3 binding scope.
+1. repair the base environment inside the reviewed dependency boundary when a concrete package-level or dependency-family repair is available;
+2. create a reviewed clean environment branch when execution evidence shows the base cannot support the relevant compatible method scope, then retry installation and load checks inside that branch;
+3. continue package-manager, pin, ABI, install-order, or dependency-family repair inside the reviewed branch while the remaining failure is still an environment configuration problem;
+4. record a `compatibility_rewrite` handoff candidate when the remaining failure is API drift, import-path drift, package layout, object conversion, file/cache layout, or integration glue and the reviewed scientific path is unchanged;
+5. route to possible `algorithmic_rewrite` when the remaining fix may touch scientific-output-determining logic;
+6. write failed or held-out evidence only when success would require unreviewed dependency scope, source references, methods, optional paths, data download, workflow execution, code changes during environment build, algorithmic rewrite, or Layer3 binding-scope expansion.
 
-Environment build execution must not use branch creation to bypass a solvable package-level or dependency-family conflict in the base environment. Compatibility rewrite candidates are handoff evidence only and must not be implemented during environment build execution.
+Environment build execution must not use branch creation to bypass a solvable package-level or dependency-family conflict in the base environment. Branch creation is a repair mechanism for reviewed compatible method scope, not an audit goal. Compatibility rewrite candidates are handoff evidence only and must not be implemented during environment build execution.
 
 Environment build execution must not implement adapters, wrappers, compatibility rewrites, or algorithmic rewrites.
 
@@ -126,6 +136,27 @@ Package- or library-level isolation results must be used first to decide whether
 
 Combined import/load checks are summary checks after attributable check units, not the evidence source for branch assignment.
 
+### Native Backend Load Evidence
+
+For an `adapter` or `wrapper` route, the method check unit must include the selected native backend entry required by the reviewed Layer4 binding.
+
+For adapter and wrapper routes, route-level backend load checks verify that the selected backend package, module, R library, reviewed source-package component, or compiled component can be loaded as an environment dependency.
+
+The selected load target must be bounded and import-safe. Prefer package imports, module imports, R library loads, package metadata checks, compiled-component checks, or syntax/bytecode parsing for script locators that are source evidence only.
+
+Workflow drivers, author-case scripts, tutorial commands, data-loading scripts, training commands, and whole-method orchestration scripts are not default backend load targets. If such a script contains top-level execution behavior, record it as source evidence and defer callable extraction, guarding, or rewrite to Layer3/Layer4 build.
+
+Use these route-level check requirements:
+
+| Layer4 route family | Required environment check for method compatibility |
+| --- | --- |
+| `adapter` / `wrapper` | Import or load the selected bounded backend package, module, R library, reviewed source-package component, or compiled component used by the Layer4 binding. For R/Rcpp backends, include `library(<package>)` or a reviewed source-package build/load equivalent, plus compiled-code load evidence when compiled code is part of the selected path. |
+| `compatibility_rewrite` / `algorithmic_rewrite` | If a reviewed rewrite implementation already exists in the approved build scope, import or load the rewritten callable/module and retained native components. If no reviewed rewrite implementation exists yet, environment build records the retained dependency load evidence and rewrite handoff boundary, then stops before code modification or compatibility claim. |
+
+A planned rewrite route does not require environment build execution to invent or import a callable that has not yet been implemented by a reviewed Layer3/Layer4 build.
+
+Dependency-family load checks support environment assembly. Method compatibility requires route-level backend load evidence for the selected Layer4 route.
+
 ## Required Outputs
 
 The `Output Path` directory must contain the core environment build outputs below. Any branch output created under a Reviewed Branch Policy must contain the same three files in its branch output directory:
@@ -150,13 +181,27 @@ environment_branch:
 conda_prefix:
 compatible_methods:
   - method:
-    layer3_interface_paths:
+    consumable_surface_scope:
+      - <execution surface name>
+    route_level_backend_load_evidence:
+      route_family: adapter | wrapper | compatibility_rewrite | algorithmic_rewrite
+      selected_backend_entry:
+      load_or_import_check:
+      compiled_component_check:
+      evidence_path:
+    held_surfaces:
+      - surface:
+        reason:
 compatibility_note:
 ```
 
-`layer3_interface_paths` identifies the reviewed BioHarness Layer3 binding scope available to the environment record. Before `build_output_result.yaml` exists, it may refer to the reviewed parent-function / method-route binding scope rather than final callable paths. It is not the original repository path, tutorial path, source config path, reader artifact, native method path, or a final `callable_path` claim before Layer3/Layer4 build output exists.
+`consumable_surface_scope` lists only BioHarness execution surfaces that the environment branch can support for downstream build, replay, or validation. It uses exact surface names only.
 
-`compatible_methods` lists the method scope supported by the successful final event for that environment branch.
+`route_level_backend_load_evidence` records the native backend package, module, source-package, or rewrite callable load evidence used to decide method compatibility.
+
+`held_surfaces` records reviewed surfaces retained in the denominator but not consumable from this environment branch.
+
+`compatible_methods` lists the method scope supported by the successful final event for that environment branch. A method enters this scope only when its reviewed route-level backend load check has passed for the selected Layer4 route. Dependency-family load success and source locator availability may be recorded as evidence, but method compatibility is derived from route-level backend load evidence.
 
 ### environment_build.yaml
 

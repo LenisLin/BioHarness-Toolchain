@@ -4,9 +4,7 @@
 
 This file defines Layer3 / Layer4 build for a Gate 2-reviewed `layer4_bridge_planning` item whose assigned step is `layer3_layer4_build`.
 
-Layer3 / Layer4 build may create or modify implementation files. Its main output is a harness-usable build output that describes the Layer3 execution surface, Layer4 backend binding, implementation files, runtime entry, and import experiment for the reviewed method path.
-
-This workflow produces `build_output_result.yaml` as the main output and `build_audit.yaml` as a small boundary audit. It does not run author cases, produce functional validation evidence, or establish final support status.
+Layer3 / Layer4 build is a completion-directed implementation/build stage. The workflow, outputs, verifier, completion report, and build-specific acceptance checklist for this stage are defined by the `layer3_layer4_*` files in the Template Index.
 
 ## Inputs
 
@@ -14,178 +12,69 @@ This workflow produces `build_output_result.yaml` as the main output and `build_
 - Gate 1-reviewed parent function / execution surface.
 - Method-to-parent Layer4 bridge planning file.
 - Gate 1 planning-level alignment route.
-- Parent-function standard contract, including canonical input, strict main output, semantic parameters, typed preflight failures, typed output-contract failures, validation expectations, and provenance expectations.
-- Backend entrypoints, native input/output shape, mapping notes, and blockers from repository-reading and bridge planning.
+- Parent-function standard contract, including canonical input, strict main output, semantic parameters, typed failures, validation expectations, and provenance expectations.
+- Reviewed build-ready implementation contract for each build-required row.
+- Repository-reading package, localized source files, or source locators referenced by reviewed native call sites.
+- Reviewed compatibility rewrite handoff candidates when environment build or planning identifies bounded source changes for import, API, dependency, object-conversion, package-layout, or glue-code compatibility.
 - Reviewed environment binding record (`harness_environment.yaml`) or reviewed environment build output path when relevant.
 - Storage/runtime conventions for implementation files, build outputs, import evidence, and evidence paths.
+
+## Template Index
+
+- `docs/layer3_4/stage_integration/layer3_layer4_build_templates/layer3_layer4_build_workflow.md`: build loop, implementation-start checks, lifecycle trace, closure inspection, and import boundary.
+- `docs/layer3_4/stage_integration/layer3_layer4_build_templates/layer3_layer4_anti_surrogate_audit.md`: action-path anti-surrogate audit rules consumed by build closure inspection and completion verification.
+- `docs/layer3_4/stage_integration/layer3_layer4_build_templates/layer3_method_config_template.md`: Layer3-M config template produced during build.
+- `docs/layer3_4/stage_integration/layer3_layer4_build_templates/layer3_layer4_method_subagent_prompt.md`: method-level implementation subagent prompt and handoff requirements.
+- `docs/layer3_4/stage_integration/layer3_layer4_build_templates/layer3_layer4_build_outputs.md`: package layout record, dispatch log, completion matrix, per-row `build_output_result.yaml`, and downstream consumption boundary.
+- `docs/layer3_4/stage_integration/layer3_layer4_build_templates/layer3_layer4_build_audit_outputs.md`: lightweight audit output shapes for anti-surrogate evidence, method-chain lifecycle trace, publication index sanity, and per-row `build_audit.yaml`.
+- `docs/layer3_4/stage_integration/layer3_layer4_build_templates/layer3_layer4_completion_verifier_prompt.md`: method/global verifier prompt and verdict format.
+- `docs/layer3_4/stage_integration/layer3_layer4_build_templates/layer3_layer4_completion_report.md`: completion report fields.
+- `docs/layer3_4/stage_integration/layer3_layer4_build_templates/layer3_layer4_acceptance_checklist.md`: derived acceptance checklist.
 
 ## Build Boundary
 
 Allowed build actions:
 
-- create or modify Layer3 callable binding;
-- create or modify Layer4 adapter, wrapper, compatibility rewrite, or algorithmic rewrite implementation within the reviewed route;
+- create or modify Layer3 callable bindings;
+- generate method-level `layer3_method_config.yaml`;
+- create or modify Layer4 adapter, wrapper, compatibility rewrite, or algorithmic rewrite implementations within the reviewed route;
+- implement config channel from Layer3 callable into method-owned Layer4 binding;
 - implement object conversion, parameter mapping, output extraction, artifact handling, filesystem policy, environment binding, failure translation, validation hooks, and provenance hooks;
-- run bounded import experiments under the reviewed environment binding record (`harness_environment.yaml`) or reviewed environment build output path.
+- record `config_consumption` evidence;
+- read the reviewed repository-reading package and localized source files needed to confirm native signatures, source-observed call order, return objects, consumer patterns, mutations, private state, artifacts, and source-level behavior;
+- compose reviewed native functions, classes, or script sections located in workflow-like source files, when they are used as source-confirmed call sites inside the implementation rather than executed as data-bound author workflows;
+- implement runtime-only compatibility glue inside the reviewed route when preservation evidence is recorded;
+- implement reviewed compatibility or algorithmic rewrite handoff candidates when they stay inside the reviewed route and preserve or explicitly review scientific-output-determining logic;
+- dispatch method-level implementation subagents and collect method-level implementation evidence when the invocation assigns method subagents;
+- run callable import checks, route-level backend load checks, and required selected bridge smoke checks under the reviewed environment binding record (`harness_environment.yaml`) or reviewed environment build output path;
+- for rows whose reachable Layer4 path crosses a language runtime, object-conversion boundary, backend initialization wrapper, package helper API, or runtime-only compatibility glue, record a selected bridge smoke check that enters the implemented Layer4 path and reaches the first selected native/glue boundary when feasible;
+- prepare method-level verifier handoff records and the draft publication package for global completion verification;
+- run independent read-only completion verification using `docs/layer3_4/stage_integration/layer3_layer4_build_templates/layer3_layer4_completion_verifier_prompt.md`.
 
-Forbidden build actions:
+Build scope boundary:
 
-- change the Gate 1 parent-function boundary;
-- change the Gate 1 planning-level alignment route;
-- use synthetic, minimal, toy, or BioHarness-created input objects;
-- run author cases, tutorials, vignettes, examples, repository fixtures, or validation fixtures;
-- download case data, model assets, or validation data;
-- run backend method workflows;
-- interpret biological outputs;
-- claim runtime support, functional correctness, final support status, production readiness, algorithmic equivalence, or biological correctness.
+Layer3 / Layer4 build stays within the reviewed Gate 1 parent-function boundary, Gate 1 planning route, and Gate 2 assignment.
 
-## Output 1: build_output_result.yaml
+Build evidence uses reviewed source locators, reviewed environment evidence, implementation files, config production and consumption evidence, callable import checks, route-level backend load checks, selected bridge smoke-check evidence, and lifecycle trace evidence. Evidence class separation, lifecycle trace checks, action-path closure inspection, import boundaries, and workflow repair loops are defined in `docs/layer3_4/stage_integration/layer3_layer4_build_templates/layer3_layer4_build_workflow.md`.
 
-`build_output_result.yaml` is the main build output. It records the harness-usable result of the Layer3 / Layer4 build.
+Source locators, environment evidence, callable import checks, backend load checks, lifecycle prose, and output observations support build confirmation; action-path closure comes from the registered Layer3 callable reaching the Layer4 implementation actions recorded for the row and passing the anti-surrogate audit defined in `docs/layer3_4/stage_integration/layer3_layer4_build_templates/layer3_layer4_anti_surrogate_audit.md`.
 
-Use this YAML shape:
+Selected bridge smoke checks are build-stage compatibility evidence. They verify that the implemented Layer4 bridge path can initialize the selected backend/API boundary under the reviewed invocation and is not immediately blocked by import-path drift, API drift, object-conversion failure, package helper API drift, or backend initialization failure. They do not establish runtime completion, strict-output production on validation data, author-case success, method-harness success, functional correctness, algorithmic equivalence, biological correctness, or production readiness.
 
-```yaml
-build_output_result:
-  analysis_problem:
-  method:
-  parent_function:
-  gate1_planning_route:
+Runtime execution evidence, author-case evidence, bridge replay evidence, validation evidence, data-localization evidence, and biological interpretation belong to their reviewed downstream phases.
 
-  layer3_execution_surface:
-    surface_api:
-      name:
-      file:
-      callable_path:
-    input_contract:
-    main_output:
-    semantic_parameters:
-    preflight_failures:
-    output_failures:
-    validation_expectations:
-    provenance_expectations:
-    agent_visibility:
+Build reports state the evidence produced in this phase and reserve runtime support, functional correctness, final support status, production readiness, algorithmic equivalence, and biological correctness for later reviewed evidence.
 
-  layer4_backend_binding:
-    binding_name:
-    backend_binding_file:
-    backend_entrypoints:
-    native_input_output_shape:
-    input_conversion:
-    parameter_mapping:
-    output_extraction:
-    artifact_handling:
-    filesystem_policy:
-    environment_binding:
-    failure_translation:
-    validation_hooks:
-    provenance_hooks:
+## Completion Definition
 
-  implementation_files:
-    repo_files:
-    changed_files:
-    notes:
+Completion status is determined jointly by the build workflow, output contract, and completion verifier. `downstream_selectable`, publication gating, completion matrix fields, YAML records, lifecycle trace records, and completion report fields are defined in the Template Index documents.
 
-  runtime_entry:
-    environment_ref:
-    registration_file:
-    import_path:
-    runtime_requirements:
+A `layer3_layer4_build` invocation is complete only after final publication with global verifier `PASS` and publication-index sanity `pass`.
 
-  import_experiment:
-    run:
-    environment_ref:
-    result:
-    evidence_path:
-    failure_route:
+`FAIL_WITH_REPAIRS` is an internal builder repair-loop signal, not a completed invocation outcome, not a permitted fallback package status, and not a reason for the main implementation window to stop after implementation-start checks have passed. The executor must route each `FAIL_WITH_REPAIRS` packet back to the affected method subagent or final collation step, apply or assign the repair, rerun the affected implementation/check/verifier path, and continue the loop.
 
-  next_evidence_needed:
-    environment_build_output:
-    author_case_execution:
-    bridge_replay:
-    validation:
-
-  boundary_checks:
-    synthetic_or_minimal_inputs_used: false
-    author_case_execution_run: false
-    method_workflow_run: false
-    data_download_run: false
-```
-
-`surface_api` is the built or declared Layer3 callable API for the reviewed parent function. It is not a backend API and must not expose backend-private controls.
-
-`surface_api.file` may point to a NAS draft surface file or to a repo surface file only if a current authority has promoted that file into repo state.
-
-`layer4_backend_binding.backend_binding_file` may point to a BackendAdapterSpec, adapter binding record, or equivalent implementation-facing file.
-
-`runtime_entry.environment_ref` should preferentially point to a reviewed environment binding record (`harness_environment.yaml`) or reviewed environment build output path. It should not imply that an agent directly reads YAML to decide the environment.
-
-`import_experiment.evidence_path` should point to the NAS evidence path for the import experiment.
-
-## Output 2: build_audit.yaml
-
-`build_audit.yaml` is a small boundary audit. It is not the main build output.
-
-Use this YAML shape:
-
-```yaml
-build_audit:
-  gate2_review:
-  bridge_plan:
-  gate1_surface:
-  environment_ref:
-
-  reviewed_build_scope:
-    method:
-    parent_function:
-    gate1_planning_route:
-
-  boundary_checks:
-    gate1_parent_function_changed: false
-    gate1_planning_route_changed: false
-    synthetic_or_minimal_inputs_used: false
-    author_case_execution_run: false
-    method_workflow_run: false
-    data_download_run: false
-
-  import_experiment:
-    run:
-    result:
-    evidence_path:
-    failure_route:
-
-  build_output_result:
-  implementation_files:
-  non_claims:
-  next_evidence_needed:
-```
-
-## Import Experiment Boundary
-
-Import experiments are allowed only under the reviewed environment binding record (`harness_environment.yaml`) or reviewed environment build output path.
-
-Allowed import experiments may import the BioHarness implementation module, callable registration path, adapter or wrapper registration path, or backend import through the adapter.
-
-Import experiments must not construct input objects, run backend method workflows, run author cases, download data, replace reviewed environment build execution/output, or establish functional correctness.
-
-If import fails because of dependency, runtime, or package-load behavior, route the issue to reviewed environment build output review or environment planning repair.
-
-If import fails because of adapter module path, registration, or BioHarness wrapper code, route the issue to build repair.
-
-If import failure exposes a parent-function boundary or Gate 1 planning-route issue, route the issue to `return_to_gate1`.
-
-## Evidence Boundary
-
-Layer3 / Layer4 build output can support later harness or runtime loading and later BioHarness bridge replay.
-
-Layer3 / Layer4 build output does not establish native author-case success, BioHarness bridge replay success, runtime support, functional correctness, final support status, production readiness, algorithmic equivalence, or biological correctness.
+After implementation-start checks pass, stopping without `PASS` is allowed only for `STOP_BEFORE_IMPLEMENTATION`, unavailable method-subagent dispatch, external interruption, or a documented contradiction with the reviewed Gate1/Gate2 boundary that requires return to review.
 
 ## Non-Claims
 
-Layer3 / Layer4 build does not replace reviewed environment build execution or reviewed environment build output.
-
-Layer3 / Layer4 build does not replace author-case/native workflow execution.
-
-Layer3 / Layer4 build does not replace post-implementation validation.
-
-`build_audit.yaml` is a small boundary audit. It is not the main build output.
+Layer3 / Layer4 build does not establish native author-case success, BioHarness bridge replay success, runtime support, functional correctness, final support status, production readiness, algorithmic equivalence, or biological correctness. Those claims require later reviewed execution and validation evidence.

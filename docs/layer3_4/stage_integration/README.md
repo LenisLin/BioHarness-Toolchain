@@ -38,11 +38,13 @@ Feature-level stage integration consumes the evidence packages
             -> environment_build.yaml
             -> environment_build.jsonl
        -> Layer3 / Layer4 build
+            -> layer3_layer4_build_completion_matrix.tsv
             -> build_output_result.yaml
             -> build_audit.yaml
+            -> layer3_method_config.yaml
+            -> callable import evidence, route-level backend load evidence, and selected bridge smoke-check evidence when required
        -> author-case/native workflow execution with BioHarness bridge replay
   -> post-implementation validation
-  -> Gate 3 post-implementation harness integration review
   -> production-readiness review
 ```
 
@@ -58,7 +60,13 @@ Environment integration planning occurs during downstream execution planning bef
 
 `harness_environment.yaml` is the reviewed environment binding record, `environment_build.yaml` is the pure conda YAML for reproducibility, and `environment_build.jsonl` records actual environment build events in reviewed plan step order.
 
-Layer3 / Layer4 build occurs after Gate 2 assigns `layer3_layer4_build` to a reviewed Layer4 bridge planning item. The build workflow is defined in `layer3_layer4_build.md`. It may create or modify implementation files and produces `build_output_result.yaml` plus `build_audit.yaml`. The build output is intended to support later harness/runtime loading and bridge replay, but it does not establish runtime support, functional correctness, final support status, algorithmic equivalence, or biological correctness.
+Layer3 / Layer4 build occurs after Gate 2 assigns `layer3_layer4_build` to a reviewed Layer4 bridge planning item. The build workflow is defined in `layer3_layer4_build.md`. A completed build follows the control-flow specification in `layer3_layer4_build.md`: build-required rows become downstream-selectable only after reachable Layer3-to-Layer4 action-path closure, strict-output contract closure, final callable-import, route-level backend-load, selected bridge smoke-check, lifecycle, per-row result, and audit evidence collation, publication index sanity pass on the draft completion matrix, global verifier pass on the draft publication package, and final publication. Reviewed held rows remain held. Completed outputs include the root `layer3_layer4_build_completion_matrix.tsv`, per-row `build_output_result.yaml`, per-row `build_audit.yaml`, method-level `layer3_method_config.yaml`, config consumption evidence, callable import evidence, route-level backend-load evidence, selected bridge smoke-check evidence when required, lifecycle evidence, and publication index sanity evidence. Later execution and replay consume downstream-selectable rows only when the referenced environment evidence includes route-level backend load evidence for the selected Layer4 route. The build output does not establish runtime support, functional correctness, final support status, algorithmic equivalence, or biological correctness.
+
+Author-case and validation preparation occur after the reviewed functional-testing planning item and required build/environment evidence are available. Preparation records case-data localization, canonical validation input, and reference evidence.
+
+Method validation occurs under `docs/layer3_4/method_validation/`. It consumes prepared inputs, reference evidence, reviewed environment evidence, and downstream-selectable Layer3/4 rows to run method-level BioHarness harness tests.
+
+Terminal method validation failures are recorded only for method harness validation attempts. Input-preparation gaps may remain repair states under the input-preparation workflow. Stage2 reference-preparation gaps are verifier repair evidence until the method result is accepted as `REFERENCE_READY` or `REFERENCE_FAIL` with complete `failure_evidence`. Runtime work uses the workspace conventions in `storage_and_runtime.md`. Output consistency review reports case-level agreement or reviewed difference for the selected author case.
 
 ## Inputs
 
@@ -93,6 +101,8 @@ Layer3 / Layer4 build occurs after Gate 2 assigns `layer3_layer4_build` to a rev
 10. `layer3_layer4_build.md`
 11. `author_case_execution.md`
 
+Phase-local templates live beside their owning stage under `*_templates/` directories. Cross-stage invocation and acceptance templates live under `docs/layer3_4/stage_integration/templates/`.
+
 ## Human Gates
 
 Gate 1 is `parent_stage_alignment_review.md`. It reviews rough stage-level parent-function candidates as execution-surface candidates. Gate 1 confirms the semantic boundary, checks cross-method coverage, reviews method x surface planning-level alignment routes, and either promotes candidates to downstream bridge planning, routes them to repair, returns them to extraction, marks them internal or optional, or defers them.
@@ -103,7 +113,7 @@ Gate 2 is `downstream_planning_review.md`. It reviews current in-scope planning 
 
 Gate 2 assigned steps are `environment_build_execution`, `layer3_layer4_build`, and `author_case_native_workflow_and_bridge_replay`. These steps are handled by `environment_build_execution.md`, `layer3_layer4_build.md`, and `author_case_execution.md`, respectively. Gate 2 repair routing values are `targeted_planning_repair` and `return_to_gate1`.
 
-Gate 3, when used, is a post-implementation harness integration review after post-implementation validation. It checks whether implemented Layer4 behavior, reviewed environment build output, validation evidence, output-contract observation, provenance, and failure handling are coherent enough to enter production-readiness review. Gate 3 does not establish production readiness by itself.
+Post-implementation coherence review may be recorded as ordinary review evidence when required; it is not a named gate in this workflow.
 
 Gate decisions and review status values are routing, alignment, or downstream planning review records. Later execution/build stages and validation stages produce their own evidence records.
 
@@ -125,4 +135,4 @@ Repository files in this directory are reusable instructions and templates. Fill
 
 ## Non-Claims
 
-Stage integration instructions do not by themselves select final implementation support states, claim runtime support, establish production readiness, or validate biological correctness. Build/execution actions named in this workflow remain bounded evidence-producing actions until later validation and review support stronger claims. Layer3 / Layer4 build output supports later harness/runtime loading and bridge replay only within its reviewed boundary.
+Stage integration instructions do not by themselves select final implementation support states, claim runtime support, establish production readiness, or validate biological correctness. Build/execution actions named in this workflow remain bounded evidence-producing actions until later validation and review support stronger claims. Layer3 / Layer4 build output supports later harness/runtime loading and bridge replay only through completion matrix rows marked `downstream_selectable=true` and backed by referenced environment evidence with route-level backend load evidence for the selected Layer4 route.

@@ -1,0 +1,6 @@
+method:
+source:
+  stage2_reference_preparation_result:
+  layer3_method_config:
+surface_config:
+  <selected_execution_surface_name>: {}

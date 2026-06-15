@@ -25,11 +25,13 @@ Layer 2 remains responsible for scientific method selection. Stage integration e
 
 ## Strict Input Direction
 
-For spatial transcriptomics execution-layer planning, the standard input direction is AnnData containing expression data, a spatial coordinate matrix, and optional image data.
+For spatial transcriptomics execution-layer planning, the standard input direction is AnnData with expression data, aligned observation/feature metadata, and spatial coordinates such as `adata.obsm["spatial"]`.
 
 - Layer 3 exposes standard AnnData semantics, not backend-specific object slots.
-- Layer 4 maps standard AnnData semantics to backend-specific AnnData, Seurat, SpatialExperiment, matrix/coordinate/image files, or other required forms.
-- Missing method-required fields should be handled by eligibility checks or typed preflight failures, not by widening the parent function signature.
+- Optional image payloads may be carried in AnnData spatial records or platform-specific morphology image records with image provenance and scale/transform metadata.
+- For image-aware routes, Layer 4 must distinguish spatial coordinate semantics from image pixel frame and must use reviewed transform evidence when converting coordinates to image patches.
+- Layer 4 maps standard AnnData semantics to backend-specific AnnData, Seurat, SpatialExperiment, matrix/coordinate/image files, tensors, or other required forms.
+- Method-required optional fields are handled by method eligibility checks, reviewed prepare-surface validation, or typed preflight failures.
 
 Detailed contract design is deferred until the Layer 3/4 architecture is stabilized.
 

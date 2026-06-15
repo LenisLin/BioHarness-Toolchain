@@ -4,6 +4,8 @@
 
 This file defines the pre-Gate2 functional testing planning file for method-centered result testing using author-provided case, tutorial, vignette, or example workflows from the original repository.
 
+Functional testing planning prepares author-case and validation candidates. It does not define terminal method validation status. Post-build method validation is defined in `docs/layer3_4/method_validation/`.
+
 Functional testing planning selects candidate author cases, records source/data/result locators, identifies expected output forms, and prepares execution targets for later author-case/native workflow execution and BioHarness bridge replay. It does not execute notebooks/scripts, download data, record observed outputs, record runtime metrics, or claim BioHarness validation evidence.
 
 Validation planning is organized once per method. Cases may record which reviewed parent functions or execution surfaces they cover, but the plan should not duplicate a complete method validation package for every execution surface.
@@ -76,12 +78,32 @@ The required environment output should identify the planned environment build ta
 
 Pre-Gate2 functional testing planning must not infer method-specific environment bindings, `environment_branch` values, or method-specific `harness_environment.yaml` paths from text evidence. Method-specific environment bindings can be referenced only after reviewed environment build output exists or later review creates a separate target.
 
-`Required Layer3/Layer4 Build Output` should point to `build_output_result.yaml` and, when relevant, `build_audit.yaml` from `layer3_layer4_build.md`. Bridge replay should not start from bridge planning alone.
+Required Layer3/Layer4 build output for bridge replay is recorded as a dependency on completed downstream-selectable build rows under the current `layer3_layer4_build.md` workflow. Functional testing planning records which surfaces will be consumed and where the future build evidence is expected; it does not define build completion, verifier, publication, or downstream-selectable rules.
+
+Functional validation planning records an explicit validation scope before execution.
+
+At planning time, method-specific repository vignette/example/source code is not inspected to select concrete result keys, object slots, output paths, or command outputs. Functional testing planning records only the analysis-problem-level expected reference mode: expected result class, acceptable artifact classes, auxiliary/context-only artifacts, candidate locator classes, and evidence to produce. Concrete per-method reference targets are discovered later during `validation_reference_preparation`.
+
+```md
+| Method | Surface Rows Consumed | Completion Matrix Evidence | Environment Evidence | Required Case Data | Author Workflow Locator | Expected Result Reference | Required Canonical Validation Input | Reviewed Output Root | Current Validation Decision | Required Repair Before Validation |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| <method> | <ordered selected surfaces> | <downstream-selectable rows and per-row YAMLs> | <environment branch with route-level backend load evidence> | <case data locator or reviewed data target> | <tutorial/example/script/workflow locator> | <analysis-problem result class; expected reference modes such as static artifact / generated-in-run / unavailable; acceptable artifact classes; auxiliary/context-only artifacts; Stage2 target-discovery requirement> | <canonical input payload requirement> | <reviewed execution evidence root> | prepare_input / prepare_reference / ready_for_method_validation / repair_input_first / repair_reference_first / held_by_review | <short repair target or none> |
+```
+
+Rows selected as `ready_for_method_validation` have post-Stage1 canonical validation input evidence, post-Stage2 verifier-accepted reference artifact evidence, downstream-selectable build evidence, route-level backend load evidence, and reviewed output root needed for method harness validation.
+
+`Expected Result Reference` records the analysis-problem-level result expectation and Stage2 discovery boundary. It should identify the expected result class, acceptable artifact classes, auxiliary/context-only artifacts, and evidence to produce. It must not freeze per-method result keys, object slots, paths, or command outputs before Stage2 inspects method-specific author workflow evidence.
+
+The field is planning evidence only. It must not record observed outputs, runtime metrics, validation conclusions, or locally acquired artifacts before the reviewed execution step.
+
+Bridge replay prerequisites are implementation-backed rows with verifier-confirmed action-path closure evidence, route-level backend load evidence, and ordered method-chain state handoff when the selected surface consumes prior-surface state. Bridge replay must not start from bridge planning alone. Bridge replay must not consume declaration-only, no-registration, no-import, or incomplete build rows.
+
+Bridge replay starts from the reviewed canonical input for the first selected surface, not from a native-result-enriched object created only to extract structures, labels, or plots.
 
 ## Validation Planning Seed
 
-| Method | Case / Tutorial / Vignette / Example Data | Original Data Description | Original Data Path Or Link | Original Result Description | Original Result Path Or Link | Original Method Interface / Workflow | Execution Surface Interface | Native Input Type | Execution-Surface Input Type | Native Output Type | Execution-Surface Output Type | Required Environment Build Output | Required Layer3/Layer4 Build Output | Planned Local Evidence Output Path | Consistency Review Roles | Boundary |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Method | Case / Tutorial / Vignette / Example Data | Original Data Description | Original Data Path Or Link | Original Result Description | Original Result Path Or Link | Original Method Interface / Workflow | Execution Surface Interface | Native Input Type | Execution-Surface Input Type | Native Output Type | Execution-Surface Output Type | Required Environment Build Output | Required Layer3/Layer4 Build Output | Planned Local Evidence Output Path | Planned Comparison Cue | Consistency Review Roles | Boundary |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 
 `Original Data Path Or Link` and `Original Result Path Or Link` should contain a local path, an online link, or `unavailable`.
 
@@ -90,6 +112,8 @@ Pre-Gate2 functional testing planning must not infer method-specific environment
 `Execution Surface Interface` records the reviewed Layer3 execution surface or parent-function callable target.
 
 `Planned Local Evidence Output Path` records the post-Gate2 evidence output location for data acquisition, native execution, BioHarness bridge replay, and comparison records. It is a planned evidence location, not observed execution evidence.
+
+`Planned Comparison Cue` records only minimal planning hints for later method harness validation, such as expected result class, comparable output level, shared cell/spot/observation-name key when known, and candidate metrics or descriptive checks when already reviewed. It must not record observed metric values, thresholds, consistency judgments, final comparison direction, language-boundary statements, or locally acquired artifacts.
 
 `Consistency Review Roles` should use stable role names such as `agent`, `primary_human`, and `secondary_human`.
 

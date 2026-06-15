@@ -38,9 +38,13 @@ The review should confirm that each planning item:
 - routes remaining planning defects to a targeted repair record;
 - routes Gate 1 boundary issues to `return_to_gate1`.
 
+For functional testing planning, Gate 2 reviews whether the plan records an analysis-problem-level reference expectation and Stage2 discovery boundary. Gate 2 should confirm candidate author workflow/data locators and reviewed output roots, but it must not require or approve concrete per-method result keys, object slots, output paths, or command outputs. Concrete target selection is deferred to `validation_reference_preparation`.
+
 Gate 2 does not create method-level `keep`, `exclude`, or `defer` decisions. If a reviewed planning item exposes a parent-function, execution-surface, or method x surface route issue, the next step is `return_to_gate1`.
 
 For `environment_build_execution`, Gate 2 should confirm that the filled plan records branch naming rules, load-check attribution units, branch output path rules, conda prefix rules, and successful-branch selection-index handoff.
+
+For `layer3_layer4_build`, Gate 2 should confirm that the reviewed bridge planning item makes clear that build will produce Layer3-M config for build-required rows. Gate 2 should not require finalized Layer3-M variable names, default values, or method-specific binding targets before build.
 
 ## Human-In-The-Loop Discussion Protocol
 
@@ -57,6 +61,8 @@ This discussion is not post-Gate2 execution and is not itself the formal Gate 2 
 - Do not perform broad terminology or language audits.
 - Raise wording issues only when they affect workflow correctness, Gate 2 reviewability, execution boundary, or downstream artifact usability.
 - Treat runtime-only unknowns as runtime observation needs unless the planning record incorrectly depends on them before execution.
+
+During Gate 2 discussion, do not inspect method repositories to resolve concrete reference targets. If the planning item lacks candidate locators or evidence boundaries, route it to targeted planning repair. If concrete target selection requires reading vignette/example/source content, defer it to `validation_reference_preparation`.
 
 ### Required File Check
 
@@ -165,6 +171,8 @@ Required cross-plan checks:
 
 Only after the human confirms that all three planning files have no unresolved blocking ambiguity and the cross-plan review has no unresolved blocker, write the formal Gate 2 human review table.
 
+Gate 2 review records whether a planning item is approved for a named next step and records the reviewed evidence boundary for that item. It does not define the execution workflow, completion criteria, verifier cadence, output schema, publication gating, or downstream-selectable semantics of that next step. Those are owned by the assigned phase workflow document.
+
 The formal output must use the approved Gate 2 review result vocabulary:
 
 - `approved_for_next_step`
@@ -226,7 +234,7 @@ These steps are handled by:
 | Planning Area | Filled Planning File Path | Reviewed Item | Method / Path | Reviewed Target | Required Evidence | Open Question / Blocker | Gate 2 Review Result | Step After Gate 2 | Output Path | Evidence Boundary | Repair / Return Target |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 
-`Output Path` points to the post-Gate2 output location. For `environment_build_execution`, Output Path points to the reviewed initial environment build output directory containing `harness_environment.yaml`, `environment_build.yaml`, and `environment_build.jsonl`, unless a later reviewed decision creates another target. For `layer3_layer4_build`, it points to `build_output_result.yaml` and, when used, `build_audit.yaml`. For `author_case_native_workflow_and_bridge_replay`, it points to author-case/native workflow and bridge replay evidence.
+`Output Path` points to the post-Gate2 output location. For `environment_build_execution`, Output Path points to the reviewed initial environment build output directory containing `harness_environment.yaml`, `environment_build.yaml`, and `environment_build.jsonl`, unless a later reviewed decision creates another target. For `layer3_layer4_build`, Output Path identifies the reviewed build output package root. Required instance facts for build readiness come from the reviewed bridge planning record. Completion outputs and publication requirements follow `layer3_layer4_build.md`. For `author_case_native_workflow_and_bridge_replay`, it points to author-case/native workflow and bridge replay evidence.
 
 For environment rows, `Filled Planning File Path` points to the filled environment integration planning record, and `Reviewed Item` points to the Environment Build Plan or initial Environment Build Target under review.
 
@@ -247,4 +255,4 @@ Allowed repair sources are exact local source locators, official static document
 
 ## Boundary
 
-Gate 2 human review output routes reviewed planning items to assigned post-Gate2 steps or repair loops. Later environment build execution, Layer3/Layer4 build, author-case/native workflow execution, BioHarness bridge replay, post-implementation validation, and Gate 3 review produce their own evidence records or build outputs.
+Gate 2 human review output routes reviewed planning items to assigned post-Gate2 steps or repair loops. Later environment build execution, Layer3/Layer4 build, author-case/native workflow execution, BioHarness bridge replay, post-implementation validation, and any ordinary coherence review produce their own evidence records or build outputs.

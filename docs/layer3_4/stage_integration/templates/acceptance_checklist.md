@@ -38,13 +38,26 @@
 - [ ] Analysis-specific build target naming is recorded without hardcoding one domain's base globally.
 - [ ] Method Dependency Group and assembly-order rows preserve include, defer, compare-only, handled-elsewhere, optional, and out-of-scope boundaries without treating them as BioHarness method exclusion.
 - [ ] Evidence pointers include the reader artifact and source config locator when available.
+- [ ] Environment planning records a Manifest Cross-Check Table for methods with README/install docs, package metadata, or dependency manifest sources.
+- [ ] Manifest cross-check hits that affect the selected execution path are reflected in the Conda Build Spec or Load Check Attribution Plan.
+- [ ] Manifest versions are treated as Source Version Anchors unless the reviewed compatibility boundary records a hard constraint.
 - [ ] GPU, CUDA, and hardware constraints are separated as environment build uncertainty.
+- [ ] Selected PyTorch/PyG training, fitting, or embedding-learning paths record a CUDA runtime target when host GPU evidence is available.
+- [ ] PyTorch/PyG CUDA checks record host GPU evidence, PyTorch CUDA build, PyG extension package variants, and `torch.cuda.is_available()`.
+- [ ] Seurat-backed methods record Seurat version, SeuratObject version, and selected source API family.
+- [ ] Seurat V4-style and V5-style API paths are handled as separate compatibility families unless reviewed source compatibility evidence covers the selected path.
 - [ ] No install, solve, import/load, build execution, or runtime support claim is made from text triage.
 - [ ] Text evidence does not determine environment branch splits.
 - [ ] Split triggers do not create output paths before reviewed build evidence or later review.
 - [ ] Environment build planning records assembly order and split response.
+- [ ] Environment build planning records package-manager/source-build policy for high-risk dependency families.
 - [ ] Environment build plans include load-check attribution units before execution.
+- [ ] Route-level backend load targets are bounded package/module/library/source-package/component checks, not workflow execution.
 - [ ] Package-level isolation checks are required when a check unit fails.
+- [ ] Environment build failures follow repair-first handling before held-out evidence.
+- [ ] Clean environment branch retry is used when covered by reviewed branch policy and base scope cannot support the relevant method scope.
+- [ ] API drift, import-path drift, package-layout, object-conversion, file/cache-layout, and glue-code failures are routed to compatibility-rewrite handoff when the scientific core is unchanged.
+- [ ] Evidence recording supports repair, branch selection, rewrite handoff, or held-out decisions; it is not treated as the environment build goal.
 - [ ] Branch split requires reviewed build evidence, impossible documented constraints, or re-review.
 - [ ] Environment execution uses the Gate 2-reviewed filled environment integration planning record.
 - [ ] Environment execution uses the assigned step, output path, and Gate 2 human review table.
@@ -52,20 +65,25 @@
 - [ ] Environment integration planning includes an Environment Build Plan.
 - [ ] Environment build output directory contains `harness_environment.yaml`, `environment_build.yaml`, and `environment_build.jsonl`.
 - [ ] `harness_environment.yaml` is a reviewed environment binding record, not final agent-facing UI.
-- [ ] `harness_environment.yaml` uses minimal fields and BioHarness Layer3 binding scope/interface language.
-- [ ] If `harness_environment.yaml` retains `layer3_interface_paths`, the field is not used for native repo paths, source config locators, tutorials, reader artifacts, or pre-build final `callable_path` claims.
+- [ ] `compatible_methods` contains only methods with route-level backend load evidence for the selected Layer4 route.
+- [ ] `consumable_surface_scope` uses exact BioHarness execution surface names only.
+- [ ] Held or conditional surfaces are recorded under `held_surfaces`, not inside consumable surface strings.
+- [ ] Dependency-family load evidence and source locator evidence are not used as method compatibility evidence by themselves.
 - [ ] `environment_build.yaml` is pure conda YAML without default `prefix:`.
 - [ ] `environment_build.jsonl` records engineering build events only.
 - [ ] `runtime_environment_selection.tsv` has `analysis_problem`, `environment_branch`, `compatible_methods`, `conda_prefix`, `harness_environment_yaml`, and `compatibility_note`.
 - [ ] Successful environment branches are reflected in `runtime_environment_selection.tsv`.
 - [ ] Successful environment outputs use the same branch key in output path, conda prefix, `harness_environment.yaml`, and `runtime_environment_selection.tsv`.
+- [ ] Rerun prompts name stale environment/build/implementation artifacts and state whether each root is deleted, archived, reused as input evidence, or left untouched.
 - [ ] Invocation prompts remain thin and do not define phase execution policy.
+- [ ] Bridge planning, Gate 2 review tables, functional testing planning, and invocation prompts record instance facts and reviewed input boundaries without defining Layer3/Layer4 build completion, verifier cadence, publication gating, output schemas, or `downstream_selectable` rules.
 - [ ] Formal harness presentation is later than engineering implementation/review workflows.
 - [ ] Environment planning files do not record actual conda execution results.
 - [ ] Environment execution files do not run method workflows or claim parent-function support.
 - [ ] Filled environment integration planning records belong in NAS, not repo docs.
 - [ ] Functional testing planning files do not record observed outputs, runtime metrics, or observed pass/fail.
-- [ ] Author-case execution files do not claim BioHarness support unless bridge replay and output-contract evidence exist.
+- [ ] Author-case execution files record preparation, reference, and native-observation evidence.
+- [ ] Method validation files record BioHarness harness results after prepared canonical input, `REFERENCE_READY` evidence, reviewed environment evidence, downstream-selectable Layer3/4 rows, output-contract evidence, and verifier acceptance are available.
 - [ ] Validation planning manifests do not claim author-case execution or BioHarness validation evidence from static examples.
 - [ ] Backend-native input/output differences are recorded as Layer4 alignment work rather than exposed in the Layer3 contract.
 - [ ] Semantic output mismatches are not hidden as adapter or wrapper work.
@@ -76,15 +94,11 @@
 
 ## Layer3 / Layer4 Build Output
 
-- [ ] `layer3_layer4_build.md` defines the post-Gate2 workflow for `layer3_layer4_build`.
-- [ ] `layer3_layer4_build` produces `build_output_result.yaml` and `build_audit.yaml`.
-- [ ] `build_output_result.yaml` records `layer3_execution_surface`, `layer4_backend_binding`, `implementation_files`, `runtime_entry`, `import_experiment`, `next_evidence_needed`, and `boundary_checks`.
-- [ ] `build_audit.yaml` records Gate 2 source, reviewed build scope, boundary checks, import experiment summary, non-claims, and next required evidence.
-- [ ] Layer3 / Layer4 build does not use synthetic, minimal, toy, or BioHarness-created input objects.
-- [ ] Layer3 / Layer4 build does not run author cases, method workflows, validation fixtures, or data downloads.
-- [ ] Import experiments are bounded by reviewed environment binding record (`harness_environment.yaml`) or reviewed environment build output path.
-- [ ] Author-case execution remains separate from Layer3 / Layer4 build.
-- [ ] Build output does not claim runtime support, functional correctness, final support status, production readiness, algorithmic equivalence, or biological correctness.
+- [ ] Layer3/Layer4 build review uses `docs/layer3_4/stage_integration/layer3_layer4_build_templates/layer3_layer4_acceptance_checklist.md`.
+- [ ] The reviewed build package follows `layer3_layer4_build.md` and the referenced `layer3_layer4_*` templates.
+- [ ] Layer3/Layer4 build review includes anti-surrogate audit through action-path closure, not as a separate downstream validation claim.
+
+## Cross-Phase Planning Preconditions
 
 - [ ] Critical backend entrypoints are identified.
 - [ ] Critical parameter mappings are identified.
@@ -94,12 +108,28 @@
 - [ ] Synthetic or minimal BioHarness-created fixtures are not used as substitutes for blocked author cases in the current functional-testing stage.
 - [ ] Output-contract observation plan exists.
 - [ ] Provenance observation plan exists.
-- [ ] Known blockers are explicit.
+- [ ] Remaining review-return conditions are explicit before author-case preparation or method validation.
 
-## Post-Implementation Integration Review
+## Method Validation
 
-- [ ] Gate 3 post-implementation integration review has checked Layer4, environment, validation, output contract, provenance, and failure-handling coherence when required.
-- [ ] Gate 3 acceptance, if present, is not treated as production readiness.
+- [ ] Validation scope names included and excluded methods.
+- [ ] Each included method has input-preparation evidence; methods with `REFERENCE_READY` have harness-validation evidence when dispatched to Stage3, and methods with `REFERENCE_FAIL` have complete Stage2 `failure_evidence` instead of harness-validation evidence.
+- [ ] Canonical validation input exists before method harness validation starts.
+- [ ] Method validation input preparation records data acquisition, canonical AnnData preparation, and `prepare_spatial_domain_input` readiness before Stage 2.
+- [ ] Reference preparation records `REFERENCE_READY` with artifacts or `REFERENCE_FAIL` with complete `failure_evidence`.
+- [ ] Method harness validation consumes reviewed environment evidence and downstream-selectable Layer3/4 build rows.
+- [ ] Terminal method results are written only from verifier-accepted harness validation attempts.
+- [ ] Reference-preparation gaps are verifier repair evidence until they produce `REFERENCE_READY` or `REFERENCE_FAIL`.
+- [ ] Method validation uses stage-gated orchestration from `docs/layer3_4/method_validation/method_validation_workflow.md`.
+- [ ] Input preparation, reference preparation, and harness validation each have verifier acceptance.
+- [ ] Each stage dispatches method subagents in batches of at most 6 active methods.
+- [ ] Only methods accepted as `INPUT_READY` enter reference preparation.
+- [ ] Only methods accepted as `INPUT_READY` and `REFERENCE_READY` enter method harness validation.
+
+## Post-Implementation Coherence Review
+
+- [ ] Any post-implementation coherence review is recorded as ordinary evidence, not as a named gate or production-readiness decision.
+- [ ] Production readiness remains separate from build, validation, and coherence-review evidence.
 
 ## Production Readiness
 

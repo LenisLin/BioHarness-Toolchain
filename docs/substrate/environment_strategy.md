@@ -34,6 +34,12 @@ The consolidation step should prefer the smallest environment that supports the 
 
 For a specific analysis problem, a planning package may choose a consolidated-first Install-Load policy. This is not a global one-environment architecture. Fallback Runtime Profiles should be evidence-driven after Install-Load review or impossible documented constraints.
 
+## Method Runtime Boundary In Consolidated Environments
+
+A consolidated environment may contain packages for more than one method, but execution should still enter the selected method's reviewed runtime boundary. Shared prefix membership does not imply that unrelated method package stacks may be imported before the selected backend route runs.
+
+After method selection, the environment profile or method binding should preserve the selected route's required package family, native-library assumptions, and backend smoke path. When a shared environment changes native-library behavior through unrelated package stacks, use a method-specific invocation policy, preload policy, wrapper boundary, or dedicated profile.
+
 ## Profile And Capsule Design
 
 `EnvironmentProfile` is the substrate object used to describe an environment target that the harness or compute layer can select. It should be serializable, reviewable, and stable enough to connect execution surfaces to concrete runtime preparation. The current schema shape is recorded in [contracts/environment_profile.schema.json](../../contracts/environment_profile.schema.json).

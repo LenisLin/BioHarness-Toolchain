@@ -30,8 +30,7 @@ This directory is the main documentation entry point for BioHarness-Toolchain. S
 - [Layer 4 support](layer3_4/layer4_support.md): Core package, adapter, wrapper, rewrite, capsule, and hold support strategy.
 - [Evaluation](layer3_4/evaluation.md): Bounded native-behavior comparison and readiness evidence.
 - [Storage and runtime](layer3_4/storage_and_runtime.md): NAS, runtime, artifact, evidence, and storage-boundary conventions.
-- [Stage integration](layer3_4/stage_integration/): Post-code-reading same-feature workflow for package audit, targeted supplemental reading, parent-function extraction, Gate 1 alignment, three downstream planning files, Gate 2 downstream planning review, Gate 2 human review table, and later execution/build records.
-- [Layer 3/4 templates](layer3_4/templates/): Current compact templates and acceptance checklist.
+- [Stage integration](layer3_4/stage_integration/): Current Layer3/4 stage workflow documents, phase-local templates, and acceptance checklists.
 
 ## References
 

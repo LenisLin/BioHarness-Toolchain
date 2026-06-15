@@ -33,10 +33,20 @@ Text compatibility triage is a substep inside environment integration planning. 
 
 Method Dependency Groups organize method-specific evidence. They are not Environment Build Targets and do not have `harness_environment.yaml` output paths unless later reviewed build evidence or review creates a separate target.
 
+For PyTorch/PyG training or fitting paths, include the CUDA PyTorch/PyG target in `Selected Core Dependency Boundary`. For Seurat-backed paths, include the Seurat / SeuratObject version pairing and source API family.
+
 | Method Dependency Group | Method | Selected Core Dependency Boundary | Optional / Deferred / Handled Elsewhere | Source Evidence / Locator | Planned Assembly Role | Boundary Note |
 | --- | --- | --- | --- | --- | --- | --- |
 | `<method_a_dependency_group>` | `<method A>` | `<selected core packages/language/runtime boundary>` | `<optional/deferred/handled-elsewhere paths>` | `<reader artifact and source config locator>` | `<base/early/mid/late/risk-isolated assembly role>` | `<planning boundary and non-claim>` |
 | `<method_b_dependency_group>` | `<method B>` | `<selected core packages/language/runtime boundary>` | `<optional/deferred/handled-elsewhere paths>` | `<reader artifact and source config locator>` | `<base/early/mid/late/risk-isolated assembly role>` | `<planning boundary and non-claim>` |
+
+### Manifest Cross-Check Table
+
+README and install documentation provide the primary author-visible environment boundary. Package metadata and dependency manifests are cross-check sources for libraries that may be required by the selected execution path. Manifest versions are Source Version Anchors unless the reviewed compatibility boundary records them as hard constraints.
+
+| Method | Source / Config References Checked | README / Metadata Primary Constraints | Manifest Cross-Check Hits | Build / Check Handling | Version Boundary |
+| --- | --- | --- | --- | --- | --- |
+| `<method A>` | `<README/install docs; pyproject/setup/DESCRIPTION; requirements/environment files>` | `<primary author-visible runtime/package constraints>` | `<manifest-only or manifest-confirmed item relevant to current build/check planning>` | `<include in build/check plan; record reviewed omission; handled by existing dependency family>` | `<source anchor / flexible compatible resolution / reviewed hard constraint>` |
 
 ### Dependency Constraint Interpretation
 
@@ -44,6 +54,8 @@ Method Dependency Groups organize method-specific evidence. They are not Environ
 | --- | --- | --- | --- | --- |
 | `<method_a_dependency_group>` | `<author-visible exact package/language/CUDA/R version text>` | `<resolver latitude within reviewed dependency family and source/config boundary>` | `<package metadata/API/ABI/source-use boundary, or unknown until execution evidence>` | `<environment_build.yaml resolved versions and environment_build.jsonl solve/load event>` |
 | `<method_b_dependency_group>` | `<author-visible exact package/language/CUDA/R version text>` | `<resolver latitude within reviewed dependency family and source/config boundary>` | `<package metadata/API/ABI/source-use boundary, or unknown until execution evidence>` | `<environment_build.yaml resolved versions and environment_build.jsonl solve/load event>` |
+
+Record selected PyTorch/PyG training, fitting, or embedding-learning paths with a CUDA PyTorch/PyG target when host GPU evidence is available. Record Seurat-backed paths with Seurat version, SeuratObject version, and selected source API family.
 
 ### Environment Assembly Order Table
 
@@ -72,11 +84,11 @@ This summary records the reviewed Layer3 parent-function / method-route binding 
 
 ### Conda Build Spec
 
-The Conda Build Spec records reviewed dependency families, source anchors, candidate resolution policy, and excluded optional paths. Do not mechanically copy all Source Version Anchors into one hard-pinned dependency list.
+The Conda Build Spec records reviewed dependency families, manifest cross-check handling, GPU/CUDA and Seurat API-family targets when applicable, source anchors, candidate resolution policy, and excluded optional paths. Keep manifest versions as Source Version Anchors unless the reviewed compatibility boundary requires a hard constraint.
 
-| Environment Build Target | Conda Environment Name Or Prefix Policy | Channels | Dependencies | Pip Dependencies | Explicitly Excluded Optional Dependencies | Source / Config References |
-| --- | --- | --- | --- | --- | --- | --- |
-| `<initial build target>` | `<name or reviewed prefix policy>` | `<channels>` | `<conda deps organized by assembly group>` | `<pip deps or none, organized by assembly group when useful>` | `<excluded optional deps>` | `<references execution may consult>` |
+| Environment Build Target | Conda Environment Name Or Prefix Policy | Channels | Dependencies | Pip Dependencies | Package Manager / Source-Build Policy | Explicitly Excluded Optional Dependencies | Source / Config References |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `<initial build target>` | `<name or reviewed prefix policy>` | `<channels>` | `<conda deps organized by assembly group>` | `<pip deps or none, organized by assembly group when useful>` | `<conda/mamba first when available inside reviewed boundary; pip/CRAN/Bioconductor/remotes when reviewed; source-package build only when explicitly reviewed>` | `<excluded optional deps>` | `<references execution may consult>` |
 
 ### Step-By-Step Build Instructions
 
@@ -86,11 +98,17 @@ The Conda Build Spec records reviewed dependency families, source anchors, candi
 
 Steps should cover conda environment create or update, planned package/load checks, writing `environment_build.yaml`, writing `harness_environment.yaml`, and appending execution events to `environment_build.jsonl`.
 
+`Planned Load Check` must name the safe backend package, module, R library, source-package component, or compiled component load target. Workflow drivers, tutorial commands, author-case scripts, data-loading scripts, and training scripts should be recorded as source locators unless explicitly reviewed as import-safe backend modules.
+
+`Failure Response` must state the repair-first sequence: base repair, clean branch retry when covered, continued branch repair while the issue is environmental, compatibility-rewrite handoff for non-core code compatibility, possible algorithmic-rewrite routing for scientific-output-determining changes, or held-out boundary.
+
 ### Load Check Attribution Plan
 
-| Check Unit | Method Dependency Group(s) | Method Scope | Packages / Libraries To Check | Package-Level Isolation Required | Evidence Recorded In |
-| --- | --- | --- | --- | --- | --- |
-| `<method_or_group_check>` | `<dependency groups>` | `<base / METHOD / reviewed method set>` | `<packages/libraries>` | `<yes; list package-level checks>` | `environment_build.jsonl` |
+| Check Unit | Method Dependency Group(s) | Method Scope | Layer4 Route Family | Native Backend Entry | Safe Backend Load Target | Workflow / Source Locators Not Used As Load Targets | Dependency Libraries To Check | Backend Load Check Required | Package-Level Isolation Required | Evidence Recorded In |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `<method_or_group_check>` | `<dependency groups>` | `<base / METHOD / reviewed method set>` | `<adapter / wrapper / compatibility_rewrite / algorithmic_rewrite>` | `<native package/module/source entrypoint used by Layer4 binding>` | `<safe package/module/R library/source-package component/compiled component>` | `<workflow drivers/tutorial commands/author-case scripts/source locators used only for reading>` | `<dependency packages/libraries>` | `<yes; command or check intent>` | `<yes; list package-level checks>` | `environment_build.jsonl` |
+
+`Dependency Libraries To Check` should include libraries from the Manifest Cross-Check Table when they are needed by the selected source call path or by a lazy backend import used by that path.
 
 ### Reviewed Output State Policy
 
@@ -114,6 +132,8 @@ This policy controls pre-existing output directories, stale conda prefixes, prev
 | --- | --- | --- | --- | --- |
 | `<solver conflict / missing package / failed load check / system requirement>` | `<rollback to reviewed spec / pin adjustment inside reviewed policy / produce covered branch evidence / write handoff evidence>` | `<yes when this trigger is covered by Reviewed Branch Policy / no when this trigger only records failure evidence>` | `<record failure evidence / branch evidence / rollback evidence / handoff evidence>` | `<notes>` |
 
+A covered failure should not move directly to held-out evidence when a reviewed environment repair or clean branch retry remains available. Branch retry is part of solving the environment configuration problem. Evidence recording should be limited to what is needed to support repair, branch selection, rewrite handoff, or held-out decisions.
+
 Split response is triggered by execution-stage evidence or re-review, not text comparison alone. Text evidence records risk order, assembly order, and planned checks.
 
 ### Compatibility Rewrite Handoff Candidates
@@ -134,7 +154,7 @@ environment_build.jsonl
 
 | Output File | Required Content | Boundary |
 | --- | --- | --- |
-| `harness_environment.yaml` | Reviewed environment binding record with `analysis_problem`, `environment_branch`, `conda_prefix`, `compatible_methods`, and `compatibility_note`. `environment_branch` uses the reviewed base, method, or method-set branch name. `compatible_methods` comes only from the compatible method scope of the successful final event for that branch. If `layer3_interface_paths` is retained inside `compatible_methods`, it may refer to reviewed Layer3 binding scope before final callable paths exist. | Uses BioHarness Layer3 planning/interface language only; `layer3_interface_paths` must not be native repo paths, source config locators, tutorials, reader artifacts, or final `callable_path` claims before `build_output_result.yaml` exists. Does not include status/build/log/repro/Gate2/non-claim fields. |
+| `harness_environment.yaml` | Reviewed environment binding record with `analysis_problem`, `environment_branch`, `conda_prefix`, `compatible_methods`, and `compatibility_note`. `environment_branch` uses the reviewed base, method, or method-set branch name. Each `compatible_methods` entry records `method`, exact `consumable_surface_scope`, `route_level_backend_load_evidence`, and optional `held_surfaces`. `compatible_methods` contains only methods with route-level backend load evidence for the selected Layer4 route. | Uses exact BioHarness execution surface names only. Held or conditional surfaces are recorded under `held_surfaces`, not mixed into consumable scope strings. Source locator evidence and dependency-family load evidence do not make a method compatible without route-level backend load evidence. Does not include status/build/log/repro/Gate2/non-claim fields. |
 | `environment_build.yaml` | Pure conda YAML for the build target. | Defaults to no `prefix:`. |
 | `environment_build.jsonl` | Actual execution events in reviewed step order. | Records environment build events only. |
 
@@ -154,7 +174,9 @@ Do not add `runtime_environment_selection.tsv` as a fourth core file inside each
 
 | Successful Output Scope | Selection Index Row Source | Downstream Selectable Condition | Existing Row Handling |
 | --- | --- | --- | --- |
-| `<primary or branch output path>` | `<analysis_problem, environment_branch, compatible_methods, conda_prefix, harness_environment_yaml, compatibility_note from successful build output>` | `<environment_build.jsonl records successful completion, conda_prefix exists, harness_environment.yaml binds compatible methods>` | `<follow Reviewed Output State Policy for row replacement or removal; successful environment_branch rows only>` |
+| `<primary or branch output path>` | `<analysis_problem, environment_branch, compatible_methods, conda_prefix, harness_environment_yaml, compatibility_note from successful build output>` | `<environment_build.jsonl records successful completion, conda_prefix exists, and every indexed compatible method has route-level backend load evidence plus exact consumable surface scope>` | `<follow Reviewed Output State Policy for row replacement or removal; successful environment_branch rows only>` |
+
+Selection index rows are derived only from current successful environment build outputs. A rerun that supersedes an environment branch must remove or replace the old row according to the reviewed output state policy before downstream validation consumes the branch.
 
 ## Non-Claims
 

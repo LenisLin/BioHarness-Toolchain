@@ -51,6 +51,10 @@ Text compatibility triage is the first substep inside environment integration pl
 
 Read author-visible environment evidence before planning local assembly. Use README and install documentation, `pyproject.toml`, `setup.py`, `requirements.txt`, `environment.yml`, lockfiles, Dockerfiles, CI files, optional dependency notes, resource notes, and environment-reader locators when present.
 
+After source/config references are identified, run a lightweight manifest cross-check for each method. README and install documentation provide the primary author-visible environment boundary. Package metadata and dependency manifests provide cross-check evidence for libraries that may be required by the selected execution path.
+
+The cross-check records manifest items only when they affect the current reviewed build/check plan or explain a reviewed omission. Manifest versions are Source Version Anchors by default. They become hard solver constraints only when the reviewed compatibility boundary records that need.
+
 This substep uses Environment Config Reader outputs, Gate 1 scope, downstream bridge-planning context, environment integration inputs, and evidence records. Gate 2 human review output should record the filled planning file path, reviewed item, review result, assigned step, output path, and evidence boundary for environment planning items that enter environment build execution. Evidence records should identify both the reader output and the source config locator when available.
 
 The goal is to organize methods and source evidence into review-ready Method Dependency Groups, Environment Assembly Order, Split Triggers, and one initial analysis-problem Environment Build Target by default, with handled-elsewhere records, deferred records, comparison-only records, or out-of-scope records where needed, before any local conda solve, install, import/load check, GPU check, R load, author-case run, data download, or method run is planned. Absence of a visible text conflict should be recorded as build-time uncertainty, not as installability evidence.
@@ -69,6 +73,10 @@ A reviewed Environment Build Plan may define a Flexible Resolution Policy. Under
 
 For R-dependent method groups, `R >=3.6` is a minimum execution-time runtime floor. It is not a default hard pin and does not override stricter reviewed source/package requirements such as `R >=4.0.0` or `R >=4.0.3`.
 
+For selected PyTorch/PyG methods whose reviewed path includes training, fitting, or embedding learning, environment planning records a CUDA PyTorch/PyG target when host GPU evidence is available. The target names the CUDA runtime family, PyTorch candidate, PyG install route, and required PyG extension package route from reviewed official install sources.
+
+For Seurat-backed R methods, environment planning records the Seurat version, SeuratObject version, and selected source API family. Seurat V4-style `slot` access and Seurat V5-style `layer` access are separate compatibility families unless a reviewed source helper covers the selected path.
+
 ### Reusable Prompt
 
 Use this prompt pattern to generate the review-ready filled environment integration planning record:
@@ -84,6 +92,7 @@ Inputs:
 Work:
 - Define one analysis-problem-level initial Environment Build Target for the current analysis problem.
 - Record method-level Text Anchors.
+- Record Manifest Cross-Check rows for source/config references that affect reviewed build/check planning.
 - Record Method Dependency Groups for method-specific dependency evidence.
 - Record Environment Assembly Order across dependency groups.
 - Record Split Triggers for version, language, GPU/CUDA, R-bridge, package-manager, or system conflicts found from text evidence.
@@ -94,12 +103,12 @@ Work:
 Boundary:
 - Do not run conda solve, install, import/load checks, GPU checks, R loads, data downloads, method runs, or author cases.
 - Do not reopen Gate 1 or Gate 2.
-- This planning step does not assign a Gate 2 review result and does not approve execution/build. It prepares Text Anchors, Method Dependency Groups, Environment Assembly Order, Split Triggers, an initial Environment Build Target, selected dependency boundaries, Conda Build Specs, step-by-step build instructions, rollback/split responses, and required build outputs for Gate 2 review.
+- This planning step does not assign a Gate 2 review result and does not approve execution/build. It prepares Text Anchors, Manifest Cross-Check rows, Method Dependency Groups, Environment Assembly Order, Split Triggers, an initial Environment Build Target, selected dependency boundaries, Conda Build Specs, step-by-step build instructions, rollback/split responses, and required build outputs for Gate 2 review.
 - Do not create method-specific environment output paths or `harness_environment.yaml` paths from pre-Gate2 text evidence.
 - Do not copy filled method-specific evidence into repo docs; filled planning files belong in the NAS results workspace.
 
 Output:
-- A review-ready filled environment integration planning record containing Evidence Roots, Text Anchor Table, Method Dependency Group Table, Environment Assembly Order Table, Split Trigger Table, Environment Build Target Summary, Conda Build Spec for the initial build target, Step-By-Step Build Instructions, Load Check Attribution Plan, Reviewed Output State Policy, Required Environment Build Outputs, Selection Index Handoff, and Non-Claims.
+- A review-ready filled environment integration planning record containing Evidence Roots, Text Anchor Table, Manifest Cross-Check Table, Method Dependency Group Table, Environment Assembly Order Table, Split Trigger Table, Environment Build Target Summary, Conda Build Spec for the initial build target, Step-By-Step Build Instructions, Load Check Attribution Plan, Reviewed Output State Policy, Required Environment Build Outputs, Selection Index Handoff, and Non-Claims.
 ```
 
 ### Text Anchor Table
@@ -109,9 +118,17 @@ Use `Method` for text/source evidence. Do not use Layer3 binding-scope or interf
 | Method | Text Anchor Type | Text Anchor | Source Locator | Planning Implication | Non-Claim |
 | --- | --- | --- | --- | --- | --- |
 
+### Manifest Cross-Check Table
+
+| Method | Source / Config References Checked | README / Metadata Primary Constraints | Manifest Cross-Check Hits | Build / Check Handling | Version Boundary |
+| --- | --- | --- | --- | --- | --- |
+| `<method>` | `<README/install docs; package metadata; requirements/environment files checked>` | `<author-visible primary packages or runtime constraints>` | `<manifest item and source path when it changes current build/check planning; empty when none>` | `<include in build/check plan; record as reviewed omission; handled by existing dependency family>` | `<source anchor / flexible compatible resolution / reviewed hard constraint>` |
+
 ### Method Dependency Group Table
 
 Use `Method Dependency Group` for method-specific dependency evidence. Do not use group labels as output directories unless later reviewed build evidence or review creates a separate Environment Build Target.
+
+For PyTorch/PyG training or fitting paths, record the CUDA PyTorch/PyG target in `Selected Core Dependency Boundary`. For Seurat-backed paths, record the Seurat / SeuratObject version pairing and source API family.
 
 | Method Dependency Group | Method | Selected Core Dependency Boundary | Optional / Deferred / Handled Elsewhere | Source Evidence / Locator | Planned Assembly Role | Boundary Note |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -147,10 +164,12 @@ Required Environment Build Outputs attach to this reviewed build target and outp
 
 ### Conda Build Spec
 
-The Conda Build Spec records the Gate-2-reviewable host conda environment build target specification. It records reviewed dependency families, source anchors, candidate resolution policy, and excluded optional paths. It is a planned assembly spec before Gate 2 review, not a solved environment, hard-pinned concatenation of all Source Version Anchors, or branch split. The current stage integration workflow supports host conda environment build, update, and check only; Docker build is out of scope.
+The Conda Build Spec records the Gate-2-reviewable host conda environment build target specification. It records reviewed dependency families, manifest cross-check handling, GPU/CUDA and Seurat API-family targets when applicable, source anchors, candidate resolution policy, and excluded optional paths. It is a planned assembly spec before Gate 2 review, not a solved environment, hard-pinned concatenation of all Source Version Anchors, or branch split. The current stage integration workflow supports host conda environment build, update, and check only; Docker build is out of scope.
 
-| Environment Build Target | Conda Environment Name Or Prefix Policy | Channels | Dependencies | Pip Dependencies | Explicitly Excluded Optional Dependencies | Source / Config References |
-| --- | --- | --- | --- | --- | --- | --- |
+The Conda Build Spec must record the package-manager and source-build policy for high-risk dependency families. It should state whether conda/mamba, pip, CRAN, Bioconductor, remotes, or source-package build is the reviewed route. Source-package build must be explicit; it is not inferred from source locator availability.
+
+| Environment Build Target | Conda Environment Name Or Prefix Policy | Channels | Dependencies | Pip Dependencies | Package Manager / Source-Build Policy | Explicitly Excluded Optional Dependencies | Source / Config References |
+| --- | --- | --- | --- | --- | --- | --- | --- |
 
 `Source / Config References` lists the exact reviewed references that execution may consult if needed. Execution may not broad reread the repository or expand dependency scope from unreviewed files.
 
@@ -169,6 +188,8 @@ The step list should allow execution to proceed in order through:
 
 Each step should specify the failure response. Reviewed responses should describe how execution records evidence inside the reviewed boundary, including primary output evidence, covered branch evidence, rollback to a reviewed spec, package-level isolation evidence, and compatibility rewrite handoff evidence.
 
+Failure responses should be repair-first. They should describe the next environment repair action, branch retry condition, rewrite handoff condition, or held-out boundary. Evidence recording supports these decisions; it is not the primary goal.
+
 When the planned dependency boundary includes ABI-sensitive dependency families such as PyTorch, torchvision, PyTorch Geometric, PyG extension packages, R/Rcpp stacks, Python/R bridge packages, native image libraries, or other compiled dependency families, the Step-By-Step Build Instructions must record a risk-ordered assembly strategy. The strategy must identify which dependency family is installed first, which invariant checks are run after that family, and which invariant checks are repeated after later high-risk updates.
 
 For PyTorch/PyG targets, the plan must require an official PyTorch/PyG ABI bundle check before later dependency-family updates and another ABI bundle check after those updates when the same prefix is retained.
@@ -179,12 +200,18 @@ Environment branch names describe the compatible method scope supported by the s
 
 ### Load Check Attribution Plan
 
-Planned load checks must be attributable to a method dependency group or reviewed method scope. A combined check may be used only after the individual check units have passed. When a check unit fails, execution records package-level isolation results before deciding compatible method scope for any branch output.
+Planned load checks must be attributable to a method dependency group or reviewed method scope. A combined check may be used only after the individual check units have passed.
 
-When a check unit fails, the filled plan must require package-level or library-level isolation before branch assignment. The isolation result should determine whether execution first attempts a package-level or dependency-family repair in the base environment, creates a reviewed branch, records a compatibility rewrite handoff candidate, or records failed or held-out evidence. A first failed solve, import, or load result should not be treated as direct branch evidence without this attribution step.
+For each method with an `adapter` or `wrapper` route, the filled plan records the selected native backend entry required by the Layer4 binding. For R/Rcpp backends, the check records the R package or reviewed source-package entrypoint and any compiled-code load evidence required by the selected route.
 
-| Check Unit | Method Dependency Group(s) | Method Scope | Packages / Libraries To Check | Package-Level Isolation Required | Evidence Recorded In |
-| --- | --- | --- | --- | --- | --- |
+For adapter and wrapper routes, the filled plan should distinguish safe backend load targets from workflow scripts, author-case commands, tutorial drivers, and source locators used only for Layer4 implementation reading.
+
+Load check rows should include manifest cross-check hits that are needed by the selected source call path, including libraries loaded lazily by backend functions.
+
+When a check unit fails, the filled plan requires package-level or library-level isolation before branch assignment. The isolation result determines whether execution first attempts a package-level or dependency-family repair in the base environment, creates a reviewed branch, records a compatibility rewrite handoff candidate, or records failed or held-out evidence.
+
+| Check Unit | Method Dependency Group(s) | Method Scope | Layer4 Route Family | Native Backend Entry | Safe Backend Load Target | Workflow / Source Locators Not Used As Load Targets | Dependency Libraries To Check | Backend Load Check Required | Package-Level Isolation Required | Evidence Recorded In |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 
 ### Reviewed Output State Policy
 
@@ -216,10 +243,12 @@ If the reviewed Environment Build Plan includes a Reviewed Branch Policy, execut
 
 Rollback and split response planning must use this escalation order for covered failures:
 
-1. package-level or dependency-family attempt inside the reviewed dependency boundary;
-2. reviewed branch creation only after evidence shows the base cannot support the relevant compatible method scope;
-3. compatibility rewrite handoff candidate when the remaining issue is a code compatibility concern rather than an environment solve concern;
-4. failed or held-out evidence when success would require unreviewed dependency scope, source references, methods, optional paths, data download, downstream execution, code rewrite, algorithmic rewrite, or Layer3 binding scope.
+1. repair the base environment inside the reviewed dependency boundary;
+2. create a reviewed clean environment branch when the base cannot support the relevant compatible method scope, then retry installation and load checks there;
+3. continue reviewed package-manager, pin, ABI, install-order, or dependency-family repair while the failure remains an environment configuration problem;
+4. record a compatibility rewrite handoff when the remaining issue is non-core API drift, import path, package layout, object conversion, file/cache layout, or glue code;
+5. route to possible algorithmic rewrite when scientific-output-determining logic may be touched;
+6. write failed or held-out evidence only when the remaining fix exceeds reviewed dependency, source, method, optional-path, execution, rewrite, or Layer3 scope.
 
 The filled plan should distinguish clean-prefix retry, package-level isolation, branch evidence, compatibility rewrite handoff, and held-out failure evidence as separate response types.
 
@@ -241,7 +270,7 @@ environment_build.jsonl
 
 | Output File | Required Content | Boundary |
 | --- | --- | --- |
-| `harness_environment.yaml` | Reviewed environment binding record with `analysis_problem`, `environment_branch`, `conda_prefix`, `compatible_methods`, and `compatibility_note`. `environment_branch` uses the reviewed branch name rule from the Environment Build Plan. `compatible_methods` comes only from the compatible method scope of the successful final event for that environment branch. If `layer3_interface_paths` is retained inside `compatible_methods`, it may refer to the reviewed Layer3 binding scope before final callable paths exist. | Uses BioHarness Layer3 planning/interface language only; `layer3_interface_paths` must not be native repository paths, source config locators, tutorials, reader artifacts, or final `callable_path` claims before `build_output_result.yaml` exists. Does not include status, build ID, provider, log, reproducibility, Gate 2, or non-claim fields. |
+| `harness_environment.yaml` | Reviewed environment binding record with `analysis_problem`, `environment_branch`, `conda_prefix`, `compatible_methods`, and `compatibility_note`. `environment_branch` uses the reviewed branch name rule from the Environment Build Plan. Each `compatible_methods` entry records `method`, exact `consumable_surface_scope`, `route_level_backend_load_evidence`, and optional `held_surfaces`. `compatible_methods` contains only methods with route-level backend load evidence for the selected Layer4 route. | Uses exact BioHarness execution surface names only. Held or conditional surfaces are recorded under `held_surfaces`, not mixed into consumable scope strings. Source locator evidence and dependency-family load evidence do not make a method compatible without route-level backend load evidence. Does not include status, build ID, provider, log, reproducibility, Gate 2, or non-claim fields. |
 | `environment_build.yaml` | Pure conda YAML for the Gate-2-reviewed build target. | Defaults to no `prefix:`. |
 | `environment_build.jsonl` | Actual execution events in the same order as the reviewed plan steps. | Records environment build events only. |
 
@@ -252,6 +281,8 @@ Core branch outputs remain `harness_environment.yaml`, `environment_build.yaml`,
 Successful primary or branch outputs must be eligible for `/mnt/NAS_21T/ProjectData/BioHarness/results/layer3_4/runtime_environment_selection.tsv` indexing after execution. Failed outputs are evidence only and are not downstream-selectable.
 
 The selection index handoff should identify the expected `analysis_problem`, `environment_branch`, `compatible_methods`, `conda_prefix`, `harness_environment_yaml`, and `compatibility_note` values to be derived from successful reviewed build outputs. The selection TSV records only successful `environment_branch` values. Row replacement or removal for an existing `environment_branch` must follow the Reviewed Output State Policy.
+
+Selection index rows are derived only from current successful environment build outputs. A rerun that supersedes an environment branch must remove or replace the old row according to the reviewed output state policy before downstream validation consumes the branch.
 
 ## Execution Scope After Gate 2
 

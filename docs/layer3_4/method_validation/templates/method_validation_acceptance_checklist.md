@@ -1,0 +1,37 @@
+# Method Validation Acceptance Checklist
+
+- [ ] Validation scope names included and excluded methods.
+- [ ] Each included method has input-preparation evidence and either accepted Stage2 reference-preparation evidence or verifier repair evidence.
+- [ ] Canonical validation input exists before method harness validation starts.
+- [ ] Input preparation records source-route completion: local check, reviewed download/localization or package route, portal artifact selection when applicable, unpack/extract when applicable, path/format/usability checks, and canonical AnnData attempt.
+- [ ] Input preparation records canonical AnnData fields needed by the method.
+- [ ] Input preparation records a `prepare_spatial_domain_input` readiness check before `INPUT_READY`.
+- [ ] Reference preparation records either `REFERENCE_READY` artifacts or `REFERENCE_FAIL` with complete `failure_evidence`.
+- [ ] Method harness validation consumes reviewed environment evidence and downstream-selectable selected Layer3 execution surface rows.
+- [ ] Stage3 package dispatch records each method as eligible, excluded, repair_route, or blocked_external with a concrete dispatch_reason.
+- [ ] Stage3 `reference_artifact_path` is extracted from Stage2 `reference_artifacts.primary.standardized_artifact` when present, otherwise from verifier-accepted `reference_artifacts.primary.raw_artifact`, with `reference_artifact_source_field` recorded.
+- [ ] Stage3 generates `method_harness_validation_surface_config.yaml` before method subagent dispatch.
+- [ ] Stage3 config generation resolves selected Layer3-M exposed variables from Stage2 parameter evidence, native command or loader-call evidence, generation-route evidence, and canonical input schema for supported input-mapping selectors.
+- [ ] Stage3 applies exact-name and documented native-name normalization before leaving a selected exposed variable absent.
+- [ ] Stage3 prompt includes the generated config path.
+- [ ] Method harness validation records actual config used per selected surface.
+- [ ] Verifier checks config path/read/use evidence without requiring a separate parameter-mapping audit.
+- [ ] Stage3 method subagent prompts are instantiated by the main implementation window and record `stage_handoff_evidence`.
+- [ ] Stage3 workflow `PASS` is distinct from `result_comparison.judgment.conclusion`.
+- [ ] Method harness validation consumes comparison_cues when supplied.
+- [ ] Method harness validation uses the reviewed conda invocation recorded for the method.
+- [ ] GPU-required methods use the reviewed GPU route; CPU fallback is not used unless explicitly reviewed.
+- [ ] GPU memory/resource failures first attempt allowed resource adjustments, such as batch size, when they do not change execution surface semantics.
+- [ ] Method harness validation records actual selected Layer3 execution evidence before verifier candidate result writing.
+- [ ] Simple non-semantic interface or output repairs are attempted and recorded before terminal failure.
+- [ ] A selected Layer3 run that produces no comparison-ready harness result records `reason_if_not_produced`, allowed repair attempts when applicable, and accepted `TERMINAL_FAIL` only when the remaining failure is inside method harness validation.
+- [ ] Comparison records reference evidence, harness evidence, shared cell/spot/observation-name comparison evidence when applicable, metric computation details, and then the consistent/inconsistent judgment.
+- [ ] When expected shared names produce `shared_count == 0`, the workflow rechecks execution/file selection before metric computation and records the outcome through existing repair or failure fields.
+- [ ] A selected Layer3 chain that was not actually run is routed back to execution and is not accepted as terminal method result.
+- [ ] Method subagents write verifier candidate results; package-level terminal method results are written only from verifier-accepted candidate results.
+- [ ] Incomplete reference-preparation work is verifier repair evidence, not an accepted Stage2 method result.
+- [ ] Package orchestration follows `docs/layer3_4/method_validation/method_validation_workflow.md`.
+- [ ] Input preparation verifier accepts each included method before reference preparation consumes its evidence.
+- [ ] Reference preparation verifier accepts each eligible method before harness validation consumes its evidence.
+- [ ] Harness validation verifier accepts candidate method results before package-level terminal results are written.
+- [ ] Repair and blocked states remain outside package-level terminal method results.

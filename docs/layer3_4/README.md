@@ -14,9 +14,9 @@ Layer 3/4 is not a continuation of Layer 2 method comparison. It is the executio
 6. [Method repository reading](method_repository_reading.md): overview and navigation for repository localization and repository-reading package review.
 7. [Repository reading package](repository_reading/): reusable workflow, reader prompts, review templates, localization rules, and NAS pointer conventions for method repository evidence assembly.
 8. [Stage integration](stage_integration/): post-code-reading same-feature workflow for package audit, targeted supplemental reading, parent-function extraction, Gate 1 alignment, three downstream planning files, Gate 2 downstream planning review, Gate 2 human review table, environment build execution, Layer3/Layer4 build output, author-case execution, and bridge replay evidence.
-9. [Templates](templates/): compact templates and checklists for parent-function candidates, downstream planning records, Gate 2 review, and acceptance checks.
+9. [Method validation](method_validation/): post-build method-level harness testing. It separates validation input preparation, reference preparation, and BioHarness method validation.
 
-Use `templates/workflow_invocation_prompt_template.md` when preparing a new Codex-window prompt for a specific Layer3/4 workflow phase and Analysis Problem.
+Use `stage_integration/templates/workflow_invocation_prompt_template.md` when preparing a new Codex-window prompt for a specific Layer3/4 workflow phase and Analysis Problem.
 
 ## Status Boundary
 

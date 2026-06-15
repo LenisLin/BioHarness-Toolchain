@@ -42,9 +42,15 @@ Repository checks, readiness audits, environment build checks or reviewed enviro
 
 A parent function should reduce agent-side interpretation burden. It should not expose flexible output modes, raw backend file paths, package-private parameters, raw object-slot names, or low-level output namespaces.
 
-For spatial transcriptomics execution-layer planning, the standard input direction is AnnData containing expression data, a spatial coordinate matrix, and optional image data. Layer 3 exposes the standard dataset semantics; Layer 4 converts those semantics to backend-specific forms.
+For spatial transcriptomics execution-layer planning, the standard input direction is AnnData containing expression data, aligned observation/feature metadata, and a spatial coordinate matrix such as `adata.obsm["spatial"]`. The spatial coordinate matrix is not assumed to be in the pixel frame of any selected image resolution. The AnnData may also carry optional spatial image payloads using Scanpy/Visium-style fields such as `adata.uns["spatial"][library_id]["images"][img_key]`, platform-specific morphology image records, and associated scale or transform metadata. Layer 3 exposes these standard dataset semantics; Layer 4 converts them to backend-specific objects, files, tensors, image patches, or package APIs.
+
+For image-aware routes, the reviewed contract must record coordinate semantics separately from image pixel frame. For Visium and Xenium image-aware routes, the reviewed evidence must record image source, image frame, and coordinate-to-image transform evidence before the row can be published as downstream-selectable. Layer 4 is responsible for applying the reviewed transform from standard AnnData semantics, canonical input evidence, or reviewed prior state to backend-specific image, patch, or tensor inputs. Raw spatial coordinates must not be treated as pixel coordinates in the selected image resolution unless reviewed evidence explicitly supports that mapping.
+
+Input-format compatibility before the first reviewed parent function is a separate ingestion or data-localization boundary unless the current Gate1 closure explicitly includes it. A Layer3/Layer4 build must not silently widen the public callable input contract to raw file locators or backend-private loader controls.
 
 The parent function should define one strict main output. Auxiliary method-native products may be stored as artifacts or downstream inputs, but they are not part of the parent function's public return contract unless explicitly promoted by a current design document.
+
+A strict main output is the product of the current parent function. It must not be required as a pre-existing input for that same parent function. It may become valid state for a later parent function in the reviewed execution-surface chain.
 
 Backend-native input and output differences are expected. They do not by themselves invalidate a parent function when the standard Layer 3 contract remains scientifically coherent. Layer 4 is responsible for mapping standard AnnData-centered semantics to backend-native objects, files, slots, tensors, scripts, or package APIs.
 
